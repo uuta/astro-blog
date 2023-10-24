@@ -3,34 +3,28 @@ layout: ../layouts/AboutLayout.astro
 title: "About"
 ---
 
-AstroPaper is a minimal, responsive and SEO-friendly Astro blog theme. I designed and crafted this based on [my personal blog](https://satnaing.dev/blog).
+## Who's uuta
 
-This theme is aimed to be accessible out of the box. Light and dark mode are supported by
-default and additional color schemes can also be configured.
+I'm a software engineer who has been in charge of several projects.
 
-This theme is self-documented \_ which means articles/posts in this theme can also be considered as documentations. So, see the documentation for more info.
+## Tech stack
 
-<div>
-  <img src="/assets/dev.svg" class="sm:w-1/2 mx-auto" alt="coding dev illustration">
-</div>
+Go, React, PHP, Laravel, MySQL5.7, MySQL8.0, NeoVim, Flutter, Rust
 
-## Tech Stack
+## My Project
 
-This theme is written in vanilla JavaScript (+ TypeScript for type checking) and a little bit of ReactJS for some interactions. TailwindCSS is used for styling; and Markdown is used for blog contents.
+### Trander
 
-## Features
+Trander is the mobile application to find new locations around you by just pressing a button. Let's get out of the boring life. I'm developing the new feature to seek it in the whole world not depending on the current location.
 
-Here are certain features of this site.
+Release will be in the end of 2023.
 
-- fully responsive and accessible
-- SEO-friendly
-- light & dark mode
-- fuzzy search
-- super fast performance
-- draft posts
-- pagination
-- sitemap & rss feed
-- highly customizable
+- [Trander | Travel app helping you to get out of the boring life!](https://trander.net/)
 
-If you like this theme, you can star/contribute to the [repo](https://github.com/satnaing/astro-paper).  
-Or you can even give any feedback via my [email](mailto:contact@satnaing.dev).
+### Resorn
+
+Resorn is the job search platform, focusing on 'Resort baito' that works in accommodation in Japan as a specified job role such as a reception staff, house keeping, and restautant's staff. It offers expected benefits packages, salary, and location in work based on information that has been continuously scraped in WEB.
+
+Resorn was my first memorial application
+
+- [RESORN（リゾーン） | 求人数No.1のリゾートバイト求人比較サイト](https://resorn.net/)
