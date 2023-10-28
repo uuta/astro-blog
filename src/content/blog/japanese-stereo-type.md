@@ -7,7 +7,7 @@ featured: false
 draft: false
 tags:
   - FAQ
-description: 海外と比較して感じること
+description: 怒気の店員とロボット顧客、冷たいおもてなしでサラリーマンの静かな食事が怒りの合唱に！
 ---
 
 丁寧だとは思うが、優しくはない。
