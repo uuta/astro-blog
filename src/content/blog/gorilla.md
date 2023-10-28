@@ -6,7 +6,7 @@ postSlug: how-to-add-estimated-reading-time
 featured: false
 draft: false
 tags:
-  - FAQ
+  - Imagination
 description: イキリゴリラと一緒に生活できるか確認しよう
 ---
 

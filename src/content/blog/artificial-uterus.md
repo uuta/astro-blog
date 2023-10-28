@@ -6,7 +6,7 @@ postSlug: artificial-uterus
 featured: false
 draft: false
 tags:
-  - FAQ
+  - Imagination
 description: 2043年、中国発の人工子宮技術と、イスラエルのマッチングアプリで理想の精子探し。人工子宮利用に伴う法律改正と社会的影響が注目される。
 ---
 

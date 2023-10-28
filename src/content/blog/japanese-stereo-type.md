@@ -6,7 +6,7 @@ postSlug: how-to-add-estimated-reading-time
 featured: false
 draft: false
 tags:
-  - FAQ
+  - Imagination
 description: 怒気の店員とロボット顧客、冷たいおもてなしでサラリーマンの静かな食事が怒りの合唱に！
 ---
 

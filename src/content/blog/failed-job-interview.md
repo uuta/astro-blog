@@ -6,7 +6,7 @@ postSlug: failed-job-interview
 featured: false
 draft: false
 tags:
-  - FAQ
+  - Imagination
 description: 質問の困惑、答えの爆発、そして英語勉強の挫折。DMM英会話への未練と、Twitterで輝くエンジニアたちに憧れ。無鉄砲な自信は泡になり、抹茶プリンと共に消化されてゆく
 ---
 
