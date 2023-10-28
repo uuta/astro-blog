@@ -7,7 +7,7 @@ featured: false
 draft: false
 tags:
   - FAQ
-description: How you can add an 'Reading time' in your blog posts of AstroPaper.
+description: 海外と比較して感じること
 ---
 
 丁寧だとは思うが、優しくはない。

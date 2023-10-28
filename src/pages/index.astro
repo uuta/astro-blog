@@ -23,7 +23,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
   <Header />
   <main id="main-content">
     <section id="hero">
-      <h1 class="mr-2">Mingalaba</h1>
+      <h1 class="mr-2">Güle güle</h1>
       <a
         target="_blank"
         href="/rss.xml"
@@ -41,19 +41,30 @@ const socialCount = SOCIALS.filter(social => social.active).length;
       </a>
 
       <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
-      </p>
-      <p>
-        Read the blog posts or check
-        <LinkButton
+        Hello, I'm uuta 🍄.
+     </p>
+     <p>
+        I'm a software engineer who prefers to develop my side projects, so if you're interested in it, you can check out my <LinkButton
           className="hover:text-skin-accent underline underline-offset-4 decoration-dashed"
-          href="https://github.com/satnaing/astro-paper#readme"
+          href="/about#my-project">
+          Projects
+        </LinkButton>.
+      </p>
+     <p>
+        I've visited the following countries so far:
+      </p>
+     <ul>
+        <li>🇯🇵, 🇹🇼, 🇹🇭, 🇲🇾, 🇻🇳, 🇩🇪, 🇹🇷</li>
+      </ul>
+      <p>
+        This blog is built by <LinkButton
+          className="hover:text-skin-accent underline underline-offset-4 decoration-dashed"
+          href="https://astro.build/themes/details/astro-paper/"
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          README
-        </LinkButton> for more info.
+          AstroPaper | Astro
+        </LinkButton>.
       </p>
       {
         // only display if at least one social link is enabled

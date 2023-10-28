@@ -9,7 +9,7 @@ I'm a software engineer who has been in charge of several projects.
 
 ## Tech stack
 
-Go, React, PHP, Laravel, MySQL5.7, MySQL8.0, NeoVim, Flutter, Rust
+Go, React, PHP, Laravel, MySQL5.7, MySQL8.0, NeoVim, Flutter, Rust, GCP
 
 ## My Project
 
