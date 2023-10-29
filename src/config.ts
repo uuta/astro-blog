@@ -1,13 +1,19 @@
 import type { Site, SocialObjects } from "./types";
 
 export const SITE: Site = {
-  website: "https://astro-paper.pages.dev/", // replace this with your deployed domain
-  author: "Sat Naing",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
+  // TODO: Change the following value if new domain is configured
+  website: "https://profound-marigold-a32ac1.netlify.app/",
+  author: "uuta",
+  desc: "Welcome to uuta's experiment institution",
   title: "uuta's experiment",
-  ogImage: "astropaper-og.jpg",
+  ogImage:
+    "https://res.cloudinary.com/djnikeo2b/image/upload/c_fit,l_text:Sawarabi%20Gothic_40:uuta's experiment,co_rgb:fff,w_900,y_-100/v1698555456/Untitled_ueewgw.png",
   lightAndDarkMode: true,
-  postPerPage: 3,
+  postPerPage: 5,
+};
+
+export const setOGImage = (title: string) => {
+  return `https://res.cloudinary.com/djnikeo2b/image/upload/c_fit,l_text:Sawarabi%20Gothic_40:${title},co_rgb:fff,w_900,y_-100/v1698555456/Untitled_ueewgw.png`;
 };
 
 export const LOCALE = ["en-EN"]; // set to [] to use the environment default
