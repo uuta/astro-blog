@@ -2,7 +2,7 @@
 title: ゴリラと一緒！シェア生活の意外な一面
 author: uuta
 pubDatetime: 2023-06-24T10:11:06.130Z
-postSlug: how-to-add-estimated-reading-time
+postSlug: gorilla
 featured: false
 draft: false
 tags:

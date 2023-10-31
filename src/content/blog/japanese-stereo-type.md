@@ -2,7 +2,7 @@
 title: 日本人のステレオタイプ
 author: uuta
 pubDatetime: 2023-10-24T10:11:06.130Z
-postSlug: how-to-add-estimated-reading-time
+postSlug: japanese-stereo-type
 featured: false
 draft: false
 tags:
