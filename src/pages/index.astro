@@ -15,8 +15,7 @@ const posts = await getCollection("blog");
 
 const sortedPosts = getSortedPosts(posts);
 
-// TODO: Featured
-// const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
@@ -42,25 +41,23 @@ const socialCount = SOCIALS.filter(social => social.active).length;
         </svg>
       </a>
 
+      <p>Hello, I'm uuta 🍄.</p>
       <p>
-        Hello, I'm uuta 🍄.
-     </p>
-     <p>
-        I'm a software engineer who prefers to develop my side projects, so if you're interested in it, you can check out my <LinkButton
-          className="hover:text-skin-accent underline underline-offset-4 decoration-dashed"
-          href="/about#my-project">
+        I'm a software engineer who prefers to develop my side projects, so if
+        you're interested in it, you can check out my <LinkButton
+          className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
+          href="/about#my-project"
+        >
           Projects
         </LinkButton>.
       </p>
-     <p>
-        I've visited the following countries so far:
-      </p>
-     <ul>
+      <p>I've visited the following countries so far:</p>
+      <ul>
         <li>🇯🇵, 🇹🇼, 🇹🇭, 🇲🇾, 🇻🇳, 🇩🇪, 🇹🇷</li>
       </ul>
       <p>
         This blog is built by <LinkButton
-          className="hover:text-skin-accent underline underline-offset-4 decoration-dashed"
+          className="underline decoration-dashed underline-offset-4 hover:text-skin-accent"
           href="https://astro.build/themes/details/astro-paper/"
           target="_blank"
           rel="noopener noreferrer"
@@ -81,27 +78,25 @@ const socialCount = SOCIALS.filter(social => social.active).length;
 
     <Hr />
 
-
-    <!-- TODO: Featured -->
-    <!-- { -->
-    <!--   featuredPosts.length > 0 && ( -->
-    <!--     <> -->
-    <!--       <section id="featured"> -->
-    <!--         <h2>Featured</h2> -->
-    <!--         <ul> -->
-    <!--           {featuredPosts.map(({ data }) => ( -->
-    <!--             <Card -->
-    <!--               href={`/posts/${slugify(data)}`} -->
-    <!--               frontmatter={data} -->
-    <!--               secHeading={false} -->
-    <!--             /> -->
-    <!--           ))} -->
-    <!--         </ul> -->
-    <!--       </section> -->
-    <!--       <Hr /> -->
-    <!--     </> -->
-    <!--   ) -->
-    <!-- } -->
+    {
+      featuredPosts.length > 0 && (
+        <>
+          <section id="featured">
+            <h2>Featured</h2>
+            <ul>
+              {featuredPosts.map(({ data }) => (
+                <Card
+                  href={`/posts/${slugify(data)}`}
+                  frontmatter={data}
+                  secHeading={false}
+                />
+              ))}
+            </ul>
+          </section>
+          <Hr />
+        </>
+      )
+    }
 
     <section id="recent-posts">
       <h2>Recent Posts</h2>
