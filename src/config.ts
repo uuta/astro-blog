@@ -9,7 +9,7 @@ export const SITE: Site = {
   ogImage:
     "https://res.cloudinary.com/djnikeo2b/image/upload/c_fit,l_text:Sawarabi%20Gothic_40:uuta's experiment,co_rgb:fff,w_900,y_-100/v1698555456/Untitled_ueewgw.png",
   lightAndDarkMode: true,
-  postPerPage: 5,
+  postPerPage: 4,
 };
 
 export const setOGImage = (title: string) => {
