@@ -2,7 +2,6 @@
 title: 【本当にあった怖い話】タイの教習所で...
 author: uuta
 pubDatetime: 2023-01-18T10:11:06.130Z
-postSlug: istanbul
 featured: false
 draft: false
 tags:

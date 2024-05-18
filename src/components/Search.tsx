@@ -7,6 +7,7 @@ import type { CollectionEntry } from "astro:content";
 export type SearchItem = {
   title: string;
   description: string;
+  slug: CollectionEntry<"blog">["slug"];
   data: CollectionEntry<"blog">["data"];
 };
 
@@ -25,6 +26,7 @@ export default function SearchBar({ searchList }: Props) {
   const [searchResults, setSearchResults] = useState<SearchResult[] | null>(
     null
   );
+  console.log(searchList);
 
   const handleChange = (e: React.FormEvent<HTMLInputElement>) => {
     setInputVal(e.currentTarget.value);
@@ -111,9 +113,9 @@ export default function SearchBar({ searchList }: Props) {
         {searchResults &&
           searchResults.map(({ item, refIndex }) => (
             <Card
-              href={`/posts/${slugify(item.data)}`}
+              href={`/posts/${slugify(item.slug)}`}
               frontmatter={item.data}
-              key={`${refIndex}-${slugify(item.data)}`}
+              key={`${refIndex}-${slugify(item.slug)}`}
             />
           ))}
       </ul>
