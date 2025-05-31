@@ -2,7 +2,7 @@
 title: ウクライナ人がくれた勇気と強さのロールモデル
 author: uuta
 pubDatetime: 2024-12-16T23:11:06.130Z
-featured: false
+featured: true 
 draft: false
 tags:
   - Travel
