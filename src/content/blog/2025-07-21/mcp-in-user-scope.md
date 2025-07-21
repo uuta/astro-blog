@@ -69,7 +69,7 @@ claude --dangerously-skip-permissions
 ```
 
 We can see suggestions when `/zen` command is entered.
-![zen.png](/assets/images/2025-07-21/mcp-in-user-scope/zen.png)
+![zen](assets/images/2025-07-21/mcp-in-user-scope/zen.png)
 
 Confirm `/zen` command works well. So yes we can add MCP servers in local scope by updating `~/.mcp.json` whatever we want.
-![thinking.png](/assets/images/2025-07-21/mcp-in-user-scope/thinking.png)
+![thinking](assets/images/2025-07-21/mcp-in-user-scope/thinking.png)
