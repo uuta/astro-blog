@@ -13,8 +13,8 @@ description: Modify ~/.mcp.json to install MCP servers with User Scope
 ## Problem
 I understand the following command is introduced in Anthropic.
 
-> # Add a user server
->claude mcp add my-user-server -s user /path/to/server
+> Add a user server
+> claude mcp add my-user-server -s user /path/to/server
 -[Model Context Protocol (MCP) - Anthropic](https://docs.anthropic.com/en/docs/claude-code/mcp)
 
 However, I wasn't sure how to register MCP servers with complicated configurations. The above command means adding a simple MCP server, but even if we need to improve it more, the solution doesn't seem to be written in Anthropic document, so we should get to know it.
@@ -69,7 +69,7 @@ claude --dangerously-skip-permissions
 ```
 
 We can see suggestions when `/zen` command is entered.
-![[Pasted image 20250719163444.png]]
+![zen.png](/assets/images/2025-07-21/mcp-in-user-scope/zen.png)
 
 Confirm `/zen` command works well. So yes we can add MCP servers in local scope by updating `~/.mcp.json` whatever we want.
-![[Pasted image 20250719163731.png]]
+![thinking.png](/assets/images/2025-07-21/mcp-in-user-scope/thinking.png)
