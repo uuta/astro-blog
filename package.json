@@ -4,7 +4,6 @@
   "private": false,
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
     "build": "astro build && jampack ./dist",
     "preview": "astro preview",
     "sync": "astro sync",
