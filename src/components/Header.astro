@@ -15,17 +15,21 @@ const { activeNav } = Astro.props;
   <div class="nav-container">
     <div class="top-nav-wrap">
       <a href="/" class="logo whitespace-nowrap">
+        <!-- src={`/assets/${LOGO_IMAGE.svg ? "logo.svg" : "logo.png"}`} -->
         {
           LOGO_IMAGE.enable ? (
-            <img
-              src={`/assets/${LOGO_IMAGE.svg ? "logo.svg" : "logo.png"}`}
+			<>
+			<img
+              src={`/assets/logo.png`}
               alt={SITE.title}
               width={LOGO_IMAGE.width}
               height={LOGO_IMAGE.height}
             />
-          ) : (
+			{SITE.title}
+			</>
+			) : (
             SITE.title
-          )
+			)
         }
       </a>
       <nav id="nav-menu">
@@ -123,10 +127,13 @@ const { activeNav } = Astro.props;
     @apply mx-auto flex max-w-3xl flex-col items-center justify-between sm:flex-row;
   }
   .top-nav-wrap {
-    @apply relative flex w-full items-start justify-between p-4 sm:items-center sm:py-8;
+    @apply relative flex w-full items-center justify-between p-4 sm:py-8;
   }
   .logo {
-    @apply absolute py-1 text-xl font-semibold sm:static sm:text-2xl;
+    @apply flex items-center gap-2 py-1 text-xl font-semibold sm:text-2xl;
+  }
+  .logo img {
+    @apply h-8 w-8 object-contain sm:h-10 sm:w-10;
   }
   .hamburger-menu {
     @apply self-end p-2 sm:hidden;
