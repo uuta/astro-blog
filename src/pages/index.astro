@@ -10,12 +10,20 @@ import Socials from "@components/Socials.astro";
 import getSortedPosts from "@utils/getSortedPosts";
 import slugify from "@utils/slugify";
 import { SOCIALS } from "@config";
+import { fetchZennArticles } from "@infrastructure/zenn/fetchZennArticles";
+import { getMergedArticles } from "@utils/getMergedArticles";
+import { isBlogArticle, isZennArticle } from "../types";
 
 const posts = await getCollection("blog");
+const zennArticles = await fetchZennArticles();
 
-const sortedPosts = getSortedPosts(posts);
+// Merge blog posts and Zenn articles
+const mergedArticles = getMergedArticles(posts, zennArticles);
 
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
+// Featured Posts (blog only)
+const featuredPosts = mergedArticles.filter(
+  article => isBlogArticle(article) && article._raw.data.featured
+);
 
 const socialCount = SOCIALS.filter(social => social.active).length;
 ---
@@ -84,10 +92,15 @@ const socialCount = SOCIALS.filter(social => social.active).length;
           <section id="featured">
             <h2>Featured</h2>
             <ul>
-              {featuredPosts.map(({ data, slug }) => (
+              {featuredPosts.map(article => (
                 <Card
-                  href={`/posts/${slugify(slug)}`}
-                  frontmatter={data}
+                  href={article.href}
+                  frontmatter={{
+                    title: article.title,
+                    description: article.description,
+                    pubDatetime: article.pubDatetime,
+                    tags: article.tags,
+                  }}
                   secHeading={false}
                 />
               ))}
@@ -102,18 +115,25 @@ const socialCount = SOCIALS.filter(social => social.active).length;
       <h2>Recent Posts</h2>
       <ul>
         {
-          sortedPosts
-            .filter(({ data }) => !data.featured)
-            .map(
-              ({ data, slug }, index) =>
-                index < 4 && (
-                  <Card
-                    href={`/posts/${slugify(slug)}`}
-                    frontmatter={data}
-                    secHeading={false}
-                  />
-                )
+          mergedArticles
+            .filter(article =>
+              isBlogArticle(article) ? !article._raw.data.featured : true
             )
+            .slice(0, 4)
+            .map(article => (
+              <Card
+                href={article.href}
+                frontmatter={{
+                  title: article.title,
+                  description: article.description,
+                  pubDatetime: article.pubDatetime,
+                  tags: article.tags,
+                }}
+                secHeading={false}
+                isExternal={article.isExternal}
+                showZennIcon={isZennArticle(article)}
+              />
+            ))
         }
       </ul>
       <div class="all-posts-btn-wrapper">
