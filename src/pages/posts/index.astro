@@ -1,20 +1,18 @@
 ---
 import { SITE } from "@config";
 import Posts from "@layouts/Posts.astro";
+import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
+
 import { getCollection } from "astro:content";
-import { fetchZennArticles } from "@infrastructure/zenn/fetchZennArticles";
-import { getMergedArticles } from "@utils/getMergedArticles";
 
-const posts = await getCollection("blog", ({ data }) => !data.draft);
-const zennArticles = await fetchZennArticles();
+const posts = await getCollection("blog");
 
-// Merge blog posts and Zenn articles
-const mergedArticles = getMergedArticles(posts, zennArticles);
+const sortedPosts = getSortedPosts(posts);
 
-const totalPages = getPageNumbers(mergedArticles.length);
+const totalPages = getPageNumbers(sortedPosts.length);
 
-const paginatedPosts = mergedArticles.slice(0, SITE.postPerPage);
+const paginatedPosts = sortedPosts.slice(0, SITE.postPerPage);
 ---
 
 <Posts posts={paginatedPosts} pageNum={1} totalPages={totalPages.length} />
