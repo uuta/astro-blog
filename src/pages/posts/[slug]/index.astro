@@ -2,38 +2,58 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import Posts from "@layouts/Posts.astro";
 import PostDetails from "@layouts/PostDetails.astro";
-import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
 import slugify from "@utils/slugify";
 import { SITE } from "@config";
+import { fetchZennArticles } from "@/infrastructure/zenn/fetchZennArticles";
+import { getMergedArticles } from "@/utils/getMergedArticles";
+import type { UnifiedArticle } from "@/types";
 
 export interface Props {
-  post: CollectionEntry<"blog">;
+  post?: CollectionEntry<"blog">;
+  mergedArticles?: UnifiedArticle[];
 }
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  // 既存ブログ記事を取得（draft除外）
+  const blogPosts = await getCollection("blog", ({ data }) => !data.draft);
 
-  const postResult = posts.map(post => ({
+  // Zenn記事を取得
+  const zennArticles = await fetchZennArticles();
+
+  // 統合してソート
+  const mergedArticles = getMergedArticles(blogPosts, zennArticles);
+
+  // 1. 既存ブログ記事のみパス生成（Zenn記事は外部リンクなので不要）
+  const postResult = blogPosts.map(post => ({
     params: { slug: slugify(post.slug) },
     props: { post },
   }));
 
-  const pagePaths = getPageNumbers(posts.length).map(pageNum => ({
+  // 2. ページネーション用のパス（統合後の総数で計算）
+  const pagePaths = getPageNumbers(mergedArticles.length).map(pageNum => ({
     params: { slug: String(pageNum) },
+    props: { mergedArticles },
   }));
 
   return [...postResult, ...pagePaths];
 }
 
 const { slug } = Astro.params;
-const { post } = Astro.props;
+const { post, mergedArticles: mergedArticlesProp } = Astro.props;
 
-const posts = await getCollection("blog");
+// ページネーション用の統合記事を取得（slugが数値の場合のみ）
+let mergedArticles: UnifiedArticle[] = [];
+if (!post && mergedArticlesProp) {
+  mergedArticles = mergedArticlesProp;
+} else if (!post) {
+  // フォールバック: ビルド時に再取得
+  const blogPosts = await getCollection("blog", ({ data }) => !data.draft);
+  const zennArticles = await fetchZennArticles();
+  mergedArticles = getMergedArticles(blogPosts, zennArticles);
+}
 
-const sortedPosts = getSortedPosts(posts);
-
-const totalPages = getPageNumbers(sortedPosts.length);
+const totalPages = getPageNumbers(mergedArticles.length);
 
 const currentPage =
   slug && !isNaN(Number(slug)) && totalPages.includes(Number(slug))
@@ -42,7 +62,7 @@ const currentPage =
 const lastPost = currentPage * SITE.postPerPage;
 const startPost = lastPost - SITE.postPerPage;
 
-const paginatedPosts = sortedPosts.slice(startPost, lastPost);
+const paginatedPosts = mergedArticles.slice(startPost, lastPost);
 ---
 
 {

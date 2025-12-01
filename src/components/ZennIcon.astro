@@ -1,0 +1,24 @@
+---
+/**
+ * Zennアイコンコンポーネント
+ *
+ * Zenn記事を視覚的に識別するためのアイコンを表示します。
+ */
+
+interface Props {
+  /** Tailwind CSSクラス（サイズ調整用） */
+  class?: string;
+}
+
+const { class: className = "w-5 h-5" } = Astro.props;
+
+import socialIcons from "@assets/socialIcons";
+---
+
+<Fragment set:html={socialIcons.Zenn} />
+
+<style>
+  svg {
+    @apply inline-block;
+  }
+</style>
