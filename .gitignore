@@ -25,6 +25,9 @@ pnpm-debug.log*
 # ignore Jampack cache files
 .jampack/
 
+# ignore Zenn API cache
+.cache/
+
 # yarn
 .yarn/*
 !.yarn/patches

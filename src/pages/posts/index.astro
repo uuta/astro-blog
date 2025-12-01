@@ -1,18 +1,25 @@
 ---
 import { SITE } from "@config";
 import Posts from "@layouts/Posts.astro";
-import getSortedPosts from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
-
 import { getCollection } from "astro:content";
+import { fetchZennArticles } from "@/infrastructure/zenn/fetchZennArticles";
+import { getMergedArticles } from "@/utils/getMergedArticles";
 
-const posts = await getCollection("blog");
+// 既存ブログ記事を取得（draft除外）
+const blogPosts = await getCollection("blog", ({ data }) => !data.draft);
 
-const sortedPosts = getSortedPosts(posts);
+// Zenn記事を取得
+const zennArticles = await fetchZennArticles();
 
-const totalPages = getPageNumbers(sortedPosts.length);
+// 統合してソート
+const mergedArticles = getMergedArticles(blogPosts, zennArticles);
 
-const paginatedPosts = sortedPosts.slice(0, SITE.postPerPage);
+// ページネーション計算
+const totalPages = getPageNumbers(mergedArticles.length);
+
+// 1ページ目の記事を抽出
+const paginatedPosts = mergedArticles.slice(0, SITE.postPerPage);
 ---
 
 <Posts posts={paginatedPosts} pageNum={1} totalPages={totalPages.length} />
