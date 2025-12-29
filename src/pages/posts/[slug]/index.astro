@@ -2,8 +2,8 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import Posts from "@layouts/Posts.astro";
 import PostDetails from "@layouts/PostDetails.astro";
-import getPageNumbers from "@utils/getPageNumbers";
-import slugify from "@utils/slugify";
+import { getPageNumbers } from "@utils/getPageNumbers";
+import { slugify } from "@utils/slugify";
 import { SITE } from "@config";
 import { fetchZennArticles } from "@/infrastructure/zenn/fetchZennArticles";
 import { getMergedArticles } from "@/utils/getMergedArticles";

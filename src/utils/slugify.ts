@@ -8,11 +8,9 @@ const formatSlug = (slug: CollectionEntry<"blog">["slug"]) => {
   return re.exec(slug);
 };
 
-const slugify = (slug: CollectionEntry<"blog">["slug"]) => {
+export const slugify = (slug: CollectionEntry<"blog">["slug"]) => {
   const fs = formatSlug(slug);
   return fs ? fs[2] : slug;
 };
 
 export const slugifyAll = (arr: string[]) => arr.map(str => slugifyStr(str));
-
-export default slugify;

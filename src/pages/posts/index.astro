@@ -1,7 +1,7 @@
 ---
 import { SITE } from "@config";
 import Posts from "@layouts/Posts.astro";
-import getPageNumbers from "@utils/getPageNumbers";
+import { getPageNumbers } from "@utils/getPageNumbers";
 import { getCollection } from "astro:content";
 import { fetchZennArticles } from "@/infrastructure/zenn/fetchZennArticles";
 import { getMergedArticles } from "@/utils/getMergedArticles";

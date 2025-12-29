@@ -1,6 +1,6 @@
 import { SITE } from "@config";
 
-export default () => {
+export const siteOgImage = () => {
   return (
     <div
       style={{

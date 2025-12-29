@@ -6,7 +6,7 @@ import {
   getZennArticleDate,
   getNormalizedTimestamp,
 } from "./dateUtils";
-import slugify from "./slugify";
+import { slugify } from "./slugify";
 
 /**
  * 既存ブログ記事を統合型に変換する

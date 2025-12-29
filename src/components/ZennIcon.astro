@@ -12,7 +12,7 @@ type Props = {
 
 const { class: className = "w-5 h-5" } = Astro.props;
 
-import socialIcons from "@assets/socialIcons";
+import { socialIcons } from "@assets/socialIcons";
 ---
 
 <Fragment set:html={socialIcons.Zenn} />

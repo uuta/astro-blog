@@ -4,7 +4,7 @@ const getDate = (s: string) => {
   return s.slice(0, 8);
 };
 
-const getSortedPosts = (posts: CollectionEntry<"blog">[]) =>
+export const getSortedPosts = (posts: CollectionEntry<"blog">[]) =>
   posts
     .filter(({ data, slug }) => {
       if (data.draft) {
@@ -19,5 +19,3 @@ const getSortedPosts = (posts: CollectionEntry<"blog">[]) =>
         Math.floor(new Date(getDate(b.slug)).getTime() / 1000) -
         Math.floor(new Date(getDate(a.slug)).getTime() / 1000)
     );
-
-export default getSortedPosts;
