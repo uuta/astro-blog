@@ -5,10 +5,10 @@
  * Zenn記事を視覚的に識別するためのアイコンを表示します。
  */
 
-interface Props {
+type Props = {
   /** Tailwind CSSクラス（サイズ調整用） */
   class?: string;
-}
+};
 
 const { class: className = "w-5 h-5" } = Astro.props;
 

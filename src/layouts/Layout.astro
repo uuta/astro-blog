@@ -5,13 +5,13 @@ import { ViewTransitions } from "astro:transitions";
 
 const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
 
-export interface Props {
+export type Props = {
   title?: string;
   author?: string;
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
-}
+};
 
 const {
   title = SITE.title,

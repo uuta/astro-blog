@@ -1,16 +1,16 @@
 ---
 import Breadcrumbs from "@components/Breadcrumbs.astro";
 
-interface StringTitleProp {
+type StringTitleProp = {
   pageTitle: string;
   pageDesc?: string;
-}
+};
 
-interface ArrayTitleProp {
+type ArrayTitleProp = {
   pageTitle: [string, string];
   titleTransition: string;
   pageDesc?: string;
-}
+};
 
 export type Props = StringTitleProp | ArrayTitleProp;
 

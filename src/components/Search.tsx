@@ -1,6 +1,6 @@
 import Fuse from "fuse.js";
 import { useEffect, useRef, useState, useMemo } from "react";
-import Card from "@components/Card";
+import { Card } from "@components/Card";
 import slugify from "@utils/slugify";
 import type { CollectionEntry } from "astro:content";
 
@@ -11,14 +11,14 @@ export type SearchItem = {
   data: CollectionEntry<"blog">["data"];
 };
 
-interface Props {
+type Props = {
   searchList: SearchItem[];
-}
+};
 
-interface SearchResult {
+type SearchResult = {
   item: SearchItem;
   refIndex: number;
-}
+};
 
 export default function SearchBar({ searchList }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);

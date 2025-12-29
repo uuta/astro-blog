@@ -2,7 +2,7 @@ import { slugifyStr } from "@utils/slugify";
 import Datetime from "./Datetime";
 import type { CollectionEntry } from "astro:content";
 
-export interface Props {
+export type Props = {
   /** リンクURL（必須） */
   href: string;
   /** 既存ブログ用のfrontmatter（互換性維持のため残す） */
@@ -19,7 +19,7 @@ export interface Props {
   isExternal?: boolean;
   /** Zennアイコン表示フラグ */
   showZennIcon?: boolean;
-}
+};
 
 /**
  * Zennブランドアイコン（SVG）
@@ -37,7 +37,7 @@ const ZennBrandIcon = () => (
   </svg>
 );
 
-export default function Card({
+export function Card({
   href,
   frontmatter,
   secHeading = true,
@@ -47,7 +47,6 @@ export default function Card({
   isExternal = false,
   showZennIcon = false,
 }: Props) {
-  // Props処理: frontmatterがあれば従来通り、なければ新規Propsを使用
   const title = frontmatter?.title ?? titleProp ?? "";
   const description = frontmatter?.description ?? descriptionProp ?? "";
   const pubDatetime = frontmatter?.pubDatetime ?? pubDatetimeProp;
@@ -70,7 +69,6 @@ export default function Card({
         {...linkProps}
       >
         <div className="flex items-center gap-2">
-          {/* Zennブランドアイコンを表示 */}
           {showZennIcon && <ZennBrandIcon />}
           {secHeading ? (
             <h2 {...headerProps}>{title}</h2>
@@ -84,3 +82,5 @@ export default function Card({
     </li>
   );
 }
+
+export default Card;

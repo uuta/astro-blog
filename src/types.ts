@@ -59,7 +59,7 @@ export type ArticleSource = "blog" | "zenn";
 /**
  * 統合記事の共通フィールド
  */
-export interface UnifiedArticleCommon {
+export type UnifiedArticleCommon = {
   /** 一意識別子（例: "blog:2025-11-21/my-post", "zenn:mcp-in-user-scope"） */
   id: string;
   /** 記事ソース */
@@ -78,24 +78,24 @@ export interface UnifiedArticleCommon {
   isExternal: boolean;
   /** タグ一覧 */
   tags: string[];
-}
+};
 
 /**
  * 既存ブログ記事
  */
-export interface BlogArticle extends UnifiedArticleCommon {
+export type BlogArticle = UnifiedArticleCommon & {
   /** 記事ソース（リテラル型） */
   source: "blog";
   /** 外部リンクフラグ（リテラル型） */
   isExternal: false;
   /** 元データへの参照 */
   _raw: CollectionEntry<"blog">;
-}
+};
 
 /**
  * Zenn記事（統合型）
  */
-export interface ZennArticleUnified extends UnifiedArticleCommon {
+export type ZennArticleUnified = UnifiedArticleCommon & {
   /** 記事ソース（リテラル型） */
   source: "zenn";
   /** 外部リンクフラグ（リテラル型） */
@@ -108,7 +108,7 @@ export interface ZennArticleUnified extends UnifiedArticleCommon {
   likedCount: number;
   /** 元データへの参照 */
   _raw: ZennArticle;
-}
+};
 
 /**
  * 統合記事型（Discriminated Union）

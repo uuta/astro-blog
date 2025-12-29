@@ -8,9 +8,9 @@ import type { CollectionEntry } from "astro:content";
 import { slugifyStr } from "@utils/slugify";
 import { setOGImage} from "@config";
 
-export interface Props {
+export type Props = {
   post: CollectionEntry<"blog">;
-}
+};
 
 const { post } = Astro.props;
 

@@ -9,11 +9,11 @@ import LinkButton from "@components/LinkButton.astro";
 import type { UnifiedArticle } from "@/types";
 import { isZennArticle } from "@/types";
 
-export interface Props {
+export type Props = {
   pageNum: number;
   totalPages: number;
   posts: UnifiedArticle[];
-}
+};
 
 const { pageNum, totalPages, posts } = Astro.props;
 

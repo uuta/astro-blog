@@ -9,10 +9,10 @@ import { fetchZennArticles } from "@/infrastructure/zenn/fetchZennArticles";
 import { getMergedArticles } from "@/utils/getMergedArticles";
 import type { UnifiedArticle } from "@/types";
 
-export interface Props {
+export type Props = {
   post?: CollectionEntry<"blog">;
   mergedArticles?: UnifiedArticle[];
-}
+};
 
 export async function getStaticPaths() {
   // 既存ブログ記事を取得（draft除外）

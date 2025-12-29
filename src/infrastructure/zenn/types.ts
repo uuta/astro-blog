@@ -6,7 +6,7 @@
 /**
  * Zennユーザー情報
  */
-export interface ZennUser {
+export type ZennUser = {
   /** ユーザーID */
   id: number;
   /** ユーザー名 */
@@ -15,31 +15,31 @@ export interface ZennUser {
   name: string;
   /** アバター画像URL（小） */
   avatar_small_url: string;
-}
+};
 
 /**
  * Zenn Publication情報（企業テックブログ等）
  */
-export interface ZennPublication {
+export type ZennPublication = {
   id: number;
   name: string;
   display_name: string;
   avatar_small_url: string;
   pro: boolean;
-}
+};
 
 /**
  * Publication記事の上書き設定
  */
-export interface PublicationArticleOverride {
+export type PublicationArticleOverride = {
   display_name: string;
   avatar_small_url: string;
-}
+};
 
 /**
  * Zenn記事の完全な型定義
  */
-export interface ZennArticle {
+export type ZennArticle = {
   // 基本情報
   /** 記事ID */
   id: number;
@@ -91,24 +91,24 @@ export interface ZennArticle {
   publication: ZennPublication | null;
   /** Publication記事の上書き設定（nullの場合あり） */
   publication_article_override: PublicationArticleOverride | null;
-}
+};
 
 /**
  * Zenn API全体のレスポンス型
  */
-export interface ZennApiResponse {
+export type ZennApiResponse = {
   /** 記事一覧 */
   articles: ZennArticle[];
   /** 次のページ番号（nullの場合あり） */
   next_page: number | null;
-}
+};
 
 /**
  * キャッシュデータ構造
  */
-export interface CacheData {
+export type CacheData = {
   /** キャッシュ作成時刻（ミリ秒） */
   timestamp: number;
   /** キャッシュされた記事一覧 */
   articles: ZennArticle[];
-}
+};

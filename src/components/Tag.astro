@@ -1,8 +1,8 @@
 ---
-export interface Props {
+export type Props = {
   name: string;
   size?: "sm" | "lg";
-}
+};
 
 const { name, size = "sm" } = Astro.props;
 ---
