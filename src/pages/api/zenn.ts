@@ -47,6 +47,11 @@ type ResponseParam = {
 
 const ENDPOINT = "https://zenn.dev/api/articles";
 
+/**
+ * Fetch articles from Zenn API.
+ *
+ * @see https://github.com/sindresorhus/ky
+ */
 export const getZennArticles = async (
   params: RequestParam
 ): Promise<ResponseParam> => {
