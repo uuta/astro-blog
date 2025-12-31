@@ -1,4 +1,4 @@
-import ky from "ky";
+import { apiClient, type ApiResult } from "@/lib/apiClient";
 
 type RequestParam = {
   username?: string;
@@ -51,15 +51,9 @@ const ENDPOINT = "https://zenn.dev/api/articles";
 
 /**
  * Fetch articles from Zenn API.
- *
- * @see https://github.com/sindresorhus/ky
  */
 export const getZennArticles = async (
   searchParams: RequestParam
-): Promise<ResponseParam> => {
-  return ky
-    .get(ENDPOINT, {
-      searchParams,
-    })
-    .json<ResponseParam>();
+): Promise<ApiResult<ResponseParam>> => {
+  return apiClient.get<ResponseParam>(ENDPOINT, { searchParams });
 };
