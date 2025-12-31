@@ -1,3 +1,5 @@
+import ky from "ky";
+
 type RequestParam = {
   username?: string;
   order?: "latest" | "daily" | "weekly" | "monthly" | "all_time";
@@ -53,14 +55,11 @@ const ENDPOINT = "https://zenn.dev/api/articles";
  * @see https://github.com/sindresorhus/ky
  */
 export const getZennArticles = async (
-  params: RequestParam
+  searchParams: RequestParam
 ): Promise<ResponseParam> => {
-  const query = new URLSearchParams(
-    Object.entries(params)
-      .filter(([, v]) => v !== undefined)
-      .map(([k, v]) => [k, String(v)])
-  ).toString();
-
-  const res = await fetch(`${ENDPOINT}?${query}`);
-  return res.json();
+  return ky
+    .get(ENDPOINT, {
+      searchParams,
+    })
+    .json<ResponseParam>();
 };
