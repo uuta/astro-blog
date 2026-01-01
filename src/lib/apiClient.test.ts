@@ -31,13 +31,17 @@ describe("apiClient.get", () => {
       json: vi.fn().mockResolvedValue(mockData),
     } as unknown as ReturnType<typeof ky.get>);
 
-    const result = await apiClient.get<{ message: string }>("https://api.example.com");
+    const result = await apiClient.get<{ message: string }>(
+      "https://api.example.com"
+    );
 
     expect(result).toEqual({ success: true, data: mockData });
   });
 
   it("returns error result on 403 response", async () => {
-    const httpError = new (HTTPError as unknown as new (status: number) => Error & { response: { status: number } })(403);
+    const httpError = new (HTTPError as unknown as new (
+      status: number
+    ) => Error & { response: { status: number } })(403);
     vi.mocked(ky.get).mockReturnValue({
       json: vi.fn().mockRejectedValue(httpError),
     } as unknown as ReturnType<typeof ky.get>);
@@ -51,7 +55,9 @@ describe("apiClient.get", () => {
   });
 
   it("returns error result on 500 response", async () => {
-    const httpError = new (HTTPError as unknown as new (status: number) => Error & { response: { status: number } })(500);
+    const httpError = new (HTTPError as unknown as new (
+      status: number
+    ) => Error & { response: { status: number } })(500);
     vi.mocked(ky.get).mockReturnValue({
       json: vi.fn().mockRejectedValue(httpError),
     } as unknown as ReturnType<typeof ky.get>);
@@ -70,6 +76,8 @@ describe("apiClient.get", () => {
       json: vi.fn().mockRejectedValue(networkError),
     } as unknown as ReturnType<typeof ky.get>);
 
-    await expect(apiClient.get("https://api.example.com")).rejects.toThrow("Network error");
+    await expect(apiClient.get("https://api.example.com")).rejects.toThrow(
+      "Network error"
+    );
   });
 });

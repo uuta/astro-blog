@@ -1,4 +1,4 @@
-import { apiClient, type ApiResult } from "@/lib/apiClient";
+import { apiClient, type ApiResult } from "@lib/apiClient";
 
 type RequestParam = {
   username?: string;

@@ -1,13 +1,13 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { getZennArticles } from "./zenn";
 
-vi.mock("@/lib/apiClient", () => ({
+vi.mock("@lib/apiClient", () => ({
   apiClient: {
     get: vi.fn(),
   },
 }));
 
-import { apiClient } from "@/lib/apiClient";
+import { apiClient } from "@lib/apiClient";
 
 const mockResponseData = {
   articles: [
@@ -60,9 +60,12 @@ describe("getZennArticles", () => {
   it("passes searchParams correctly", async () => {
     await getZennArticles({ username: "testuser", order: "latest", page: 1 });
 
-    expect(apiClient.get).toHaveBeenCalledWith("https://zenn.dev/api/articles", {
-      searchParams: { username: "testuser", order: "latest", page: 1 },
-    });
+    expect(apiClient.get).toHaveBeenCalledWith(
+      "https://zenn.dev/api/articles",
+      {
+        searchParams: { username: "testuser", order: "latest", page: 1 },
+      }
+    );
   });
 
   it("returns success result with data", async () => {
