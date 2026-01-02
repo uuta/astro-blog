@@ -1,0 +1,4 @@
+- Add an external API definition as necessary into pages/api
+- Use `type` instead of `interface`
+- Do not use `export default` instead use `export`
+- Do not use `useEffect()` as far as possible
