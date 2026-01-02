@@ -15,8 +15,10 @@ export async function getStaticPaths() {
 }
 
 export const GET: APIRoute = async ({ props }) => {
-  const png = await generateOgImageForPost(props as CollectionEntry<"blog">);
-  return new Response(png as unknown as BodyInit, {
+  const png: Buffer = await generateOgImageForPost(
+    props as CollectionEntry<"blog">
+  );
+  return new Response(Uint8Array.from(png), {
     headers: { "Content-Type": "image/png" },
   });
 };

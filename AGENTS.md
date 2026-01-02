@@ -2,3 +2,4 @@
 - Use `type` instead of `interface`
 - Do not use `export default` instead use `export`
 - Do not use `useEffect()` as far as possible
+- Do not use the `unknown` type as far as possible. .e.g, `png as unknown as BodyInit`. Be explicit.
