@@ -14,6 +14,9 @@ export async function getStaticPaths() {
   }));
 }
 
+/**
+ * Generates an Open Graph image for a blog post.
+ */
 export const GET: APIRoute = async ({ props }) => {
   const png: Buffer = await generateOgImageForPost(
     props as CollectionEntry<"blog">
