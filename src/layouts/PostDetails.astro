@@ -19,7 +19,7 @@ const { title, author, description, ogImage, canonicalURL, pubDatetime, tags } =
 
 const { Content } = await post.render();
 
-const ogImageUrl = setOGImage(title) ?? ogImage?.src;
+const ogImageUrl = setOGImage(title) ?? (typeof ogImage === "string" ? ogImage : ogImage?.src);
 const ogUrl = new URL(
   ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,
   Astro.url.origin
