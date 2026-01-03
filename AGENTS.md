@@ -4,3 +4,4 @@
 - Do not use `useEffect()` as far as possible
 - Do not use the `unknown` type as far as possible. .e.g, `png as unknown as BodyInit`. Be explicit.
 - Do not use `git add` or `git commit` because diffs should be checked before staging commits.
+- If a workflow is defined in `.github/workflows`, `workflow_dispatch` also should be defined.
