@@ -9,9 +9,7 @@ import { resolve } from "node:path";
 const fontRegular = readFileSync(
   resolve("src/assets/fonts/IBMPlexMono-Regular.ttf")
 );
-const fontBold = readFileSync(
-  resolve("src/assets/fonts/IBMPlexMono-Bold.ttf")
-);
+const fontBold = readFileSync(resolve("src/assets/fonts/IBMPlexMono-Bold.ttf"));
 
 const options: SatoriOptions = {
   width: 1200,

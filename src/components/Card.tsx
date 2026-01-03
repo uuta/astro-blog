@@ -22,9 +22,7 @@ export function Card({ post, secHeading = true }: Props) {
     <>
       {title}
       {isZenn && (
-        <span className="ml-2 text-sm opacity-70">
-          [Zenn] ❤️ {likedCount}
-        </span>
+        <span className="ml-2 text-sm opacity-70">[Zenn] ❤️ {likedCount}</span>
       )}
     </>
   );
@@ -43,7 +41,7 @@ export function Card({ post, secHeading = true }: Props) {
         )}
       </a>
       <Datetime datetime={pubDatetime} />
-      <p>{description}</p>
+      {!isZenn && <p>{description}</p>}
     </li>
   );
 }
