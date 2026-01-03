@@ -1,4 +1,4 @@
-import type { ImageMetadata } from "astro";
+import type { CollectionEntry } from "astro:content";
 
 /**
  * 基本的な投稿データの共通インターフェース
@@ -15,17 +15,10 @@ type BasePostData = {
 
 /**
  * ローカルの Markdown 記事を表すインターフェース
+ * CollectionEntry<"blog"> を拡張して render() メソッドを含む
  */
-type LocalPost = {
+type LocalPost = CollectionEntry<"blog"> & {
   source: "local";
-  slug: string;
-  data: BasePostData & {
-    postSlug?: string;
-    ogImage?: string | ImageMetadata;
-    canonicalURL?: string;
-  };
-  body: string;
-  collection: "blog";
 };
 
 /**
@@ -36,7 +29,7 @@ type ZennPost = {
   slug: string;
   data: BasePostData;
   externalUrl: string;
-  emoji: string;
+  likedCount: number;
 };
 
 /**

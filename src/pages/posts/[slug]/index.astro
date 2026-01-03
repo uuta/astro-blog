@@ -1,25 +1,34 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
+import type { LocalPost } from "../../../types/post";
 import Posts from "@layouts/Posts.astro";
 import PostDetails from "@layouts/PostDetails.astro";
-import getSortedPosts from "@utils/getSortedPosts";
+import { getAllPosts } from "@services/posts";
+import { getSortedPosts } from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
 import slugify from "@utils/slugify";
 import { SITE } from "@config";
 
 export interface Props {
-  post: CollectionEntry<"blog">;
+  post?: LocalPost;
 }
 
 export async function getStaticPaths() {
-  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  const allPosts = await getAllPosts();
+  const localPosts = allPosts.filter(
+    (p): p is LocalPost => p.source === "local"
+  );
+  // ドラフト記事を除外
+  const publishedLocalPosts = localPosts.filter(p => !p.data.draft);
 
-  const postResult = posts.map(post => ({
+  // ローカル記事のみ詳細ページを生成
+  const postResult = publishedLocalPosts.map(post => ({
     params: { slug: slugify(post.slug) },
     props: { post },
   }));
 
-  const pagePaths = getPageNumbers(posts.length).map(pageNum => ({
+  // 全記事（ローカル + Zenn）のページネーション
+  const sortedPosts = getSortedPosts(allPosts);
+  const pagePaths = getPageNumbers(sortedPosts.length).map(pageNum => ({
     params: { slug: String(pageNum) },
   }));
 
@@ -29,9 +38,9 @@ export async function getStaticPaths() {
 const { slug } = Astro.params;
 const { post } = Astro.props;
 
-const posts = await getCollection("blog");
+const allPosts = await getAllPosts();
 
-const sortedPosts = getSortedPosts(posts);
+const sortedPosts = getSortedPosts(allPosts);
 
 const totalPages = getPageNumbers(sortedPosts.length);
 

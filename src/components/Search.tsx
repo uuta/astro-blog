@@ -1,8 +1,8 @@
 import Fuse from "fuse.js";
 import { useEffect, useRef, useState, useMemo } from "react";
-import Card from "@components/Card";
-import slugify from "@utils/slugify";
+import { Card } from "@components/Card";
 import type { CollectionEntry } from "astro:content";
+import type { LocalPost } from "../types/post";
 
 export type SearchItem = {
   title: string;
@@ -10,6 +10,14 @@ export type SearchItem = {
   slug: CollectionEntry<"blog">["slug"];
   data: CollectionEntry<"blog">["data"];
 };
+
+// SearchItemをLocalPost互換オブジェクトに変換
+const toLocalPost = (item: SearchItem): LocalPost =>
+  ({
+    source: "local",
+    slug: item.slug,
+    data: item.data,
+  }) as LocalPost;
 
 interface Props {
   searchList: SearchItem[];
@@ -112,11 +120,7 @@ export default function SearchBar({ searchList }: Props) {
       <ul>
         {searchResults &&
           searchResults.map(({ item, refIndex }) => (
-            <Card
-              href={`/posts/${slugify(item.slug)}`}
-              frontmatter={item.data}
-              key={`${refIndex}-${slugify(item.slug)}`}
-            />
+            <Card post={toLocalPost(item)} key={`${refIndex}-${item.slug}`} />
           ))}
       </ul>
     </>

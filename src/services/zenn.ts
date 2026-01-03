@@ -20,7 +20,7 @@ export const transformZennArticle = (article: Article): ZennPost => {
       draft: false,
     },
     externalUrl: `https://zenn.dev${article.path}`,
-    emoji: article.emoji || "📝",
+    likedCount: article.liked_count,
   };
 };
 
@@ -60,11 +60,8 @@ export const fetchAllZennArticles = async (): Promise<Article[]> => {
         break;
       }
 
-      const publishedArticles = result.data.articles.filter(
-        article => article.published
-      );
-
-      allArticles.push(...publishedArticles);
+      // APIは公開された記事のみを返すため、フィルタリング不要
+      allArticles.push(...result.data.articles);
 
       hasNextPage = result.data.next_page !== null;
       currentPage = result.data.next_page ?? currentPage + 1;
