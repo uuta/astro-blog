@@ -36,7 +36,7 @@ type ZennPost = {
   slug: string;
   data: BasePostData;
   externalUrl: string;
-  emoji: string;
+  likedCount: number;
 };
 
 /**

@@ -20,7 +20,7 @@ export const transformZennArticle = (article: Article): ZennPost => {
       draft: false,
     },
     externalUrl: `https://zenn.dev${article.path}`,
-    emoji: article.emoji || "📝",
+    likedCount: article.liked_count,
   };
 };
 
