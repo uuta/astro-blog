@@ -3,7 +3,7 @@ import type { ImageMetadata } from "astro";
 /**
  * 基本的な投稿データの共通インターフェース
  */
-interface BasePostData {
+type BasePostData = {
   title: string;
   pubDatetime: Date;
   description: string;
@@ -11,12 +11,12 @@ interface BasePostData {
   tags: string[];
   featured?: boolean;
   draft?: boolean;
-}
+};
 
 /**
  * ローカルの Markdown 記事を表すインターフェース
  */
-interface LocalPost {
+type LocalPost = {
   source: "local";
   slug: string;
   data: BasePostData & {
@@ -26,18 +26,18 @@ interface LocalPost {
   };
   body: string;
   collection: "blog";
-}
+};
 
 /**
  * Zenn の記事を表すインターフェース
  */
-interface ZennPost {
+type ZennPost = {
   source: "zenn";
   slug: string;
   data: BasePostData;
   externalUrl: string;
   emoji: string;
-}
+};
 
 /**
  * ローカル記事と Zenn 記事を統一的に扱うための Union 型
