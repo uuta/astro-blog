@@ -22,7 +22,7 @@ type Publication = {
   avatar_registered: boolean;
 };
 
-type Article = {
+export type Article = {
   id: number;
   post_type: "Article";
   title: string;
