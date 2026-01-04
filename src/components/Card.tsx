@@ -7,7 +7,7 @@ type Props = {
   secHeading?: boolean;
 };
 
-export function Card({ post, secHeading = true }: Props) {
+export function Card({ post }: Props) {
   const { title, pubDatetime, description } = post.data;
   const isZenn = post.source === "zenn";
   const href = isZenn ? post.externalUrl : `/posts/${post.slug}/`;
@@ -34,11 +34,7 @@ export function Card({ post, secHeading = true }: Props) {
         className="inline-block text-lg font-medium text-skin-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
         {...(isZenn ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
-        {secHeading ? (
-          <h2 {...headerProps}>{titleContent}</h2>
-        ) : (
-          <h3 {...headerProps}>{titleContent}</h3>
-        )}
+        <h2 {...headerProps}>{titleContent}</h2>
       </a>
       <Datetime datetime={pubDatetime} />
       {!isZenn && <p>{description}</p>}
