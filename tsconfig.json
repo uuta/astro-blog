@@ -11,7 +11,11 @@
       "@layouts/*": ["layouts/*"],
       "@pages/*": ["pages/*"],
       "@styles/*": ["styles/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@lib/*": ["lib/*"],
+      "@models/*": ["models/*"],
+      "@types/*": ["types/*"],
+      "@services/*": ["services/*"]
     }
   }
 }

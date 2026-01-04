@@ -6,7 +6,7 @@ featured: false
 draft: false
 tags:
   - Travel
-  - Dubai 
+  - Dubai
 description: ドバイの灼熱と階級社会、労働者と贅沢の対比にニヤリ
 ---
 

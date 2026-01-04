@@ -1,8 +1,8 @@
 import { slugifyStr } from "./slugify";
-import type { CollectionEntry } from "astro:content";
+import type { UnifiedPost } from "../types/post";
 
-const getUniqueTags = (posts: CollectionEntry<"blog">[]) => {
-  const filteredPosts = posts.filter(({ data }) => !data.draft);
+const getUniqueTags = (posts: UnifiedPost[]): string[] => {
+  const filteredPosts = posts.filter(post => !post.data.draft);
   const tags: string[] = filteredPosts
     .flatMap(post => post.data.tags)
     .map(tag => slugifyStr(tag))
@@ -14,4 +14,4 @@ const getUniqueTags = (posts: CollectionEntry<"blog">[]) => {
   return tags;
 };
 
-export default getUniqueTags;
+export { getUniqueTags };

@@ -1,17 +1,13 @@
 ---
 import { SITE } from "@config";
 import Posts from "@layouts/Posts.astro";
-import getSortedPosts from "@utils/getSortedPosts";
+import { getSortedPosts } from "@utils/getSortedPosts";
 import getPageNumbers from "@utils/getPageNumbers";
+import { getAllPosts } from "@services/posts";
 
-import { getCollection } from "astro:content";
-
-const posts = await getCollection("blog");
-
+const posts = await getAllPosts();
 const sortedPosts = getSortedPosts(posts);
-
 const totalPages = getPageNumbers(sortedPosts.length);
-
 const paginatedPosts = sortedPosts.slice(0, SITE.postPerPage);
 ---
 

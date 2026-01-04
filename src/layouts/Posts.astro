@@ -4,15 +4,14 @@ import Layout from "@layouts/Layout.astro";
 import Main from "@layouts/Main.astro";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
-import Card from "@components/Card";
+import { Card } from "@components/Card";
 import LinkButton from "@components/LinkButton.astro";
-import slugify from "@utils/slugify";
-import type { CollectionEntry } from "astro:content";
+import type { UnifiedPost } from "../types/post";
 
 export interface Props {
   pageNum: number;
   totalPages: number;
-  posts: CollectionEntry<"blog">[];
+  posts: UnifiedPost[];
 }
 
 const { pageNum, totalPages, posts } = Astro.props;
@@ -26,8 +25,8 @@ const next = pageNum < totalPages ? "" : "disabled";
   <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
     <ul>
       {
-        posts.map(({ data, slug }) => (
-          <Card href={`/posts/${slugify(slug)}`} frontmatter={data} />
+        posts.map((post) => (
+          <Card post={post} />
         ))
       }
     </ul>
