@@ -4,7 +4,6 @@ import react from "@astrojs/react";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import sitemap from "@astrojs/sitemap";
-import netlify from "@astrojs/netlify";
 import { SITE } from "./src/config";
 
 // https://astro.build/config
