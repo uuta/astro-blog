@@ -11,7 +11,6 @@ import { SITE } from "./src/config";
 export default defineConfig({
   site: SITE.website,
   output: "static",
-  adapter: netlify(),
   integrations: [
     tailwind({
       applyBaseStyles: false,
@@ -37,6 +36,14 @@ export default defineConfig({
   vite: {
     optimizeDeps: {
       exclude: ["@resvg/resvg-js"],
+    },
+    server: {
+      watch: {
+        // Ensure component changes are detected
+      },
+      hmr: {
+        overlay: true,
+      },
     },
   },
   scopedStyleStrategy: "where",
