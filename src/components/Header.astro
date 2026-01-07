@@ -18,18 +18,18 @@ const { activeNav } = Astro.props;
         <!-- src={`/assets/${LOGO_IMAGE.svg ? "logo.svg" : "logo.png"}`} -->
         {
           LOGO_IMAGE.enable ? (
-			<>
-			<img
-              src={`/assets/logo.png`}
-              alt={SITE.title}
-              width={LOGO_IMAGE.width}
-              height={LOGO_IMAGE.height}
-            />
-			{SITE.title}
-			</>
-			) : (
+            <>
+              <img
+                src={`/assets/logo.png`}
+                alt={SITE.title}
+                width={LOGO_IMAGE.width}
+                height={LOGO_IMAGE.height}
+              />
+              {SITE.title}
+            </>
+          ) : (
             SITE.title
-			)
+          )
         }
       </a>
       <nav id="nav-menu">
