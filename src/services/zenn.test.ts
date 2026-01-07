@@ -293,9 +293,8 @@ describe("fetchAllZennArticles without username config", () => {
       .mockImplementation(() => {});
 
     // Re-import with new mock
-    const { fetchAllZennArticles: fetchWithoutUsername } = await import(
-      "./zenn"
-    );
+    const { fetchAllZennArticles: fetchWithoutUsername } =
+      await import("./zenn");
 
     const result = await fetchWithoutUsername();
 

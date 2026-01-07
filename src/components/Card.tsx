@@ -1,4 +1,4 @@
-import { slugifyStr } from "@utils/slugify";
+import slugify, { slugifyStr } from "@utils/slugify";
 import Datetime from "./Datetime";
 import type { UnifiedPost } from "../types/post";
 
@@ -10,7 +10,7 @@ type Props = {
 export function Card({ post }: Props) {
   const { title, pubDatetime, description } = post.data;
   const isZenn = post.source === "zenn";
-  const href = isZenn ? post.externalUrl : `/posts/${post.slug}/`;
+  const href = isZenn ? post.externalUrl : `/posts/${slugify(post.slug)}/`;
   const likedCount = isZenn ? post.likedCount : undefined;
 
   const headerProps = {

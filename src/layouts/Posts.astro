@@ -24,11 +24,7 @@ const next = pageNum < totalPages ? "" : "disabled";
   <Header activeNav="posts" />
   <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
     <ul>
-      {
-        posts.map((post) => (
-          <Card post={post} />
-        ))
-      }
+      {posts.map(post => <Card post={post} />)}
     </ul>
   </Main>
 

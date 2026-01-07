@@ -6,7 +6,7 @@ import Tag from "@components/Tag.astro";
 import Datetime from "@components/Datetime";
 import type { LocalPost } from "../types/post";
 import { slugifyStr } from "@utils/slugify";
-import { setOGImage} from "@config";
+import { setOGImage } from "@config";
 
 export interface Props {
   post: LocalPost;
@@ -19,7 +19,8 @@ const { title, author, description, ogImage, canonicalURL, pubDatetime, tags } =
 
 const { Content } = await post.render();
 
-const ogImageUrl = setOGImage(title) ?? (typeof ogImage === "string" ? ogImage : ogImage?.src);
+const ogImageUrl =
+  setOGImage(title) ?? (typeof ogImage === "string" ? ogImage : ogImage?.src);
 const ogUrl = new URL(
   ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,
   Astro.url.origin
