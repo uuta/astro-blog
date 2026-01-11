@@ -8,9 +8,9 @@ import type { LocalPost } from "../types/post";
 import { slugifyStr } from "@utils/slugify";
 import { setOGImage } from "@config";
 
-export interface Props {
+export type Props = {
   post: LocalPost;
-}
+};
 
 const { post } = Astro.props;
 
