@@ -1,0 +1,74 @@
+<aside id="speakgain-cta" class="speakgain-cta" aria-label="SpeakGain">
+  <h2>喋る英語学習アプリ『SpeakGain』作ってます</h2>
+  <ul class="advantages">
+    <li>言いたかった英語を、自分だけの暗記カードにできる</li>
+    <li>ネイティブ音声・AI 解説・項目別の発音採点で練習できる</li>
+    <li>忘れそうなタイミングに合わせて効率よく復習できる</li>
+  </ul>
+  <p>よかったら使ってみてね👇</p>
+  <a href="https://speakgain.com/ja/">
+    <img
+      src="/assets/speakgain-cta.png"
+      width="1024"
+      height="500"
+      loading="lazy"
+      alt="SpeakGain — つくって、しゃべって、忘れない。言いたかった英語を口で覚える、自分だけの暗記カード。"
+    />
+  </a>
+</aside>
+
+<style>
+  .speakgain-cta {
+    margin-top: 2rem;
+  }
+
+  .speakgain-cta h2 {
+    @apply text-2xl font-semibold tracking-wide;
+  }
+
+  .advantages {
+    margin: 0.75rem 0 0;
+    padding-left: 1.5rem;
+    list-style: disc;
+  }
+
+  .advantages li + li {
+    margin-top: 0.5rem;
+  }
+
+  .speakgain-cta p {
+    @apply mb-3 mt-6 font-medium text-skin-base;
+  }
+
+  .speakgain-cta a {
+    display: block;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    transition:
+      box-shadow 150ms ease,
+      transform 150ms ease;
+  }
+
+  .speakgain-cta a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.75rem 1.5rem rgb(32 21 64 / 16%);
+  }
+
+  .speakgain-cta a:focus-visible {
+    outline: 3px dashed rgb(var(--color-accent));
+    outline-offset: 4px;
+  }
+
+  .speakgain-cta img {
+    display: block;
+    margin-top: 1rem;
+    width: 100%;
+    height: auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .speakgain-cta a {
+      transition: none;
+    }
+  }
+</style>
