@@ -5,9 +5,10 @@ import type { UnifiedPost } from "../types/post";
 type Props = {
   post: UnifiedPost;
   secHeading?: boolean;
+  featured?: boolean;
 };
 
-export function Card({ post }: Props) {
+export function Card({ post, featured }: Props) {
   const { title, pubDatetime, description } = post.data;
   const isZenn = post.source === "zenn";
   const href = isZenn ? post.externalUrl : `/posts/${slugify(post.slug)}/`;
@@ -15,7 +16,7 @@ export function Card({ post }: Props) {
 
   const headerProps = {
     style: { viewTransitionName: slugifyStr(title) },
-    className: "text-lg font-medium decoration-dashed hover:underline",
+    className: `${featured ? "text-2xl font-bold" : "text-lg font-medium"} decoration-dashed hover:underline`,
   };
 
   const ZennContent = () => (
@@ -36,7 +37,7 @@ export function Card({ post }: Props) {
           fill="currentColor"
         />
       </svg>
-      <span className="text-white">{likedCount}</span>
+      <span className="text-skin-subtle">{likedCount}</span>
     </div>
   );
 
@@ -44,13 +45,13 @@ export function Card({ post }: Props) {
     <li className="my-6">
       <a
         href={href}
-        className="inline text-lg font-medium text-skin-accent decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
+        className="inline text-lg font-medium text-skin-base decoration-dashed underline-offset-4 focus-visible:no-underline focus-visible:underline-offset-0"
         {...(isZenn ? { target: "_blank", rel: "noopener noreferrer" } : {})}
       >
         <h2 {...headerProps}>{title}</h2>
         {isZenn && <ZennContent />}
       </a>
-      {!isZenn && <p>{description}</p>}
+      {!isZenn && <p className="text-skin-muted">{description}</p>}
       <Datetime datetime={pubDatetime} />
     </li>
   );

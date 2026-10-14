@@ -3,7 +3,7 @@ title: AstroPaperでブログをリニューアル - v0.0.1
 author: uuta
 pubDatetime: 2023-11-01T00:11:06.130Z
 postSlug: new-blog
-featured: true
+featured: false
 draft: false
 tags:
   - dev
