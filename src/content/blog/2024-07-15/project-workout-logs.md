@@ -6,7 +6,6 @@ featured: false
 draft: true
 tags:
   - dev
-description: I integrated Spreadsheet into Looker Studio for monitoring workouts.
 ---
 
 ## Overview of Integrating Workout Logs into Looker Studio

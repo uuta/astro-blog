@@ -7,7 +7,6 @@ featured: false
 draft: false
 tags:
   - Imagination
-description: イキリゴリラと一緒に生活できるか確認しよう
 ---
 
 とある都道府県の部屋を2件内見してきた。

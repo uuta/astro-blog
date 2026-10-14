@@ -7,7 +7,6 @@ draft: false
 tags:
   - AI
   - Agents
-description: AI agentのworkflowを構築しローカルで使用してみた実験の記録
 ---
 
 2週間ぐらい前の話だが、前々職で定期的に開催されているLT会で機会をもらって、AI agentのworkflow構築に関する話をさせてもらった。

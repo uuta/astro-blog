@@ -8,7 +8,6 @@ draft: false
 tags:
   - daily
   - Thailand
-description: 冬休み初日のサプライズ：Immigration Officeでの冒険
 ---
 
 「入国スタンプの期限が切れている。overstayだ」

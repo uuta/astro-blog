@@ -7,7 +7,6 @@ featured: true
 draft: true
 tags:
   - dev
-description: WordPressの重さにさよなら、AstroPaper + NeoVim + Netlifyで快適新生活
 ---
 
 ## Version

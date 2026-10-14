@@ -19,6 +19,7 @@ type BasePostData = {
  */
 type LocalPost = CollectionEntry<"blog"> & {
   source: "local";
+  data: { description: string };
 };
 
 /**
