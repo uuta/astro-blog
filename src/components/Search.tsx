@@ -8,7 +8,7 @@ export type SearchItem = {
   title: string;
   description: string;
   slug: CollectionEntry<"blog">["slug"];
-  data: CollectionEntry<"blog">["data"];
+  data: LocalPost["data"];
 };
 
 // SearchItemをLocalPost互換オブジェクトに変換

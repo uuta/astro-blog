@@ -7,7 +7,6 @@ featured: false
 draft: false
 tags:
   - shanghai
-description: 入国審査で震え声のジェームズボンドを演じた男、3週間後に上海国の建国を宣言。
 ---
 
 あ、俺疑われている。

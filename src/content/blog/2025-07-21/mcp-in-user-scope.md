@@ -7,7 +7,6 @@ draft: false
 tags:
   - Tech
   - AI
-description: Modify ~/.mcp.json to install MCP servers with User Scope
 ---
 
 ## Problem

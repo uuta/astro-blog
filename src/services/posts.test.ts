@@ -19,11 +19,12 @@ import { getAllPosts } from "./posts";
 const createMockLocalPost = (slug: string) => ({
   id: slug,
   slug,
+  body: "## Heading\n\nA local post body.",
+  render: vi.fn(),
   collection: "blog" as const,
   data: {
     title: `Local Post: ${slug}`,
     pubDatetime: new Date("2024-01-10"),
-    description: "A local post",
     author: "localauthor",
     tags: ["typescript", "astro"],
     featured: false,
@@ -79,6 +80,18 @@ describe("getAllPosts", () => {
 
     expect(result).toHaveLength(1);
     expect(result[0].source).toBe("local");
+  });
+
+  it("derives the description of local posts from the body", async () => {
+    vi.mocked(getCollection).mockResolvedValue([
+      createMockLocalPost("local-1"),
+    ]);
+    vi.mocked(fetchAllZennArticles).mockResolvedValue([]);
+    vi.mocked(transformZennArticles).mockReturnValue([]);
+
+    const result = await getAllPosts();
+
+    expect(result[0].data.description).toBe("A local post body.");
   });
 
   it("returns only local posts when Zenn returns empty", async () => {

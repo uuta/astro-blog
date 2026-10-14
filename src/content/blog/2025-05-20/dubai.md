@@ -7,7 +7,6 @@ draft: false
 tags:
   - Travel
   - Dubai
-description: ドバイの灼熱と階級社会、労働者と贅沢の対比にニヤリ
 ---
 
 Dubai信じられないぐらい暑い。日陰を探すのが難しくて、ちょっと歩いていると殺人的な直射日光に晒されることになる。Sharjahは地下鉄がないので、直感的な移動ができない。CareemでTaxiを呼んだ場合、SharjahからDubaiまでの14kmの道のりで2万円もかかるところだったw

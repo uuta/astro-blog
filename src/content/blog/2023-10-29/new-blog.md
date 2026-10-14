@@ -7,7 +7,6 @@ featured: true
 draft: false
 tags:
   - dev
-description: WordPressの重さにさよなら、AstroPaper + NeoVim + Netlifyで快適新生活
 ---
 
 [Astro](https://astro.build/)を使って、ブログをリニューアルしました。長年、WordPressを使っていたが、重い管理画面を開くのが非常に億劫になっていた点、WordPress自体が時代遅れの産物になっていた点を鑑み、以前からリニューアルを検討していました。

@@ -7,7 +7,6 @@ featured: false
 draft: false
 tags:
   - danang
-description: 4回目のDa Nang。鬱と馴染みを反復しながら、Solopreneurたちが集う街で勇気の在り処を探る。
 ---
 
 Da Nangは4回目の訪問である。ここは非常に微妙な温度を含んだ街だ。単なるresortではなく、良い意味で自然淘汰が発生する街なのだ。俺は行くたびに強烈な鬱に襲われ、そこから徐々に馴染んでいくという過程を辿る。修行のような気持ちである。

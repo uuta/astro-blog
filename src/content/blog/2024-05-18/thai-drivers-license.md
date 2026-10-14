@@ -7,7 +7,6 @@ draft: false
 tags:
   - Travel
   - Thai
-description: 謎の声が導く、タイの教習所での怪奇体験。果たしてその結末は...？
 ---
 
 ![school](https://res.cloudinary.com/djnikeo2b/image/upload/v1716041944/articles/school.webp)

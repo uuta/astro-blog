@@ -7,7 +7,6 @@ draft: false
 tags:
   - Tech
   - AI
-description: Claude Codeを導入してTranderというMVPアプリケーションを開発した体験記。料金プラン、実際の使用感、注意点、そして今後のAI開発への展望について
 ---
 
 - 金曜日の終業後に、[Claude Code](https://docs.anthropic.com/ja/docs/claude-code/overview)をお試しで導入することにした。
