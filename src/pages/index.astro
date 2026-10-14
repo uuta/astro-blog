@@ -81,7 +81,7 @@ const socialCount = SOCIALS.filter(social => social.active).length;
             <h2>Featured</h2>
             <ul>
               {featuredPosts.map(post => (
-                <Card post={post} secHeading={false} />
+                <Card post={post} secHeading={false} featured />
               ))}
             </ul>
           </section>

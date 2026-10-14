@@ -3,7 +3,7 @@ title: 英語学習アプリ「SpeakGain」をリリースして2ヶ月の反省
 author: uuta
 pubDatetime: 2026-10-14T05:40:48.000Z
 postSlug: speakgain-kpt
-featured: false
+featured: true
 draft: false
 tags:
   - SpeakGain
