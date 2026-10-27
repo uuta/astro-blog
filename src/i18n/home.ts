@@ -10,28 +10,30 @@ export interface WritingRow {
 
 const en = {
 	meta: {
-		title: 'uuta — Agentic workflows · Security',
+		title: 'uuta — Growth with agents · Security',
 		description:
-			"You can't know which agent workflow fits your team until it runs. Once it does, I make every run visible: what it changed, what it read and ran, and whether it got merged or sent back.",
+			'I run the whole loop on my own app: analyze the market, build with an agent pipeline, and reach users with content that agents make and post.',
 	},
 	hero: {
-		kicker: 'Agentic workflows · Security',
-		title: 'See what your agents actually do.',
-		lead: "You can't know which agent workflow fits your team until it runs. Once it does, I make every run visible: what it changed, what it read and ran, and whether it got merged or sent back. Then you keep what works.",
+		kicker: 'Growth with agents · Security',
+		title: 'Grow an app with agents, from the market to its users.',
+		lead: 'I run the whole loop on my own app: analyze the market, build with an agent pipeline, and reach users with content that agents make and post. I can help you set up the same loop, with guardrails where agents need them.',
 		primary: 'Work with me',
 		secondary: 'Read the writing',
 		art: {
 			label:
-				'Pipeline diagram: first an analysis of the market, the infrastructure the work touches and the expected cost. A manager agent then assigns the task to one engineer agent working in its own git worktree. Reviewers are picked by what the change touched. Work that fails review goes back to the engineer for a fix; clean work becomes a pull request whose checks must pass, and I merge it.',
-			// Top row (Analysis, Manager, Engineer) is labelled above the cards, the bottom row below.
+				'Pipeline diagram: first an analysis of the market, the infrastructure the work touches and the expected cost. A manager agent then assigns the task to one engineer agent working in its own git worktree. Reviewers are picked by what the change touched. Work that fails review goes back to the engineer for a fix; clean work becomes a pull request whose checks must pass, and I merge it. Last, agents make and post content so the app reaches its users.',
+			// Top row (Analysis, Manager, Engineer) is labelled above the cards, the bottom row below;
+			// Merged is a small circle between cards, so its label sits above it.
 			// On narrow screens a sub-label wraps; the no-break spaces keep each "·" at a line end.
 			nodes: [
 				{ x: '21%', y: '18.5%', above: true, name: 'Analysis', sub: 'market\u00a0· infra\u00a0· cost' },
 				{ x: '50%', y: '18.5%', above: true, name: 'Manager', sub: 'assigns the task' },
 				{ x: '79%', y: '18.5%', above: true, name: 'Engineer', sub: 'one worktree' },
 				{ x: '79%', y: '79.25%', above: false, name: 'Reviewers', sub: 'picked by the change' },
-				{ x: '50%', y: '79.25%', above: false, name: 'Pull request', sub: 'checks pass' },
-				{ x: '21%', y: '74.9%', above: false, name: 'Merged', sub: 'by me' },
+				{ x: '53%', y: '79.25%', above: false, name: 'Pull request', sub: 'checks pass' },
+				{ x: '36%', y: '63.1%', above: true, name: 'Merged', sub: 'by me' },
+				{ x: '18.5%', y: '79.25%', above: false, name: 'Distribution', sub: 'content agents post' },
 			],
 			fixRequested: 'fix requested',
 			legend: {
@@ -43,17 +45,36 @@ const en = {
 	},
 	focus: {
 		kicker: 'Focus',
-		title: 'Two areas, one question: what did your agents do, and what could they have done?',
+		title: 'One loop from the market to its users, and the guardrails around it.',
 		cards: [
 			{
-				icon: 'workflow',
-				title: 'Agentic workflow',
-				body: 'Analysis first: the market, the infrastructure it touches, what it will cost. Then agents do the work, and people own the decisions.',
+				icon: 'analysis',
+				title: 'Analysis',
+				body: 'Before any agent runs.',
 				items: [
-					'Analysis before any agent runs: market, infrastructure, expected cost',
-					'A manager agent assigns each task to an engineer agent',
-					'Reviewers picked by what the change touched, then CI before anything merges',
+					'The market your users spend time in',
+					'The infrastructure the work touches',
+					'What it will cost to build and run',
+				],
+			},
+			{
+				icon: 'workflow',
+				title: 'Build',
+				body: 'A manager agent hands each task to an engineer agent.',
+				items: [
+					'Reviewers picked by what the change touched, then CI',
 					'Run history: what each agent changed, and what got merged or sent back',
+					'Skills and instructions shared across Claude Code and Codex',
+				],
+			},
+			{
+				icon: 'distribution',
+				title: 'Distribution',
+				body: 'Content agents make and post, so the app reaches people. An ongoing experiment on SpeakGain.',
+				items: [
+					'Short videos and photo carousels made with image and video models',
+					'Posted as drafts through Zernio',
+					'I make the final call before anything goes out',
 				],
 			},
 			{
@@ -61,7 +82,6 @@ const en = {
 				title: 'Security',
 				body: 'An agent with write access and a shell is a new attack surface. I treat it like one.',
 				items: [
-					'A log of what each agent read, wrote and ran',
 					'Permission and sandbox design for agents',
 					'Prompt injection through issues, docs and web pages',
 					'Keeping secrets out of agent context',
@@ -75,8 +95,8 @@ const en = {
 		caseStudy: 'Read the case study',
 		feature: {
 			title: 'SpeakGain, an English speaking app',
-			body: 'Flashcards built from the English you wanted to say, learned out loud, with native-speaker audio, AI explanations, and pronunciation scoring. I build and run all of it with my agent workflow: the Flutter app, the Cloudflare Workers backend, and the site.',
-			tools: ['flutter', 'cloudflareWorkers', 'astro', 'claudeCode'] as Tool[],
+			body: 'Flashcards built from the English you wanted to say, learned out loud, with native-speaker audio, AI explanations, and pronunciation scoring. I build and run all of it with my agent workflow: the Flutter app, the Cloudflare Workers backend, the site, and the TikTok content that brings users in.',
+			tools: ['flutter', 'cloudflareWorkers', 'astro', 'claudeCode', 'tiktok'] as Tool[],
 			shotAlt: "SpeakGain home screen: today's review, a progress ring and a Practice now button",
 		},
 		cards: [
@@ -130,11 +150,11 @@ const en = {
 		columns: [
 			{
 				title: 'Hiring',
-				body: 'Full-time or contract roles in agentic workflow or security engineering. Remote, with teams in Japan or abroad.',
+				body: 'Full-time or contract roles in agentic workflow, growth or security engineering. Remote, with teams in Japan or abroad.',
 			},
 			{
-				title: 'Teams already using agents',
-				body: 'For companies and indie developers. Once agents work in your repos, I make every run visible: what it changed, what it touched, and whether it got merged or sent back. Then you can see which workflow actually works for you.',
+				title: 'Growing an app with agents',
+				body: "Where agents fit in your product's growth, from market analysis to distribution: what it will cost, and how to set it up.",
 			},
 			{
 				title: 'Agent security review',
@@ -147,7 +167,7 @@ const en = {
 	about: {
 		kicker: 'About',
 		lead: "I'm uuta, a software engineer based in Japan. [ONE LINE ON BACKGROUND: years, stack, past roles.]",
-		body: 'These days most of my code is written by agents I direct. Most of my engineering time goes into the system around them: how work is split, how it gets reviewed, how the agents stay inside safe bounds, and how to see what they actually did.',
+		body: 'These days agents I direct write most of my code, and they take part from market analysis to the content that reaches users. Most of my time goes into the system around them: how work is split and reviewed, how they stay inside safe bounds, and how to see what they actually did.',
 		profileLink: 'Full profile',
 		contact: 'Contact',
 	},
@@ -155,26 +175,27 @@ const en = {
 
 const ja: typeof en = {
 	meta: {
-		title: 'uuta — エージェント開発 · セキュリティ',
+		title: 'uuta — エージェントでグロース · セキュリティ',
 		description:
-			'どのエージェント開発がチームに合うかは、動かしてみるまで分かりません。動き始めたら、実行ごとに、何を変えたか、何を読んで実行したか、マージされたか差し戻されたかを見えるようにします。',
+			'自分のアプリで、この流れを丸ごと回しています。市場を分析し、エージェントのパイプラインで作り、エージェントが作って投稿するコンテンツでユーザーに届けます。',
 	},
 	hero: {
-		kicker: 'エージェント開発 · セキュリティ',
-		title: 'エージェントが何をしているか、見えるように。',
-		lead: 'どのエージェント開発がチームに合うかは、動かしてみるまで分かりません。動き始めたら、実行ごとに、何を変えたか、何を読んで実行したか、マージされたか差し戻されたかを見えるようにします。合うものは残し、合わないものはやめられます。',
+		kicker: 'エージェントでグロース · セキュリティ',
+		title: '市場からユーザーまで、エージェントでアプリを育てる。',
+		lead: '自分のアプリで、この流れを丸ごと回しています。市場を分析し、エージェントのパイプラインで作り、エージェントが作って投稿するコンテンツでユーザーに届ける。同じ流れを、エージェントに必要な安全策とあわせて組むお手伝いをします。',
 		primary: '相談する',
 		secondary: '記事を読む',
 		art: {
 			label:
-				'パイプラインの図：まず市場、作業が触れるインフラ、想定コストを分析します。次にマネージャーのエージェントが、専用の git worktree で作業するエンジニアのエージェント1つにタスクを割り当てます。レビュアーは変更が触れた範囲に応じて選ばれます。レビューを通らなければ修正のためエンジニアに戻り、通ったものだけがチェックを通過した Pull Request になって、自分がマージします。',
+				'パイプラインの図：まず市場、作業が触れるインフラ、想定コストを分析します。次にマネージャーのエージェントが、専用の git worktree で作業するエンジニアのエージェント1つにタスクを割り当てます。レビュアーは変更が触れた範囲に応じて選ばれます。レビューを通らなければ修正のためエンジニアに戻り、通ったものだけがチェックを通過した Pull Request になって、自分がマージします。最後に、エージェントがコンテンツを作って投稿し、アプリをユーザーに届けます。',
 			nodes: [
 				{ x: '21%', y: '18.5%', above: true, name: '分析', sub: '市場\u00a0· インフラ\u00a0· コスト' },
 				{ x: '50%', y: '18.5%', above: true, name: 'マネージャー', sub: 'タスクを割り当て' },
 				{ x: '79%', y: '18.5%', above: true, name: 'エンジニア', sub: '専用の worktree' },
 				{ x: '79%', y: '79.25%', above: false, name: 'レビュアー', sub: '変更に応じて選ぶ' },
-				{ x: '50%', y: '79.25%', above: false, name: 'Pull Request', sub: 'チェック通過' },
-				{ x: '21%', y: '74.9%', above: false, name: 'マージ', sub: '自分が判断' },
+				{ x: '53%', y: '79.25%', above: false, name: 'Pull Request', sub: 'チェック通過' },
+				{ x: '36%', y: '63.1%', above: true, name: 'マージ', sub: '自分が判断' },
+				{ x: '18.5%', y: '79.25%', above: false, name: '配信', sub: 'エージェントが投稿' },
 			],
 			fixRequested: '修正依頼',
 			legend: {
@@ -186,17 +207,36 @@ const ja: typeof en = {
 	},
 	focus: {
 		kicker: '領域',
-		title: '2つの領域、1つの問い。エージェントは何をして、何ができてしまうのか。',
+		title: '市場からユーザーまでの一つの流れと、それを囲む安全策。',
 		cards: [
 			{
-				icon: 'workflow',
-				title: 'エージェント開発ワークフロー',
-				body: 'まず分析する。市場、触るインフラ、かかるコスト。そのうえで、作業はエージェントが、判断は人が持つ。',
+				icon: 'analysis',
+				title: '分析',
+				body: 'エージェントを動かす前に。',
 				items: [
-					'エージェントを動かす前の分析：市場・インフラ・想定コスト',
-					'マネージャーのエージェントが、各タスクをエンジニアのエージェントに渡す',
-					'変更が触れた範囲に応じてレビュアーを選び、マージ前に CI を通す',
+					'ユーザーが時間を使っている市場',
+					'作業が触れるインフラ',
+					'作って運用するのにかかるコスト',
+				],
+			},
+			{
+				icon: 'workflow',
+				title: '開発',
+				body: 'マネージャーのエージェントが、各タスクをエンジニアのエージェントに渡す。',
+				items: [
+					'変更が触れた範囲に応じてレビュアーを選び、その後に CI',
 					'実行の記録：各エージェントが何を変え、何がマージされ、何が差し戻されたか',
+					'Claude Code と Codex で共有する skill と指示',
+				],
+			},
+			{
+				icon: 'distribution',
+				title: '配信',
+				body: 'エージェントが作って投稿するコンテンツで、アプリを人に届ける。SpeakGain で続けている実験です。',
+				items: [
+					'画像・動画モデルで作るショート動画と写真カルーセル',
+					'Zernio から下書きとして投稿',
+					'公開前の最終判断は自分',
 				],
 			},
 			{
@@ -204,7 +244,6 @@ const ja: typeof en = {
 				title: 'セキュリティ',
 				body: '書き込み権限とシェルを持つエージェントは、新しい攻撃面です。そのように扱います。',
 				items: [
-					'各エージェントが何を読み、書き、実行したかのログ',
 					'エージェントの権限とサンドボックスの設計',
 					'Issue・ドキュメント・Web 経由のプロンプトインジェクション',
 					'シークレットをエージェントの文脈に入れない設計',
@@ -218,8 +257,8 @@ const ja: typeof en = {
 		caseStudy: '事例を読む',
 		feature: {
 			title: 'SpeakGain — 英語スピーキングアプリ',
-			body: '言いたかった英語を口で覚える、自分だけの暗記カードアプリです。ネイティブ音声・AI 解説・発音採点つき。Flutter のアプリ、Cloudflare Workers のバックエンド、サイトまで、自分のエージェント開発フローで作り、運用しています。',
-			tools: ['flutter', 'cloudflareWorkers', 'astro', 'claudeCode'] as Tool[],
+			body: '言いたかった英語を口で覚える、自分だけの暗記カードアプリです。ネイティブ音声・AI 解説・発音採点つき。Flutter のアプリ、Cloudflare Workers のバックエンド、サイト、そしてユーザーを呼び込む TikTok のコンテンツまで、自分のエージェント開発フローで作り、運用しています。',
+			tools: ['flutter', 'cloudflareWorkers', 'astro', 'claudeCode', 'tiktok'] as Tool[],
 			shotAlt: 'SpeakGain のホーム画面。今日の復習の進み具合と「今すぐ学習する」ボタン',
 		},
 		cards: [
@@ -274,11 +313,11 @@ const ja: typeof en = {
 		columns: [
 			{
 				title: '採用のご相談',
-				body: 'エージェント開発やセキュリティ領域の、正社員・業務委託のポジション。国内外のチームとフルリモートで。',
+				body: 'エージェント開発、グロース、セキュリティ領域の、正社員・業務委託のポジション。国内外のチームとフルリモートで。',
 			},
 			{
-				title: 'エージェントを使っているチーム',
-				body: '企業にも個人開発者にも。エージェントがリポジトリで動き始めたら、実行ごとに、何を変えたか、どこに触れたか、マージされたか差し戻されたかを見えるようにします。そこから、本当に合うワークフローが分かります。',
+				title: 'エージェントでアプリを育てる',
+				body: '市場分析から配信まで、プロダクトの成長のどこにエージェントが合うか。かかるコストと、組み方まで。',
 			},
 			{
 				title: 'エージェントのセキュリティレビュー',
@@ -291,7 +330,7 @@ const ja: typeof en = {
 	about: {
 		kicker: '自己紹介',
 		lead: 'uuta です。日本在住のソフトウェアエンジニアです。[経歴を1行で：年数・技術スタック・これまでの役割]',
-		body: '今はコードの大半を、自分が指示するエージェントが書いています。エンジニアとしての時間の多くは、その周りの仕組みに使っています。作業の分け方、レビューの通し方、エージェントを安全な範囲に留める方法、そして実際に何をしたかを見えるようにする方法です。',
+		body: '今はコードの大半を、自分が指示するエージェントが書いています。市場の分析から、ユーザーに届くコンテンツまで、エージェントが関わります。時間の多くは、その周りの仕組みに使っています。作業の分け方とレビューの通し方、エージェントを安全な範囲に留める方法、そして実際に何をしたかを見えるようにする方法です。',
 		profileLink: 'プロフィールを見る',
 		contact: '連絡先',
 	},

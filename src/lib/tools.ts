@@ -7,6 +7,7 @@ import {
 	siGithub,
 	siGo,
 	siNextdotjs,
+	siTiktok,
 	siTmux,
 	type SimpleIcon,
 } from 'simple-icons';
@@ -36,6 +37,7 @@ export const tools = {
 	tmux: { name: 'tmux', icon: siTmux, light: '#18A51C' },
 	go: { name: 'Go', icon: siGo, light: '#009BC1' },
 	nextjs: { name: 'Next.js', icon: siNextdotjs, ink: true },
+	tiktok: { name: 'TikTok', icon: siTiktok, ink: true },
 } satisfies Record<string, ToolEntry>;
 
 export type Tool = keyof typeof tools;

@@ -9,14 +9,16 @@ interface Props {
 const { lang } = Astro.props;
 const { label, nodes, fixRequested, legend } = home[lang].hero.art;
 
-// Card frames (220 × 150) in the 1000 × 800 drawing. Top row runs left to right,
-// the bottom row comes back right to left after review.
+// Card frames [x, y, width] in the 1000 × 800 drawing, all 150 tall. The top row runs
+// left to right; the bottom row comes back right to left after review and ends with
+// distribution, under analysis.
 const cards = {
-	analysis: [100, 160],
-	manager: [390, 160],
-	engineer: [680, 160],
-	reviewers: [680, 470],
-	pr: [390, 470],
+	analysis: [100, 160, 220],
+	manager: [390, 160, 220],
+	engineer: [680, 160, 220],
+	reviewers: [680, 470, 220],
+	pr: [450, 470, 160],
+	distribution: [100, 470, 170],
 } as const;
 const at = (card: keyof typeof cards) => `translate(${cards[card][0]} ${cards[card][1]})`;
 // Reviewer chips; the lit ones are the reviewers this change picked.
@@ -32,29 +34,31 @@ const picked = [44, 132];
 			</defs>
 			<rect width="1000" height="800" fill="url(#hero-grid)"></rect>
 
-			{/* Edges: analysis → manager → engineer ↓ reviewers → pull request → merged */}
+			{/* Edges: analysis → manager → engineer ↓ reviewers → pull request → merged → distribution */}
 			<g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--line)">
 				<path d="M320 235 H390"></path>
 				<path d="M610 235 H680"></path>
 				<path d="M830 310 V470"></path>
 				<path d="M680 545 H610"></path>
-				<path d="M390 545 H250"></path>
+				<path d="M450 545 H386"></path>
+				<path d="M334 545 H270"></path>
 				<path d="M381 229 L389 235 L381 241"></path>
 				<path d="M671 229 L679 235 L671 241"></path>
 				<path d="M824 461 L830 469 L836 461"></path>
 				<path d="M619 539 L611 545 L619 551"></path>
-				<path d="M259 539 L251 545 L259 551"></path>
+				<path d="M395 539 L387 545 L395 551"></path>
+				<path d="M279 539 L271 545 L279 551"></path>
 			</g>
 			{/* Fix loop: reviewers back to the engineer */}
 			<path d="M750 470 V310" fill="none" stroke-width="2" stroke-dasharray="8 7" style="stroke: var(--field-line)"></path>
 			<path d="M744 319 L750 311 L756 319" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--field-line)"></path>
 
 			{
-				Object.keys(cards).map((card) => (
-					<g transform={at(card as keyof typeof cards)}>
-						<rect width="220" height="150" rx="6" stroke-width="1.5" style="fill: var(--card); stroke: var(--field-line)" />
-						<path d="M0 22 V6 Q0 0 6 0 H214 Q220 0 220 6 V22 Z" style="fill: var(--svg-2)" />
-						<path d="M0 22 H220" stroke-width="1.5" style="stroke: var(--field-line)" />
+				Object.values(cards).map(([x, y, w]) => (
+					<g transform={`translate(${x} ${y})`}>
+						<rect width={w} height="150" rx="6" stroke-width="1.5" style="fill: var(--card); stroke: var(--field-line)" />
+						<path d={`M0 22 V6 Q0 0 6 0 H${w - 6} Q${w} 0 ${w} 6 V22 Z`} style="fill: var(--svg-2)" />
+						<path d={`M0 22 H${w}`} stroke-width="1.5" style="stroke: var(--field-line)" />
 					</g>
 				))
 			}
@@ -172,15 +176,39 @@ const picked = [44, 132];
 						</g>
 					))
 				}
-				<rect x="12" y="118" width="196" height="22" rx="4" style="fill: var(--svg-2)"></rect>
-				<rect class="hid rm a-mb" x="12" y="118" width="196" height="22" rx="4" style="fill: var(--accent)"></rect>
-				<rect x="80" y="126" width="60" height="6" rx="3" style="fill: var(--card)"></rect>
+				<rect x="12" y="118" width="136" height="22" rx="4" style="fill: var(--svg-2)"></rect>
+				<rect class="hid rm a-mb" x="12" y="118" width="136" height="22" rx="4" style="fill: var(--accent)"></rect>
+				<rect x="50" y="126" width="60" height="6" rx="3" style="fill: var(--card)"></rect>
 			</g>
 
 			{/* Merged, by me */}
-			<circle class="hid ring a-ring" cx="210" cy="545" r="40" fill="none" stroke-width="2" style="stroke: var(--accent)"></circle>
-			<circle cx="210" cy="545" r="40" style="fill: var(--inverse)"></circle>
-			<g fill="none" stroke-width="2" stroke-linecap="round" style="stroke: var(--on-inverse)"><circle cx="202" cy="533" r="3.5"></circle><circle cx="202" cy="557" r="3.5"></circle><circle cx="219" cy="550" r="3.5"></circle><path d="M202 536.5 V553.5"></path><path d="M202 536.5 Q202 546 215.5 549"></path></g>
+			<circle class="hid ring a-ring" cx="360" cy="545" r="26" fill="none" stroke-width="2" style="stroke: var(--accent)"></circle>
+			<circle cx="360" cy="545" r="26" style="fill: var(--inverse)"></circle>
+			<g fill="none" stroke-width="2" stroke-linecap="round" style="stroke: var(--on-inverse)"><circle cx="352" cy="533" r="3.5"></circle><circle cx="352" cy="557" r="3.5"></circle><circle cx="369" cy="550" r="3.5"></circle><path d="M352 536.5 V553.5"></path><path d="M352 536.5 Q352 546 365.5 549"></path></g>
+
+			{/* Distribution: agents make a video and a carousel, write the caption, and post it */}
+			<g transform={at('distribution')}>
+				<g fill="none" stroke-width="1.5" stroke-linecap="round" style="stroke: var(--field-line)"><path d="M9 7.5 A5 5 0 0 0 9 14.5"></path><path d="M17 7.5 A5 5 0 0 1 17 14.5"></path></g>
+				<circle cx="13" cy="11" r="2" style="fill: var(--field-line)"></circle>
+				<rect x="26" y="8" width="50" height="6" rx="3" style="fill: var(--field-line)"></rect>
+				<rect x="12" y="32" width="52" height="104" rx="6" style="fill: var(--svg-2)"></rect>
+				<path d="M32 74 L45 84 L32 94 Z" style="fill: var(--field-line)"></path>
+				<g style="fill: var(--svg-2)">
+					<rect x="76" y="64" width="24" height="24" rx="3"></rect>
+					<rect x="105" y="64" width="24" height="24" rx="3"></rect>
+					<rect x="134" y="64" width="24" height="24" rx="3"></rect>
+				</g>
+				<g class="hid rm a-vid">
+					<rect x="12" y="32" width="52" height="104" rx="6" style="fill: var(--accent)" fill-opacity="0.16"></rect>
+					<path d="M32 74 L45 84 L32 94 Z" style="fill: var(--accent)"></path>
+					<g style="fill: var(--accent)" fill-opacity="0.16"><rect x="76" y="64" width="24" height="24" rx="3"></rect><rect x="105" y="64" width="24" height="24" rx="3"></rect><rect x="134" y="64" width="24" height="24" rx="3"></rect></g>
+				</g>
+				<g class="tl a-cap1"><rect x="76" y="34" width="80" height="6" rx="3" style="fill: var(--field-line)"></rect></g>
+				<g class="tl a-cap2"><rect x="76" y="48" width="58" height="6" rx="3" style="fill: var(--line)"></rect></g>
+				<rect x="76" y="112" width="82" height="22" rx="4" style="fill: var(--svg-2)"></rect>
+				<rect class="hid rm a-post" x="76" y="112" width="82" height="22" rx="4" style="fill: var(--accent)"></rect>
+				<rect x="95" y="120" width="44" height="6" rx="3" style="fill: var(--card)"></rect>
+			</g>
 
 			{/* Work moving along the edges; the ink dot is a fix request going back */}
 			<g style="stroke: var(--accent)">
@@ -188,7 +216,8 @@ const picked = [44, 132];
 				<path class="dot still a-d2" pathLength="100" d="M610 235 H680"></path>
 				<path class="dot a-d3" pathLength="100" d="M830 310 V470"></path>
 				<path class="dot a-d5" pathLength="100" d="M680 545 H610"></path>
-				<path class="dot a-d6" pathLength="100" d="M390 545 H250"></path>
+				<path class="dot a-d6" pathLength="100" d="M450 545 H386"></path>
+				<path class="dot a-d7" pathLength="100" d="M334 545 H270"></path>
 			</g>
 			<path class="dot still a-dfix" pathLength="100" d="M750 470 V310" style="stroke: var(--ink)"></path>
 		</svg>
@@ -296,7 +325,7 @@ const picked = [44, 132];
 </style>
 
 <style is:global>
-	/* One 12 s loop: analysis, manager, engineer, review with one fix round, pull request, merge. */
+	/* One 12 s loop: analysis, manager, engineer, review with one fix round, pull request, merge, post. */
 	.hero-art .dot{fill:none;stroke-width:14;stroke-linecap:round;stroke-dasharray:0.01 199.99;opacity:0}
 	.hero-art .hid{opacity:0}
 	.hero-art .tl{transform-box:fill-box;transform-origin:0 50%}
@@ -315,20 +344,25 @@ const picked = [44, 132];
 	.hero-art .a-l4{animation:hero-l4 12s linear infinite}@keyframes hero-l4{0%,26%{transform:scaleX(0)}27.5%,52%{transform:scaleX(1)}52.1%{transform:scaleX(0)}55%,98.5%{transform:scaleX(1)}99%,100%{transform:scaleX(0)}}
 	.hero-art .a-l5{animation:hero-l5 12s linear infinite}@keyframes hero-l5{0%,28%{transform:scaleX(0)}29.5%,98.5%{transform:scaleX(1)}99%,100%{transform:scaleX(0)}}
 	.hero-art .a-l6{animation:hero-l6 12s linear infinite}@keyframes hero-l6{0%,30%{transform:scaleX(0)}31.5%,98.5%{transform:scaleX(1)}99%,100%{transform:scaleX(0)}}
-	.hero-art .a-d3{animation:hero-d3 12s linear infinite}@keyframes hero-d3{0%,33%{opacity:0;stroke-dashoffset:0}33.1%{opacity:1;stroke-dashoffset:0}37%{opacity:1;stroke-dashoffset:-100}37.1%{opacity:0;stroke-dashoffset:-100}37.2%,64%{opacity:0;stroke-dashoffset:0}64.1%{opacity:1;stroke-dashoffset:0}68%{opacity:1;stroke-dashoffset:-100}68.1%,100%{opacity:0;stroke-dashoffset:-100}}
+	.hero-art .a-d3{animation:hero-d3 12s linear infinite}@keyframes hero-d3{0%,33%{opacity:0;stroke-dashoffset:0}33.1%{opacity:1;stroke-dashoffset:0}37%{opacity:1;stroke-dashoffset:-100}37.1%{opacity:0;stroke-dashoffset:-100}37.2%,61%{opacity:0;stroke-dashoffset:0}61.1%{opacity:1;stroke-dashoffset:0}64%{opacity:1;stroke-dashoffset:-100}64.1%,100%{opacity:0;stroke-dashoffset:-100}}
 	.hero-art .a-sel{animation:hero-sel 12s linear infinite}@keyframes hero-sel{0%,38%{opacity:0}38.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
 	.hero-art .a-cmt{animation:hero-cmt 12s linear infinite}@keyframes hero-cmt{0%,41%{opacity:0}41.8%,49%{opacity:1}49.8%,100%{opacity:0}}
 	.hero-art .a-dfix{animation:hero-dfix 12s linear infinite}@keyframes hero-dfix{0%,44%{opacity:0;stroke-dashoffset:0}44.1%{opacity:1;stroke-dashoffset:0}50%{opacity:1;stroke-dashoffset:-100}50.1%,100%{opacity:0;stroke-dashoffset:-100}}
-	.hero-art .a-fix{animation:hero-fix 12s linear infinite}@keyframes hero-fix{0%,50%{opacity:0}50.8%,62%{opacity:1}62.8%,100%{opacity:0}}
-	.hero-art .a-ok{animation:hero-ok 12s linear infinite}@keyframes hero-ok{0%,70%{opacity:0}70.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
-	.hero-art .a-d5{animation:hero-d5 12s linear infinite}@keyframes hero-d5{0%,74%{opacity:0;stroke-dashoffset:0}74.1%{opacity:1;stroke-dashoffset:0}78%{opacity:1;stroke-dashoffset:-100}78.1%,100%{opacity:0;stroke-dashoffset:-100}}
-	.hero-art .a-c1{animation:hero-c1 12s linear infinite}@keyframes hero-c1{0%,79%{opacity:0}79.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
-	.hero-art .a-c2{animation:hero-c2 12s linear infinite}@keyframes hero-c2{0%,82%{opacity:0}82.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
-	.hero-art .a-c3{animation:hero-c3 12s linear infinite}@keyframes hero-c3{0%,85%{opacity:0}85.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
-	.hero-art .a-mb{animation:hero-mb 12s linear infinite}@keyframes hero-mb{0%,87%{opacity:0}87.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
-	.hero-art .a-d6{animation:hero-d6 12s linear infinite}@keyframes hero-d6{0%,88%{opacity:0;stroke-dashoffset:0}88.1%{opacity:1;stroke-dashoffset:0}92%{opacity:1;stroke-dashoffset:-100}92.1%,100%{opacity:0;stroke-dashoffset:-100}}
-	.hero-art .a-ring{animation:hero-ring 12s linear infinite}@keyframes hero-ring{0%,92%{opacity:0;transform:scale(1)}92.1%{opacity:0.7;transform:scale(1)}96%{opacity:0;transform:scale(1.6)}96.1%,100%{opacity:0;transform:scale(1)}}
+	.hero-art .a-fix{animation:hero-fix 12s linear infinite}@keyframes hero-fix{0%,50%{opacity:0}50.8%,59%{opacity:1}59.8%,100%{opacity:0}}
+	.hero-art .a-ok{animation:hero-ok 12s linear infinite}@keyframes hero-ok{0%,65%{opacity:0}65.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-d5{animation:hero-d5 12s linear infinite}@keyframes hero-d5{0%,67%{opacity:0;stroke-dashoffset:0}67.1%{opacity:1;stroke-dashoffset:0}70%{opacity:1;stroke-dashoffset:-100}70.1%,100%{opacity:0;stroke-dashoffset:-100}}
+	.hero-art .a-c1{animation:hero-c1 12s linear infinite}@keyframes hero-c1{0%,71%{opacity:0}71.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-c2{animation:hero-c2 12s linear infinite}@keyframes hero-c2{0%,73%{opacity:0}73.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-c3{animation:hero-c3 12s linear infinite}@keyframes hero-c3{0%,75%{opacity:0}75.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-mb{animation:hero-mb 12s linear infinite}@keyframes hero-mb{0%,77%{opacity:0}77.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-d6{animation:hero-d6 12s linear infinite}@keyframes hero-d6{0%,78%{opacity:0;stroke-dashoffset:0}78.1%{opacity:1;stroke-dashoffset:0}81%{opacity:1;stroke-dashoffset:-100}81.1%,100%{opacity:0;stroke-dashoffset:-100}}
+	.hero-art .a-d7{animation:hero-d7 12s linear infinite}@keyframes hero-d7{0%,85%{opacity:0;stroke-dashoffset:0}85.1%{opacity:1;stroke-dashoffset:0}88%{opacity:1;stroke-dashoffset:-100}88.1%,100%{opacity:0;stroke-dashoffset:-100}}
+	.hero-art .a-vid{animation:hero-vid 12s linear infinite}@keyframes hero-vid{0%,88.5%{opacity:0}89.3%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-cap1{animation:hero-cap1 12s linear infinite}@keyframes hero-cap1{0%,89%{transform:scaleX(0)}90.5%,98.5%{transform:scaleX(1)}99%,100%{transform:scaleX(0)}}
+	.hero-art .a-cap2{animation:hero-cap2 12s linear infinite}@keyframes hero-cap2{0%,90.5%{transform:scaleX(0)}92%,98.5%{transform:scaleX(1)}99%,100%{transform:scaleX(0)}}
+	.hero-art .a-post{animation:hero-post 12s linear infinite}@keyframes hero-post{0%,93%{opacity:0}93.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-ring{animation:hero-ring 12s linear infinite}@keyframes hero-ring{0%,81%{opacity:0;transform:scale(1)}81.1%{opacity:0.7;transform:scale(1)}85%{opacity:0;transform:scale(1.6)}85.1%,100%{opacity:0;transform:scale(1)}}
 
-	/* Without motion, show the finished run: everything checked, two reviewers picked. */
+	/* Without motion, show the finished run: everything checked, two reviewers picked, the post out. */
 	@media (prefers-reduced-motion: reduce){.hero-art *{animation:none !important}.hero-art .dot.still{opacity:1;stroke-dashoffset:-55}.hero-art .rm{opacity:1}}
 </style>
