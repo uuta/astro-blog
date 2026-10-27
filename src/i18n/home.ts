@@ -1,4 +1,5 @@
 import type { Lang } from './ui';
+import type { Tool } from '../lib/tools';
 
 /** A row in the Writing list. `post` is the key of a writing post; rows without one stay placeholders. */
 export interface WritingRow {
@@ -21,15 +22,16 @@ const en = {
 		secondary: 'Read the writing',
 		art: {
 			label:
-				'Pipeline diagram: GitHub issues flow to three agents, each working in its own git worktree. One writes code, one runs tests, one reads the codebase. A second model reviews the diff. Work that fails review goes back to its agent for a fix; clean work becomes a pull request whose checks must pass, and I merge it.',
+				'Pipeline diagram: first an analysis of the market, the infrastructure the work touches and the expected cost. A manager agent then assigns the task to one engineer agent working in its own git worktree. Reviewers are picked by what the change touched. Work that fails review goes back to the engineer for a fix; clean work becomes a pull request whose checks must pass, and I merge it.',
+			// Top row (Analysis, Manager, Engineer) is labelled above the cards, the bottom row below.
+			// On narrow screens a sub-label wraps; the no-break spaces keep each "·" at a line end.
 			nodes: [
-				{ x: '10%', y: '60.5%', name: 'Issues', sub: 'GitHub' },
-				{ x: '32.5%', y: '30.4%', name: 'Agent 1', sub: 'worktree 1' },
-				{ x: '32.5%', y: '56.6%', name: 'Agent 2', sub: 'worktree 2' },
-				{ x: '32.5%', y: '82.9%', name: 'Agent 3', sub: 'worktree 3' },
-				{ x: '56.5%', y: '60.5%', name: 'Review', sub: '2nd model' },
-				{ x: '76.5%', y: '58%', name: 'Pull request', sub: 'checks pass' },
-				{ x: '92.5%', y: '54%', name: 'Merged', sub: 'by me' },
+				{ x: '21%', y: '18.5%', above: true, name: 'Analysis', sub: 'market\u00a0· infra\u00a0· cost' },
+				{ x: '50%', y: '18.5%', above: true, name: 'Manager', sub: 'assigns the task' },
+				{ x: '79%', y: '18.5%', above: true, name: 'Engineer', sub: 'one worktree' },
+				{ x: '79%', y: '79.25%', above: false, name: 'Reviewers', sub: 'picked by the change' },
+				{ x: '50%', y: '79.25%', above: false, name: 'Pull request', sub: 'checks pass' },
+				{ x: '21%', y: '74.9%', above: false, name: 'Merged', sub: 'by me' },
 			],
 			fixRequested: 'fix requested',
 			legend: {
@@ -46,12 +48,12 @@ const en = {
 			{
 				icon: 'workflow',
 				title: 'Agentic workflow',
-				body: 'Issue, plan, implement, review, pull request. Agents do the work; people own the decisions.',
+				body: 'Analysis first: the market, the infrastructure it touches, what it will cost. Then agents do the work, and people own the decisions.',
 				items: [
+					'Analysis before any agent runs: market, infrastructure, expected cost',
+					'A manager agent assigns each task to an engineer agent',
+					'Reviewers picked by what the change touched, then CI before anything merges',
 					'Run history: what each agent changed, and what got merged or sent back',
-					'Multi-agent pipelines on Claude Code and Codex',
-					'Skills and instructions shared across models',
-					'Review and CI gates before anything merges',
 				],
 			},
 			{
@@ -72,52 +74,42 @@ const en = {
 		title: 'Systems I run every day, and what they produced.',
 		caseStudy: 'Read the case study',
 		feature: {
-			meta: 'Product · Shipped',
 			title: 'SpeakGain, an English speaking app',
 			body: 'Flashcards built from the English you wanted to say, learned out loud, with native-speaker audio, AI explanations, and pronunciation scoring. I build and run all of it with my agent workflow: the Flutter app, the Cloudflare Workers backend, and the site.',
-			facts: [
-				{ label: 'Platforms', value: 'iOS · Android' },
-				{ label: 'Pronunciation', value: 'Scored word by word' },
-				{ label: 'UI languages', value: '12' },
-			],
-			tags: ['Flutter', 'Cloudflare Workers', 'Astro', 'Claude Code', 'Codex'],
+			tools: ['flutter', 'cloudflareWorkers', 'astro', 'claudeCode'] as Tool[],
 			shotAlt: "SpeakGain home screen: today's review, a progress ring and a Practice now button",
 		},
 		cards: [
 			{
-				meta: 'Agentic workflow · Tooling',
 				title: 'One skill library for Claude Code and Codex',
 				body: 'Workflow rules used to live in prompts I retyped. Now both agents load the same model-neutral skills (how to split an issue, review a diff, set up a worktree), so fixing a rule once fixes it for both.',
 				resultLabel: 'Result',
 				result: '[N skills, in daily use across N repos]',
-				tags: ['Claude Code', 'Codex', 'Skills'],
+				tools: ['claudeCode'] as Tool[],
 				draft: false,
 			},
 			{
-				meta: 'Agentic workflow · Pipeline',
-				title: 'Issue-to-PR loop with parallel agents',
-				body: 'Agents pick up ready GitHub issues, each in its own git worktree. A second model reviews the diff, failures loop back for a fix, and only clean work becomes a pull request. I review and merge.',
+				title: 'Issue-to-PR loop with a manager agent',
+				body: 'A manager agent hands each issue to an engineer agent in its own worktree. Reviewers are picked by the change: one for a small change, several for a risky one. Failures go back for a fix; clean work becomes a pull request I merge.',
 				resultLabel: 'Caught before merge',
 				result: '[A BUG THE REVIEW STEP STOPPED]',
-				tags: ['GitHub', 'git worktree', 'tmux', 'Code review'],
+				tools: ['github', 'gitWorktree', 'tmux'] as Tool[],
 				draft: false,
 			},
 			{
-				meta: 'Agentic workflow · Product',
 				title: 'A resort-job aggregator, built by agents',
 				body: 'A real product built end to end with Claude as the manager and Codex as implementer and reviewer, from the plan to a running web app. A test of how far the workflow holds up outside of tooling.',
 				resultLabel: 'Result',
 				result: '[WHAT SHIPPED · LINK]',
-				tags: ['Go', 'Next.js', 'Claude Code', 'Codex'],
+				tools: ['go', 'nextjs', 'claudeCode'] as Tool[],
 				draft: false,
 			},
 			{
-				meta: 'Security · Case study',
 				title: '[SECURITY CASE STUDY TITLE]',
 				body: '[e.g. an audit of what a coding agent could read, write and run on a real repo, the risky paths found, and what changed]',
 				resultLabel: 'Result',
 				result: '[FINDINGS · FIXES]',
-				tags: ['Threat model', 'Sandboxing'],
+				tools: [] as Tool[],
 				draft: true,
 			},
 		],
@@ -175,15 +167,14 @@ const ja: typeof en = {
 		secondary: '記事を読む',
 		art: {
 			label:
-				'パイプラインの図：GitHub の Issue が3つのエージェントに渡り、それぞれ専用の git worktree で作業します。1つはコードを書き、1つはテストを回し、1つはコードベースを読みます。差分は別のモデルがレビューし、通らなければ修正のためエージェントに戻り、通ったものだけがチェックを通過した Pull Request になって、自分がマージします。',
+				'パイプラインの図：まず市場、作業が触れるインフラ、想定コストを分析します。次にマネージャーのエージェントが、専用の git worktree で作業するエンジニアのエージェント1つにタスクを割り当てます。レビュアーは変更が触れた範囲に応じて選ばれます。レビューを通らなければ修正のためエンジニアに戻り、通ったものだけがチェックを通過した Pull Request になって、自分がマージします。',
 			nodes: [
-				{ x: '10%', y: '60.5%', name: 'Issue', sub: 'GitHub' },
-				{ x: '32.5%', y: '30.4%', name: 'エージェント 1', sub: 'worktree 1' },
-				{ x: '32.5%', y: '56.6%', name: 'エージェント 2', sub: 'worktree 2' },
-				{ x: '32.5%', y: '82.9%', name: 'エージェント 3', sub: 'worktree 3' },
-				{ x: '56.5%', y: '60.5%', name: 'レビュー', sub: '別のモデル' },
-				{ x: '76.5%', y: '58%', name: 'Pull Request', sub: 'チェック通過' },
-				{ x: '92.5%', y: '54%', name: 'マージ', sub: '自分が判断' },
+				{ x: '21%', y: '18.5%', above: true, name: '分析', sub: '市場\u00a0· インフラ\u00a0· コスト' },
+				{ x: '50%', y: '18.5%', above: true, name: 'マネージャー', sub: 'タスクを割り当て' },
+				{ x: '79%', y: '18.5%', above: true, name: 'エンジニア', sub: '専用の worktree' },
+				{ x: '79%', y: '79.25%', above: false, name: 'レビュアー', sub: '変更に応じて選ぶ' },
+				{ x: '50%', y: '79.25%', above: false, name: 'Pull Request', sub: 'チェック通過' },
+				{ x: '21%', y: '74.9%', above: false, name: 'マージ', sub: '自分が判断' },
 			],
 			fixRequested: '修正依頼',
 			legend: {
@@ -200,12 +191,12 @@ const ja: typeof en = {
 			{
 				icon: 'workflow',
 				title: 'エージェント開発ワークフロー',
-				body: 'Issue → 計画 → 実装 → レビュー → PR。作業はエージェントが、判断は人が持つ。',
+				body: 'まず分析する。市場、触るインフラ、かかるコスト。そのうえで、作業はエージェントが、判断は人が持つ。',
 				items: [
+					'エージェントを動かす前の分析：市場・インフラ・想定コスト',
+					'マネージャーのエージェントが、各タスクをエンジニアのエージェントに渡す',
+					'変更が触れた範囲に応じてレビュアーを選び、マージ前に CI を通す',
 					'実行の記録：各エージェントが何を変え、何がマージされ、何が差し戻されたか',
-					'Claude Code / Codex によるマルチエージェント開発',
-					'モデルをまたいで共有する skill と指示',
-					'マージ前のレビューと CI のゲート',
 				],
 			},
 			{
@@ -226,52 +217,42 @@ const ja: typeof en = {
 		title: '毎日動かしている仕組みと、そこから生まれたもの。',
 		caseStudy: '事例を読む',
 		feature: {
-			meta: 'プロダクト · リリース済み',
 			title: 'SpeakGain — 英語スピーキングアプリ',
 			body: '言いたかった英語を口で覚える、自分だけの暗記カードアプリです。ネイティブ音声・AI 解説・発音採点つき。Flutter のアプリ、Cloudflare Workers のバックエンド、サイトまで、自分のエージェント開発フローで作り、運用しています。',
-			facts: [
-				{ label: '対応', value: 'iOS · Android' },
-				{ label: '発音採点', value: '単語ごとに採点' },
-				{ label: '表示言語', value: '12 言語' },
-			],
-			tags: ['Flutter', 'Cloudflare Workers', 'Astro', 'Claude Code', 'Codex'],
+			tools: ['flutter', 'cloudflareWorkers', 'astro', 'claudeCode'] as Tool[],
 			shotAlt: 'SpeakGain のホーム画面。今日の復習の進み具合と「今すぐ学習する」ボタン',
 		},
 		cards: [
 			{
-				meta: 'エージェント開発 · ツール',
 				title: 'Claude Code と Codex で共有する skill ライブラリ',
 				body: '以前はワークフローのルールを毎回プロンプトに書いていました。今は両方のエージェントが同じモデル非依存の skill（Issue の分割、差分レビュー、worktree の準備など）を読み込むので、ルールを一度直せば両方に効きます。',
 				resultLabel: '成果',
 				result: '[skill N 個 · N リポジトリで毎日利用]',
-				tags: ['Claude Code', 'Codex', 'Skills'],
+				tools: ['claudeCode'] as Tool[],
 				draft: false,
 			},
 			{
-				meta: 'エージェント開発 · パイプライン',
-				title: '並列エージェントによる Issue → PR ループ',
-				body: '準備のできた GitHub Issue をエージェントが拾い、それぞれ専用の git worktree で作業します。別のモデルが差分をレビューし、指摘があれば修正に戻り、問題のないものだけが Pull Request になります。マージは自分が判断します。',
+				title: 'マネージャーエージェントによる Issue → PR ループ',
+				body: 'マネージャーのエージェントが Issue をエンジニアのエージェントに渡し、専用の worktree で作業させます。レビュアーは変更に応じて選び、小さな変更なら1つ、リスクのある変更なら複数。指摘があれば修正に戻り、問題のないものだけが Pull Request になって、自分がマージします。',
 				resultLabel: 'マージ前に止めた例',
 				result: '[レビューで止めたバグの例]',
-				tags: ['GitHub', 'git worktree', 'tmux', 'コードレビュー'],
+				tools: ['github', 'gitWorktree', 'tmux'] as Tool[],
 				draft: false,
 			},
 			{
-				meta: 'エージェント開発 · プロダクト',
 				title: 'エージェントで開発したリゾートバイト求人アグリゲーター',
 				body: 'Claude をマネージャー、Codex を実装とレビュー担当にして、計画から動く Web アプリまで一通り作ったプロダクトです。ツールづくりの外で、このワークフローがどこまで通用するかの検証でもあります。',
 				resultLabel: '成果',
 				result: '[リリースした内容 · リンク]',
-				tags: ['Go', 'Next.js', 'Claude Code', 'Codex'],
+				tools: ['go', 'nextjs', 'claudeCode'] as Tool[],
 				draft: false,
 			},
 			{
-				meta: 'セキュリティ · 事例',
 				title: '[セキュリティ事例のタイトル]',
 				body: '[例：実際のリポジトリでコーディングエージェントが読み書き・実行できる範囲を監査し、見つけた危険な経路と変更内容]',
 				resultLabel: '成果',
 				result: '[発見 · 対策]',
-				tags: ['脅威モデル', 'サンドボックス'],
+				tools: [] as Tool[],
 				draft: true,
 			},
 		],

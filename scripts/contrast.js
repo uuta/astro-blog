@@ -4,7 +4,7 @@
 // (`npm run preview`), open any page, and evaluate this function there, for
 // example with the chrome-devtools MCP `evaluate_script` tool.
 // Returns per route and theme the number of text elements checked, the lowest
-// ratio found and every element below 4.5:1 (3:1 for large text).
+// ratio found and every element below 4.5:1 (3:1 for large text and brand icons).
 async () => {
 	const parse = (c) => {
 		let m = c.match(/^rgba?\(([^)]+)\)/);
@@ -85,6 +85,11 @@ async () => {
 				const size = parseFloat(cs.fontSize);
 				const large = size >= 24 || (size >= 18.66 && +cs.fontWeight >= 700);
 				if (r < (large ? 3 : 4.5)) bad.push({ text: own.slice(0, 40), ratio: +r.toFixed(2), fg: cs.color, bg: e ? win.getComputedStyle(e).backgroundColor : 'body' });
+			}
+			// Brand icons are graphics: they need 3:1 against their card (WCAG 1.4.11).
+			for (const icon of doc.querySelectorAll('.tools svg')) {
+				const r = ratio(parse(win.getComputedStyle(icon).color), parse(win.getComputedStyle(icon.closest('.card')).backgroundColor));
+				if (r < 3) bad.push({ icon: icon.getAttribute('aria-label'), ratio: +r.toFixed(2) });
 			}
 			out[`${route} ${theme}`] = { checked, min: +min.toFixed(2), bad };
 			f.remove();

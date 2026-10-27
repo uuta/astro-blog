@@ -2,6 +2,7 @@
 import { Image } from 'astro:assets';
 import SectionHead from './SectionHead.astro';
 import Icon from '../Icon.astro';
+import ToolIcons from '../ToolIcons.astro';
 import { home } from '../../i18n/home';
 import type { Lang } from '../../i18n/ui';
 import enLight from '../../assets/speakgain/speakgain-home-en.png';
@@ -24,20 +25,9 @@ const shots = { en: { light: enLight, dark: enDark }, ja: { light: jaLight, dark
 		<div class="grid">
 			<article class="card feature">
 				<div class="feature-body">
-					<p class="meta-label">{t.feature.meta}</p>
 					<h3>{t.feature.title}</h3>
 					<p class="body">{t.feature.body}</p>
-					<div class="facts">
-						{
-							t.feature.facts.map((fact) => (
-								<div class="fact">
-									<span class="meta-label">{fact.label}</span>
-									<span class="value mono">{fact.value}</span>
-								</div>
-							))
-						}
-					</div>
-					<div class="tags">{t.feature.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
+					<ToolIcons tools={t.feature.tools} />
 					<div class="links">
 						<a class="accent-link" href="https://speakgain.com">speakgain.com<Icon name="external" size={14} /></a>
 						<a class="accent-link" href="#">{t.caseStudy}<Icon name="arrow-right" /></a>
@@ -52,14 +42,13 @@ const shots = { en: { light: enLight, dark: enDark }, ja: { light: jaLight, dark
 			{
 				t.cards.map((card) => (
 					<article class:list={['card', 'case', { draft: card.draft }]}>
-						<p class="meta-label">{card.meta}</p>
 						<h3>{card.title}</h3>
 						<p class="body">{card.body}</p>
-						<div class="fact fact--ruled">
+						<div class="result">
 							<span class="meta-label">{card.resultLabel}</span>
 							<span class="value mono">{card.result}</span>
 						</div>
-						<div class="tags">{card.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
+						<ToolIcons tools={card.tools} />
 						<a class="accent-link case-link" href="#">{t.caseStudy}<Icon name="arrow-right" /></a>
 					</article>
 				))
@@ -135,20 +124,11 @@ const shots = { en: { light: enLight, dark: enDark }, ja: { light: jaLight, dark
 	.feature .body {
 		max-width: 38rem;
 	}
-	.facts {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0 40px;
-		border-top: 1px solid var(--rule);
-		border-bottom: 1px solid var(--rule);
-	}
-	.fact {
+	.result {
 		display: flex;
 		flex-direction: column;
 		gap: 4px;
 		padding: 14px 0;
-	}
-	.fact--ruled {
 		border-top: 1px solid var(--rule);
 		border-bottom: 1px solid var(--rule);
 	}

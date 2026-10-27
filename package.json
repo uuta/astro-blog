@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
+    "simple-icons": "^16.36.0",
     "typescript": "^6.0.3",
     "wrangler": "^4.153.0"
   }

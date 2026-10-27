@@ -8,212 +8,194 @@ interface Props {
 
 const { lang } = Astro.props;
 const { label, nodes, fixRequested, legend } = home[lang].hero.art;
+
+// Card frames (220 × 150) in the 1000 × 800 drawing. Top row runs left to right,
+// the bottom row comes back right to left after review.
+const cards = {
+	analysis: [100, 160],
+	manager: [390, 160],
+	engineer: [680, 160],
+	reviewers: [680, 470],
+	pr: [390, 470],
+} as const;
+const at = (card: keyof typeof cards) => `translate(${cards[card][0]} ${cards[card][1]})`;
+// Reviewer chips; the lit ones are the reviewers this change picked.
+const chips = [44, 88, 132, 176];
+const picked = [44, 132];
 ---
 
 <figure class="hero-figure">
 	<div class="hero-canvas">
-<svg class="hero-art" viewBox="0 0 1000 800" role="img" aria-label={label}>
-<defs>
-<pattern id="hero-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M0 0 H50 M0 0 V50" fill="none" stroke-width="1.5" style="stroke: var(--rule)"></path></pattern>
-<clipPath id="hero-issue-clip"><rect x="31" y="323" width="138" height="145"></rect></clipPath>
-</defs>
-<rect width="1000" height="800" fill="url(#hero-grid)"></rect>
-<g fill="none" stroke-width="2" style="stroke: var(--line)">
-<path d="M170 385 C205 385 205 175 240 175"></path>
-<path d="M170 385 C205 385 205 385 240 385"></path>
-<path d="M170 385 C205 385 205 595 240 595"></path>
-<path d="M410 175 C450 175 450 385 490 385"></path>
-<path d="M410 385 C450 385 450 385 490 385"></path>
-<path d="M410 595 C450 595 450 385 490 385"></path>
-<path d="M640 385 L700 385"></path>
-<path d="M830 385 L895 385"></path>
-</g>
-<path d="M565 300 C565 200 480 150 410 150" fill="none" stroke-width="2" stroke-dasharray="8 7" style="stroke: var(--field-line)"></path>
-<rect x="30" y="300" width="140" height="170" rx="6" style="fill: var(--card); stroke: var(--field-line)" stroke-width="1.5"></rect>
-<path d="M30 322 V306 Q30 300 36 300 H164 Q170 300 170 306 V322 Z" style="fill: var(--svg-2)"></path>
-<path d="M30 322 H170" style="stroke: var(--field-line)" stroke-width="1.5"></path>
-<circle cx="44" cy="311" r="4" fill="none" stroke-width="1.5" style="stroke: var(--ok)"></circle>
-<rect x="54" y="308" width="58" height="6" rx="3.0" style="fill: var(--field-line)"></rect>
-<g clip-path="url(#hero-issue-clip)">
-<g class="h1">
-<rect class="hid h3" x="36" y="326" width="128" height="20" rx="4" style="fill: var(--accent)" fill-opacity="0.14"></rect>
-<g class="h2">
-<circle cx="48" cy="336" r="5" fill="none" stroke-width="1.5" style="stroke: var(--ok)"></circle>
-<circle class="hid h4" cx="48" cy="336" r="5" style="fill: var(--accent)"></circle>
-<rect x="60" y="332.5" width="84" height="7" rx="3.5" style="fill: var(--line)"></rect>
-</g>
-<g>
-<circle cx="48" cy="362" r="5" fill="none" stroke-width="1.5" style="stroke: var(--ok)"></circle>
-<rect x="60" y="358.5" width="62" height="7" rx="3.5" style="fill: var(--line)"></rect>
-</g>
-<g>
-<circle cx="48" cy="388" r="5" fill="none" stroke-width="1.5" style="stroke: var(--ok)"></circle>
-<rect x="60" y="384.5" width="92" height="7" rx="3.5" style="fill: var(--line)"></rect>
-</g>
-<g>
-<circle cx="48" cy="414" r="5" fill="none" stroke-width="1.5" style="stroke: var(--ok)"></circle>
-<rect x="60" y="410.5" width="70" height="7" rx="3.5" style="fill: var(--line)"></rect>
-</g>
-<g>
-<circle cx="48" cy="440" r="5" fill="none" stroke-width="1.5" style="stroke: var(--ok)"></circle>
-<rect x="60" y="436.5" width="80" height="7" rx="3.5" style="fill: var(--line)"></rect>
-</g>
-<g>
-<circle cx="48" cy="466" r="5" fill="none" stroke-width="1.5" style="stroke: var(--ok)"></circle>
-<rect x="60" y="462.5" width="58" height="7" rx="3.5" style="fill: var(--line)"></rect>
-</g>
-</g>
-</g>
-<rect x="240" y="115" width="170" height="120" rx="6" style="fill: var(--card); stroke: var(--field-line)" stroke-width="1.5"></rect>
-<path d="M240 135 V121 Q240 115 246 115 H404 Q410 115 410 121 V135 Z" style="fill: var(--svg-2)"></path>
-<path d="M240 135 H410" style="stroke: var(--field-line)" stroke-width="1.5"></path>
-<circle cx="252" cy="125" r="3" style="fill: var(--dashed)"></circle>
-<circle cx="262" cy="125" r="3" style="fill: var(--dashed)"></circle>
-<circle cx="272" cy="125" r="3" style="fill: var(--dashed)"></circle>
-<rect class="hid h5" x="240" y="115" width="170" height="120" rx="6" fill="none" stroke-width="2.5" style="stroke: var(--accent)"></rect>
-<rect x="240" y="325" width="170" height="120" rx="6" style="fill: var(--card); stroke: var(--field-line)" stroke-width="1.5"></rect>
-<path d="M240 345 V331 Q240 325 246 325 H404 Q410 325 410 331 V345 Z" style="fill: var(--svg-2)"></path>
-<path d="M240 345 H410" style="stroke: var(--field-line)" stroke-width="1.5"></path>
-<circle cx="252" cy="335" r="3" style="fill: var(--dashed)"></circle>
-<circle cx="262" cy="335" r="3" style="fill: var(--dashed)"></circle>
-<circle cx="272" cy="335" r="3" style="fill: var(--dashed)"></circle>
-<rect class="hid h6" x="240" y="325" width="170" height="120" rx="6" fill="none" stroke-width="2.5" style="stroke: var(--accent)"></rect>
-<rect x="240" y="535" width="170" height="120" rx="6" style="fill: var(--card); stroke: var(--field-line)" stroke-width="1.5"></rect>
-<path d="M240 555 V541 Q240 535 246 535 H404 Q410 535 410 541 V555 Z" style="fill: var(--svg-2)"></path>
-<path d="M240 555 H410" style="stroke: var(--field-line)" stroke-width="1.5"></path>
-<circle cx="252" cy="545" r="3" style="fill: var(--dashed)"></circle>
-<circle cx="262" cy="545" r="3" style="fill: var(--dashed)"></circle>
-<circle cx="272" cy="545" r="3" style="fill: var(--dashed)"></circle>
-<rect class="hid h7" x="240" y="535" width="170" height="120" rx="6" fill="none" stroke-width="2.5" style="stroke: var(--accent)"></rect>
-<rect class="hid h8" x="246" y="190.5" width="158" height="15" rx="3" style="fill: var(--accent)" fill-opacity="0.16"></rect>
-<g class="tl h9">
-<rect x="254" y="145" width="16" height="7" rx="3.5" style="fill: var(--accent)"></rect>
-<rect x="275" y="145" width="46" height="7" rx="3.5" style="fill: var(--field-line)"></rect>
-<rect x="326" y="145" width="20" height="7" rx="3.5" style="fill: var(--dashed)"></rect>
-</g>
-<g class="tl h10">
-<rect x="268" y="161" width="18" height="7" rx="3.5" style="fill: var(--dashed)"></rect>
-<rect x="291" y="161" width="58" height="7" rx="3.5" style="fill: var(--field-line)"></rect>
-</g>
-<g class="tl h11">
-<rect x="268" y="177" width="20" height="7" rx="3.5" style="fill: var(--accent)"></rect>
-<rect x="293" y="177" width="34" height="7" rx="3.5" style="fill: var(--field-line)"></rect>
-<rect x="332" y="177" width="34" height="7" rx="3.5" style="fill: var(--danger)"></rect>
-</g>
-<g class="tl h12">
-<rect x="268" y="193" width="66" height="7" rx="3.5" style="fill: var(--field-line)"></rect>
-<rect x="339" y="193" width="12" height="7" rx="3.5" style="fill: var(--dashed)"></rect>
-</g>
-<g class="tl h13">
-<rect x="254" y="209" width="10" height="7" rx="3.5" style="fill: var(--dashed)"></rect>
-</g>
-<rect class="blink" x="270" y="207" width="6" height="11" style="fill: var(--ink)"></rect>
-<circle cx="258" cy="357" r="4" fill="none" stroke-width="1.5" style="stroke: var(--line)"></circle>
-<circle class="hid h14" cx="258" cy="357" r="4" style="fill: var(--accent)"></circle>
-<rect x="270" y="354" width="96" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<circle cx="258" cy="371" r="4" fill="none" stroke-width="1.5" style="stroke: var(--line)"></circle>
-<circle class="hid h15" cx="258" cy="371" r="4" style="fill: var(--accent)"></circle>
-<rect x="270" y="368" width="74" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<circle cx="258" cy="385" r="4" fill="none" stroke-width="1.5" style="stroke: var(--line)"></circle>
-<circle class="hid h16" cx="258" cy="385" r="4" style="fill: var(--accent)"></circle>
-<rect x="270" y="382" width="110" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<circle cx="258" cy="399" r="4" fill="none" stroke-width="1.5" style="stroke: var(--line)"></circle>
-<circle class="hid h17" cx="258" cy="399" r="4" style="fill: var(--accent)"></circle>
-<rect x="270" y="396" width="64" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<circle cx="258" cy="413" r="4" fill="none" stroke-width="1.5" style="stroke: var(--line)"></circle>
-<circle class="hid h18" cx="258" cy="413" r="4" style="fill: var(--accent)"></circle>
-<rect x="270" y="410" width="88" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<rect x="254" y="429" width="142" height="6" rx="3.0" style="fill: var(--svg-2)"></rect>
-<g class="tl h19"><rect x="254" y="429" width="142" height="6" rx="3.0" style="fill: var(--accent)"></rect>
-</g>
-<rect class="hid h20" x="248" y="561" width="154" height="12" rx="3" style="fill: var(--accent)" fill-opacity="0.18"></rect>
-<rect x="254" y="563.5" width="9" height="7" rx="1.5" style="fill: var(--dashed)"></rect>
-<rect x="268" y="564" width="70" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<rect x="266" y="576.5" width="9" height="7" rx="1.5" style="fill: var(--dashed)"></rect>
-<rect x="280" y="577" width="58" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<rect x="278" y="589.5" width="9" height="7" rx="1.5" style="fill: var(--dashed)"></rect>
-<rect x="292" y="590" width="66" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<rect x="278" y="602.5" width="9" height="7" rx="1.5" style="fill: var(--dashed)"></rect>
-<rect x="292" y="603" width="48" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<rect x="266" y="615.5" width="9" height="7" rx="1.5" style="fill: var(--dashed)"></rect>
-<rect x="280" y="616" width="76" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<rect x="278" y="628.5" width="9" height="7" rx="1.5" style="fill: var(--dashed)"></rect>
-<rect x="292" y="629" width="54" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<rect x="254" y="641.5" width="9" height="7" rx="1.5" style="fill: var(--dashed)"></rect>
-<rect x="268" y="642" width="62" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<rect x="490" y="300" width="150" height="170" rx="6" style="fill: var(--card); stroke: var(--field-line)" stroke-width="1.5"></rect>
-<path d="M490 322 V306 Q490 300 496 300 H634 Q640 300 640 306 V322 Z" style="fill: var(--svg-2)"></path>
-<path d="M490 322 H640" style="stroke: var(--field-line)" stroke-width="1.5"></path>
-<rect x="500" y="308" width="46" height="6" rx="3.0" style="fill: var(--field-line)"></rect>
-<rect x="552" y="308" width="26" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<rect x="508" y="334.5" width="80" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<rect x="492" y="348" width="146" height="15" style="fill: var(--danger)" fill-opacity="0.12"></rect>
-<rect x="495" y="350" width="3" height="11" style="fill: var(--danger)"></rect>
-<rect x="508" y="352.5" width="64" height="6" rx="3.0" style="fill: var(--field-line)"></rect>
-<rect x="492" y="366" width="146" height="15" style="fill: var(--accent)" fill-opacity="0.12"></rect>
-<rect x="495" y="368" width="3" height="11" style="fill: var(--accent)"></rect>
-<rect x="508" y="370.5" width="92" height="6" rx="3.0" style="fill: var(--field-line)"></rect>
-<rect x="492" y="384" width="146" height="15" style="fill: var(--accent)" fill-opacity="0.12"></rect>
-<rect x="495" y="386" width="3" height="11" style="fill: var(--accent)"></rect>
-<rect x="508" y="388.5" width="70" height="6" rx="3.0" style="fill: var(--field-line)"></rect>
-<rect x="508" y="406.5" width="86" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<rect x="492" y="420" width="146" height="15" style="fill: var(--danger)" fill-opacity="0.12"></rect>
-<rect x="495" y="422" width="3" height="11" style="fill: var(--danger)"></rect>
-<rect x="508" y="424.5" width="52" height="6" rx="3.0" style="fill: var(--field-line)"></rect>
-<rect x="492" y="438" width="146" height="15" style="fill: var(--accent)" fill-opacity="0.12"></rect>
-<rect x="495" y="440" width="3" height="11" style="fill: var(--accent)"></rect>
-<rect x="508" y="442.5" width="76" height="6" rx="3.0" style="fill: var(--field-line)"></rect>
-<rect class="hid h21" x="492" y="329" width="146" height="17" rx="3" fill="none" stroke-width="1.5" style="stroke: var(--accent)"></rect>
-<g class="hid h22">
-<rect x="492" y="347" width="146" height="17" rx="3" fill="none" stroke-width="1.5" style="stroke: var(--ink)"></rect>
-<path d="M600 316 H676 Q682 316 682 322 V342 Q682 348 676 348 H630 L620 357 L621 348 H600 Q594 348 594 342 V322 Q594 316 600 316 Z" stroke-width="1.5" style="fill: var(--card); stroke: var(--ink)"></path>
-<rect x="604" y="325" width="52" height="5" rx="2.5" style="fill: var(--ink)"></rect>
-<rect x="604" y="335" width="36" height="5" rx="2.5" style="fill: var(--field-line)"></rect>
-</g>
-<rect x="700" y="315" width="130" height="140" rx="6" style="fill: var(--card); stroke: var(--field-line)" stroke-width="1.5"></rect>
-<path d="M700 337 V321 Q700 315 706 315 H824 Q830 315 830 321 V337 Z" style="fill: var(--svg-2)"></path>
-<path d="M700 337 H830" style="stroke: var(--field-line)" stroke-width="1.5"></path>
-<g fill="none" stroke-width="1.5" style="stroke: var(--field-line)"><circle cx="711" cy="326" r="2.5"></circle><circle cx="711" cy="336" r="2.5"></circle><path d="M711 328.5 V333.5"></path><path d="M721 333.5 V328 Q721 324 717 324 H715"></path><circle cx="721" cy="336" r="2.5"></circle></g>
-<rect x="732" y="323" width="56" height="6" rx="3.0" style="fill: var(--field-line)"></rect>
-<rect x="712" y="345" width="96" height="8" rx="4.0" style="fill: var(--field-line)"></rect>
-<circle cx="717" cy="371" r="5.5" fill="none" stroke-width="1.5" style="stroke: var(--line)"></circle>
-<g class="h23"><circle cx="717" cy="371" r="5.5" style="fill: var(--accent)"></circle><path d="M714.4 371.2 l1.9 1.9 l3.4 -3.6" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--on-accent)"></path></g>
-<rect x="729" y="368" width="70" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<circle cx="717" cy="389" r="5.5" fill="none" stroke-width="1.5" style="stroke: var(--line)"></circle>
-<g class="h24"><circle cx="717" cy="389" r="5.5" style="fill: var(--accent)"></circle><path d="M714.4 389.2 l1.9 1.9 l3.4 -3.6" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--on-accent)"></path></g>
-<rect x="729" y="386" width="56" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<circle cx="717" cy="407" r="5.5" fill="none" stroke-width="1.5" style="stroke: var(--line)"></circle>
-<g class="h25"><circle cx="717" cy="407" r="5.5" style="fill: var(--accent)"></circle><path d="M714.4 407.2 l1.9 1.9 l3.4 -3.6" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--on-accent)"></path></g>
-<rect x="729" y="404" width="64" height="6" rx="3.0" style="fill: var(--line)"></rect>
-<rect x="712" y="424" width="106" height="20" rx="4" style="fill: var(--svg-2)"></rect>
-<rect class="hid h26" x="712" y="424" width="106" height="20" rx="4" style="fill: var(--accent)"></rect>
-<rect x="745" y="431" width="40" height="6" rx="3.0" style="fill: var(--card)"></rect>
-<path d="M925 290 V385" fill="none" stroke-width="2" style="stroke: var(--line)"></path>
-<circle cx="925" cy="305" r="6" stroke-width="1.5" style="fill: var(--card); stroke: var(--field-line)"></circle>
-<circle cx="925" cy="336" r="6" stroke-width="1.5" style="fill: var(--card); stroke: var(--field-line)"></circle>
-<circle class="hid ring h27" cx="925" cy="385" r="30" fill="none" stroke-width="2" style="stroke: var(--accent)"></circle>
-<circle cx="925" cy="385" r="30" style="fill: var(--inverse)"></circle>
-<g fill="none" stroke-width="2" stroke-linecap="round" style="stroke: var(--on-inverse)"><circle cx="917" cy="373" r="3.5"></circle><circle cx="917" cy="397" r="3.5"></circle><circle cx="934" cy="390" r="3.5"></circle><path d="M917 376.5 V393.5"></path><path d="M917 376.5 Q917 386 930.5 389"></path></g>
-<g style="stroke: var(--accent)">
-<path class="dot h28" pathLength="100" d="M170 385 C205 385 205 175 240 175"></path>
-<path class="dot h29" pathLength="100" d="M410 175 C450 175 450 385 490 385"></path>
-<path class="dot h30" pathLength="100" d="M640 385 L700 385"></path>
-<path class="dot h31" pathLength="100" d="M830 385 L895 385"></path>
-<path class="dot h32" pathLength="100" d="M170 385 C205 385 205 385 240 385"></path>
-<path class="dot still h33" pathLength="100" d="M410 385 C450 385 450 385 490 385"></path>
-<path class="dot h34" pathLength="100" d="M640 385 L700 385"></path>
-<path class="dot h35" pathLength="100" d="M830 385 L895 385"></path>
-<path class="dot h36" pathLength="100" d="M170 385 C205 385 205 595 240 595"></path>
-<path class="dot h37" pathLength="100" d="M410 595 C450 595 450 385 490 385"></path>
-<path class="dot h38" pathLength="100" d="M640 385 L700 385"></path>
-<path class="dot h39" pathLength="100" d="M830 385 L895 385"></path>
-</g>
-<path class="dot still h40" pathLength="100" d="M565 300 C565 200 480 150 410 150" style="stroke: var(--ink)"></path>
-</svg>
+		<svg class="hero-art" viewBox="0 0 1000 800" role="img" aria-label={label}>
+			<defs>
+				<pattern id="hero-grid" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M0 0 H50 M0 0 V50" fill="none" stroke-width="1.5" style="stroke: var(--rule)"></path></pattern>
+			</defs>
+			<rect width="1000" height="800" fill="url(#hero-grid)"></rect>
+
+			{/* Edges: analysis → manager → engineer ↓ reviewers → pull request → merged */}
+			<g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--line)">
+				<path d="M320 235 H390"></path>
+				<path d="M610 235 H680"></path>
+				<path d="M830 310 V470"></path>
+				<path d="M680 545 H610"></path>
+				<path d="M390 545 H250"></path>
+				<path d="M381 229 L389 235 L381 241"></path>
+				<path d="M671 229 L679 235 L671 241"></path>
+				<path d="M824 461 L830 469 L836 461"></path>
+				<path d="M619 539 L611 545 L619 551"></path>
+				<path d="M259 539 L251 545 L259 551"></path>
+			</g>
+			{/* Fix loop: reviewers back to the engineer */}
+			<path d="M750 470 V310" fill="none" stroke-width="2" stroke-dasharray="8 7" style="stroke: var(--field-line)"></path>
+			<path d="M744 319 L750 311 L756 319" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--field-line)"></path>
+
+			{
+				Object.keys(cards).map((card) => (
+					<g transform={at(card as keyof typeof cards)}>
+						<rect width="220" height="150" rx="6" stroke-width="1.5" style="fill: var(--card); stroke: var(--field-line)" />
+						<path d="M0 22 V6 Q0 0 6 0 H214 Q220 0 220 6 V22 Z" style="fill: var(--svg-2)" />
+						<path d="M0 22 H220" stroke-width="1.5" style="stroke: var(--field-line)" />
+					</g>
+				))
+			}
+
+			{/* Analysis: market, infrastructure, cost, checked one by one */}
+			<g transform={at('analysis')}>
+				<circle cx="13" cy="11" r="4" fill="none" stroke-width="1.5" style="stroke: var(--field-line)"></circle>
+				<path d="M16 14 L19.5 17.5" stroke-width="1.5" stroke-linecap="round" style="stroke: var(--field-line)"></path>
+				<rect x="26" y="8" width="60" height="6" rx="3" style="fill: var(--field-line)"></rect>
+				<g style="fill: var(--field-line)">
+					<rect x="12" y="47" width="3" height="6"></rect>
+					<rect x="17" y="44" width="3" height="9"></rect>
+					<rect x="22" y="41" width="3" height="12"></rect>
+					<rect x="11" y="76" width="15" height="5" rx="1"></rect>
+					<rect x="11" y="83" width="15" height="5" rx="1"></rect>
+				</g>
+				<circle cx="18.5" cy="116" r="6.5" fill="none" stroke-width="1.5" style="stroke: var(--field-line)"></circle>
+				<path d="M18.5 112.5 V119.5" stroke-width="1.5" style="stroke: var(--field-line)"></path>
+				<rect x="36" y="45" width="92" height="6" rx="3" style="fill: var(--line)"></rect>
+				<rect x="36" y="79" width="70" height="6" rx="3" style="fill: var(--line)"></rect>
+				<rect x="36" y="113" width="80" height="6" rx="3" style="fill: var(--line)"></rect>
+				<rect x="150" y="44" width="56" height="8" rx="4" style="fill: var(--svg-2)"></rect>
+				<rect x="150" y="78" width="56" height="8" rx="4" style="fill: var(--svg-2)"></rect>
+				<rect x="150" y="112" width="56" height="8" rx="4" style="fill: var(--svg-2)"></rect>
+				<rect class="hid rm a-p1" x="150" y="44" width="56" height="8" rx="4" style="fill: var(--accent)"></rect>
+				<rect class="hid rm a-p2" x="150" y="78" width="56" height="8" rx="4" style="fill: var(--accent)"></rect>
+				<rect class="hid rm a-p3" x="150" y="112" width="56" height="8" rx="4" style="fill: var(--accent)"></rect>
+			</g>
+
+			{/* Manager: picks the top task and hands it on */}
+			<g transform={at('manager')}>
+				<g style="fill: var(--dashed)"><circle cx="12" cy="11" r="3"></circle><circle cx="22" cy="11" r="3"></circle><circle cx="32" cy="11" r="3"></circle></g>
+				<g class="hid rm a-mhl">
+					<rect x="6" y="40" width="208" height="20" rx="4" style="fill: var(--accent)" fill-opacity="0.14"></rect>
+					<circle cx="20" cy="50" r="5" style="fill: var(--accent)"></circle>
+					<rect x="158" y="45" width="46" height="10" rx="5" style="fill: var(--accent)"></rect>
+					<path d="M173 50 H187 M183 46.5 L187 50 L183 53.5" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--on-accent)"></path>
+				</g>
+				<g fill="none" stroke-width="1.5" style="stroke: var(--ok)"><circle cx="20" cy="50" r="5"></circle><circle cx="20" cy="80" r="5"></circle><circle cx="20" cy="110" r="5"></circle></g>
+				<g style="fill: var(--line)">
+					<rect x="32" y="46.5" width="96" height="7" rx="3.5"></rect>
+					<rect x="32" y="76.5" width="74" height="7" rx="3.5"></rect>
+					<rect x="32" y="106.5" width="86" height="7" rx="3.5"></rect>
+				</g>
+			</g>
+
+			{/* Engineer: one worktree, code typed line by line, one line fixed after review */}
+			<g transform={at('engineer')}>
+				<g style="fill: var(--dashed)"><circle cx="12" cy="11" r="3"></circle><circle cx="22" cy="11" r="3"></circle><circle cx="32" cy="11" r="3"></circle></g>
+				<rect x="156" y="7" width="52" height="8" rx="4" style="fill: var(--dashed)"></rect>
+				<rect class="hid a-fix" x="6" y="79.5" width="208" height="16" rx="3" style="fill: var(--accent)" fill-opacity="0.16"></rect>
+				<g class="tl a-l1"><rect x="14" y="30" width="16" height="7" rx="3.5" style="fill: var(--accent)"></rect><rect x="35" y="30" width="52" height="7" rx="3.5" style="fill: var(--field-line)"></rect><rect x="92" y="30" width="22" height="7" rx="3.5" style="fill: var(--dashed)"></rect></g>
+				<g class="tl a-l2"><rect x="28" y="48" width="18" height="7" rx="3.5" style="fill: var(--dashed)"></rect><rect x="51" y="48" width="64" height="7" rx="3.5" style="fill: var(--field-line)"></rect></g>
+				<g class="tl a-l3"><rect x="28" y="66" width="22" height="7" rx="3.5" style="fill: var(--accent)"></rect><rect x="55" y="66" width="40" height="7" rx="3.5" style="fill: var(--field-line)"></rect><rect x="100" y="66" width="36" height="7" rx="3.5" style="fill: var(--danger)"></rect></g>
+				<g class="tl a-l4"><rect x="28" y="84" width="72" height="7" rx="3.5" style="fill: var(--field-line)"></rect><rect x="105" y="84" width="14" height="7" rx="3.5" style="fill: var(--dashed)"></rect></g>
+				<g class="tl a-l5"><rect x="42" y="102" width="50" height="7" rx="3.5" style="fill: var(--field-line)"></rect><rect x="97" y="102" width="28" height="7" rx="3.5" style="fill: var(--accent)"></rect></g>
+				<g class="tl a-l6"><rect x="14" y="120" width="10" height="7" rx="3.5" style="fill: var(--dashed)"></rect></g>
+				<rect class="blink" x="30" y="118" width="6" height="11" style="fill: var(--ink)"></rect>
+			</g>
+
+			{/* Reviewers: only the ones this change needs light up; they request a fix, then approve */}
+			<g transform={at('reviewers')}>
+				<rect x="10" y="8" width="46" height="6" rx="3" style="fill: var(--field-line)"></rect>
+				<rect x="62" y="8" width="26" height="6" rx="3" style="fill: var(--line)"></rect>
+				{
+					chips.map((cx) => (
+						<g>
+							<circle cx={cx} cy="50" r="15" stroke-width="1.5" style="fill: var(--card); stroke: var(--line)" />
+							<circle cx={cx} cy="46" r="4.5" style="fill: var(--dashed)" />
+							<path d={`M${cx - 8} 60 a8 7 0 0 1 16 0`} style="fill: var(--dashed)" />
+						</g>
+					))
+				}
+				<g class="hid rm a-sel" fill="none" stroke-width="2.5" style="stroke: var(--accent)">
+					{picked.map((cx) => <circle cx={cx} cy="50" r="15" />)}
+				</g>
+				<g class="hid rm a-ok">
+					{
+						picked.map((cx) => (
+							<g>
+								<circle cx={cx} cy="50" r="15" style="fill: var(--accent)" />
+								<path d={`M${cx - 6} 50 l4 4 l8 -8.5`} fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--on-accent)" />
+							</g>
+						))
+					}
+				</g>
+				<rect x="2" y="80" width="216" height="14" style="fill: var(--danger)" fill-opacity="0.12"></rect>
+				<rect x="5" y="82" width="3" height="10" style="fill: var(--danger)"></rect>
+				<rect x="18" y="84" width="70" height="6" rx="3" style="fill: var(--field-line)"></rect>
+				<rect x="2" y="100" width="216" height="14" style="fill: var(--accent)" fill-opacity="0.12"></rect>
+				<rect x="5" y="102" width="3" height="10" style="fill: var(--accent)"></rect>
+				<rect x="18" y="104" width="96" height="6" rx="3" style="fill: var(--field-line)"></rect>
+				<rect x="2" y="120" width="216" height="14" style="fill: var(--accent)" fill-opacity="0.12"></rect>
+				<rect x="5" y="122" width="3" height="10" style="fill: var(--accent)"></rect>
+				<rect x="18" y="124" width="58" height="6" rx="3" style="fill: var(--field-line)"></rect>
+				<rect class="hid a-cmt" x="1.5" y="78.5" width="217" height="17" rx="3" fill="none" stroke-width="1.5" style="stroke: var(--ink)"></rect>
+			</g>
+
+			{/* Pull request: checks pass one by one, then the merge button */}
+			<g transform={at('pr')}>
+				<g fill="none" stroke-width="1.5" style="stroke: var(--field-line)"><circle cx="11" cy="7" r="2.5"></circle><circle cx="11" cy="17" r="2.5"></circle><path d="M11 9.5 V14.5"></path><path d="M21 14.5 V9 Q21 5 17 5 H15"></path><circle cx="21" cy="17" r="2.5"></circle></g>
+				<rect x="32" y="8" width="56" height="6" rx="3" style="fill: var(--field-line)"></rect>
+				<rect x="12" y="34" width="110" height="8" rx="4" style="fill: var(--field-line)"></rect>
+				<g fill="none" stroke-width="1.5" style="stroke: var(--line)"><circle cx="18" cy="60" r="5.5"></circle><circle cx="18" cy="80" r="5.5"></circle><circle cx="18" cy="100" r="5.5"></circle></g>
+				<g style="fill: var(--line)">
+					<rect x="30" y="57" width="70" height="6" rx="3"></rect>
+					<rect x="30" y="77" width="56" height="6" rx="3"></rect>
+					<rect x="30" y="97" width="64" height="6" rx="3"></rect>
+				</g>
+				{
+					[60, 80, 100].map((cy, i) => (
+						<g class={`hid rm a-c${i + 1}`}>
+							<circle cx="18" cy={cy} r="5.5" style="fill: var(--accent)" />
+							<path d={`M15.4 ${cy + 0.2} l1.9 1.9 l3.4 -3.6`} fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="stroke: var(--on-accent)" />
+						</g>
+					))
+				}
+				<rect x="12" y="118" width="196" height="22" rx="4" style="fill: var(--svg-2)"></rect>
+				<rect class="hid rm a-mb" x="12" y="118" width="196" height="22" rx="4" style="fill: var(--accent)"></rect>
+				<rect x="80" y="126" width="60" height="6" rx="3" style="fill: var(--card)"></rect>
+			</g>
+
+			{/* Merged, by me */}
+			<circle class="hid ring a-ring" cx="210" cy="545" r="40" fill="none" stroke-width="2" style="stroke: var(--accent)"></circle>
+			<circle cx="210" cy="545" r="40" style="fill: var(--inverse)"></circle>
+			<g fill="none" stroke-width="2" stroke-linecap="round" style="stroke: var(--on-inverse)"><circle cx="202" cy="533" r="3.5"></circle><circle cx="202" cy="557" r="3.5"></circle><circle cx="219" cy="550" r="3.5"></circle><path d="M202 536.5 V553.5"></path><path d="M202 536.5 Q202 546 215.5 549"></path></g>
+
+			{/* Work moving along the edges; the ink dot is a fix request going back */}
+			<g style="stroke: var(--accent)">
+				<path class="dot a-d1" pathLength="100" d="M320 235 H390"></path>
+				<path class="dot still a-d2" pathLength="100" d="M610 235 H680"></path>
+				<path class="dot a-d3" pathLength="100" d="M830 310 V470"></path>
+				<path class="dot a-d5" pathLength="100" d="M680 545 H610"></path>
+				<path class="dot a-d6" pathLength="100" d="M390 545 H250"></path>
+			</g>
+			<path class="dot still a-dfix" pathLength="100" d="M750 470 V310" style="stroke: var(--ink)"></path>
+		</svg>
 
 		{
 			nodes.map((node) => (
-				<div class="node" aria-hidden="true" style={`left: ${node.x}; top: ${node.y}`}>
+				<div class:list={['node', { above: node.above }]} aria-hidden="true" style={`left: ${node.x}; top: ${node.y}`}>
 					<div class="node-name">{node.name}</div>
 					<div class="node-sub mono">{node.sub}</div>
 				</div>
@@ -252,10 +234,16 @@ const { label, nodes, fixRequested, legend } = home[lang].hero.art;
 	}
 	.node {
 		position: absolute;
+		/* Wide enough for one line on desktop; wraps on phones so neighbours don't collide. */
+		width: max-content;
+		max-width: 30%;
 		transform: translateX(-50%);
 		text-align: center;
-		white-space: nowrap;
+		word-break: keep-all;
 		pointer-events: none;
+	}
+	.node.above {
+		transform: translate(-50%, -100%);
 	}
 	.node-name {
 		font-size: 12px;
@@ -268,11 +256,12 @@ const { label, nodes, fixRequested, legend } = home[lang].hero.art;
 		line-height: 1.3;
 		color: var(--muted);
 	}
+	/* Sits just left of the dashed fix line (x = 750 of 1000), midway between the rows. */
 	.fix {
 		position: absolute;
-		left: 49%;
-		top: 15%;
-		transform: translateX(-50%);
+		right: 26.5%;
+		top: 48.75%;
+		transform: translateY(-50%);
 		white-space: nowrap;
 		pointer-events: none;
 		font-size: 11px;
@@ -307,50 +296,39 @@ const { label, nodes, fixRequested, legend } = home[lang].hero.art;
 </style>
 
 <style is:global>
+	/* One 12 s loop: analysis, manager, engineer, review with one fix round, pull request, merge. */
 	.hero-art .dot{fill:none;stroke-width:14;stroke-linecap:round;stroke-dasharray:0.01 199.99;opacity:0}
 	.hero-art .hid{opacity:0}
-	.hero-art .tl,.hero-art .ring{transform-box:fill-box;transform-origin:0 50%}
-	.hero-art .ring{transform-origin:50% 50%}
+	.hero-art .tl{transform-box:fill-box;transform-origin:0 50%}
+	.hero-art .ring{transform-box:fill-box;transform-origin:50% 50%}
 	.hero-art .blink{animation:hero-blink 1s steps(1) infinite}@keyframes hero-blink{50%{opacity:0}}
-	.hero-art .h1{animation:hero-h1 12s linear infinite}@keyframes hero-h1{0.0%{transform:translateY(0.0px)}6.667%{transform:translateY(0.0px)}10.0%{transform:translateY(-26.0px)}32.917%{transform:translateY(-26.0px)}33.0%{transform:translateY(0.0px)}40.0%{transform:translateY(0.0px)}43.333%{transform:translateY(-26.0px)}66.25%{transform:translateY(-26.0px)}66.333%{transform:translateY(0.0px)}73.333%{transform:translateY(0.0px)}76.667%{transform:translateY(-26.0px)}99.583%{transform:translateY(-26.0px)}99.667%{transform:translateY(0.0px)}100.0%{transform:translateY(0.0px)}}
-	.hero-art .h2{animation:hero-h2 12s linear infinite}@keyframes hero-h2{0.0%{opacity:1.0}6.667%{opacity:1.0}9.167%{opacity:0.0}32.917%{opacity:0.0}33.0%{opacity:1.0}40.0%{opacity:1.0}42.5%{opacity:0.0}66.25%{opacity:0.0}66.333%{opacity:1.0}73.333%{opacity:1.0}75.833%{opacity:0.0}99.583%{opacity:0.0}99.667%{opacity:1.0}100.0%{opacity:1.0}}
-	.hero-art .h3{animation:hero-h3 12s linear infinite}@keyframes hero-h3{0.0%{opacity:1.0}6.667%{opacity:1.0}7.5%{opacity:0.0}32.5%{opacity:0.0}33.333%{opacity:1.0}40.0%{opacity:1.0}40.833%{opacity:0.0}65.833%{opacity:0.0}66.667%{opacity:1.0}73.333%{opacity:1.0}74.167%{opacity:0.0}99.167%{opacity:0.0}100.0%{opacity:1.0}}
-	.hero-art .h4{animation:hero-h4 12s linear infinite}@keyframes hero-h4{0.0%{opacity:1.0}6.667%{opacity:1.0}7.5%{opacity:0.0}32.5%{opacity:0.0}33.333%{opacity:1.0}40.0%{opacity:1.0}40.833%{opacity:0.0}65.833%{opacity:0.0}66.667%{opacity:1.0}73.333%{opacity:1.0}74.167%{opacity:0.0}99.167%{opacity:0.0}100.0%{opacity:1.0}}
-	.hero-art .h5{animation:hero-h5 12s linear infinite}@keyframes hero-h5{0.0%{opacity:0.0}7.083%{opacity:0.0}8.333%{opacity:1.0}16.667%{opacity:1.0}17.917%{opacity:0.0}34.583%{opacity:0.0}35.833%{opacity:1.0}41.667%{opacity:1.0}42.917%{opacity:0.0}100.0%{opacity:0.0}}
-	.hero-art .h6{animation:hero-h6 12s linear infinite}@keyframes hero-h6{0.0%{opacity:0.0}40.417%{opacity:0.0}41.667%{opacity:1.0}75.0%{opacity:1.0}76.25%{opacity:0.0}100.0%{opacity:0.0}}
-	.hero-art .h7{animation:hero-h7 12s linear infinite}@keyframes hero-h7{0.0%{opacity:1.0}8.333%{opacity:1.0}9.583%{opacity:0.0}73.75%{opacity:0.0}75.0%{opacity:1.0}100.0%{opacity:1.0}}
-	.hero-art .h8{animation:hero-h8 12s linear infinite}@keyframes hero-h8{0.0%{opacity:0.0}34.583%{opacity:0.0}35.833%{opacity:1.0}48.333%{opacity:1.0}49.583%{opacity:0.0}100.0%{opacity:0.0}}
-	.hero-art .h9{animation:hero-h9 12s linear infinite}@keyframes hero-h9{0.0%{transform:scaleX(0.0)}8.333%{transform:scaleX(0.0)}9.833%{transform:scaleX(1.0)}98.75%{transform:scaleX(1.0)}98.833%{transform:scaleX(0.0)}100.0%{transform:scaleX(0.0)}}
-	.hero-art .h10{animation:hero-h10 12s linear infinite}@keyframes hero-h10{0.0%{transform:scaleX(0.0)}9.833%{transform:scaleX(0.0)}11.333%{transform:scaleX(1.0)}98.75%{transform:scaleX(1.0)}98.833%{transform:scaleX(0.0)}100.0%{transform:scaleX(0.0)}}
-	.hero-art .h11{animation:hero-h11 12s linear infinite}@keyframes hero-h11{0.0%{transform:scaleX(0.0)}11.333%{transform:scaleX(0.0)}12.833%{transform:scaleX(1.0)}98.75%{transform:scaleX(1.0)}98.833%{transform:scaleX(0.0)}100.0%{transform:scaleX(0.0)}}
-	.hero-art .h12{animation:hero-h12 12s linear infinite}@keyframes hero-h12{0.0%{transform:scaleX(0.0)}12.833%{transform:scaleX(0.0)}14.333%{transform:scaleX(1.0)}37.0%{transform:scaleX(1.0)}37.083%{transform:scaleX(0.0)}41.25%{transform:scaleX(1.0)}98.75%{transform:scaleX(1.0)}98.833%{transform:scaleX(0.0)}100.0%{transform:scaleX(0.0)}}
-	.hero-art .h13{animation:hero-h13 12s linear infinite}@keyframes hero-h13{0.0%{transform:scaleX(0.0)}14.333%{transform:scaleX(0.0)}15.833%{transform:scaleX(1.0)}98.75%{transform:scaleX(1.0)}98.833%{transform:scaleX(0.0)}100.0%{transform:scaleX(0.0)}}
-	.hero-art .h14{animation:hero-h14 12s linear infinite}@keyframes hero-h14{0.0%{opacity:1.0}31.667%{opacity:1.0}31.75%{opacity:0.0}46.583%{opacity:0.0}46.667%{opacity:1.0}100.0%{opacity:1.0}}
-	.hero-art .h15{animation:hero-h15 12s linear infinite}@keyframes hero-h15{0.0%{opacity:1.0}31.667%{opacity:1.0}31.75%{opacity:0.0}52.417%{opacity:0.0}52.5%{opacity:1.0}100.0%{opacity:1.0}}
-	.hero-art .h16{animation:hero-h16 12s linear infinite}@keyframes hero-h16{0.0%{opacity:1.0}31.667%{opacity:1.0}31.75%{opacity:0.0}58.25%{opacity:0.0}58.333%{opacity:1.0}100.0%{opacity:1.0}}
-	.hero-art .h17{animation:hero-h17 12s linear infinite}@keyframes hero-h17{0.0%{opacity:1.0}31.667%{opacity:1.0}31.75%{opacity:0.0}64.083%{opacity:0.0}64.167%{opacity:1.0}100.0%{opacity:1.0}}
-	.hero-art .h18{animation:hero-h18 12s linear infinite}@keyframes hero-h18{0.0%{opacity:1.0}31.667%{opacity:1.0}31.75%{opacity:0.0}69.917%{opacity:0.0}70.0%{opacity:1.0}100.0%{opacity:1.0}}
-	.hero-art .h19{animation:hero-h19 12s linear infinite}@keyframes hero-h19{0.0%{transform:scaleX(1.0)}31.667%{transform:scaleX(1.0)}31.75%{transform:scaleX(0.0)}43.333%{transform:scaleX(0.0)}73.333%{transform:scaleX(1.0)}100.0%{transform:scaleX(1.0)}}
-	.hero-art .h20{animation:hero-h20 12s linear infinite}@keyframes hero-h20{0.0%{opacity:1.0;transform:translateY(59.5263px)}7.5%{opacity:1.0;transform:translateY(78.0px)}8.75%{opacity:0.0;transform:translateY(78.0px)}9.167%{opacity:0.0;transform:translateY(78.0px)}10.0%{opacity:0.0;transform:translateY(0.0px)}74.583%{opacity:0.0;transform:translateY(0.0px)}75.833%{opacity:1.0;transform:translateY(0.0px)}100.0%{opacity:1.0;transform:translateY(59.5263px)}}
-	.hero-art .h21{animation:hero-h21 12s linear infinite}@keyframes hero-h21{0.0%{opacity:0.0;transform:translateY(0.0px)}15.833%{opacity:0.0;transform:translateY(0.0px)}16.667%{opacity:1.0;transform:translateY(0.0px)}25.0%{opacity:1.0;transform:translateY(108.0px)}25.833%{opacity:0.0;transform:translateY(108.0px)}26.667%{opacity:0.0;transform:translateY(108.0px)}27.083%{opacity:0.0;transform:translateY(0.0px)}49.167%{opacity:0.0;transform:translateY(0.0px)}50.0%{opacity:1.0;transform:translateY(0.0px)}58.333%{opacity:1.0;transform:translateY(108.0px)}59.167%{opacity:0.0;transform:translateY(108.0px)}60.0%{opacity:0.0;transform:translateY(108.0px)}60.417%{opacity:0.0;transform:translateY(0.0px)}82.5%{opacity:0.0;transform:translateY(0.0px)}83.333%{opacity:1.0;transform:translateY(0.0px)}91.667%{opacity:1.0;transform:translateY(108.0px)}92.5%{opacity:0.0;transform:translateY(108.0px)}93.333%{opacity:0.0;transform:translateY(108.0px)}93.75%{opacity:0.0;transform:translateY(0.0px)}100.0%{opacity:0.0;transform:translateY(0.0px)}}
-	.hero-art .h22{animation:hero-h22 12s linear infinite}@keyframes hero-h22{0.0%{opacity:0.0}25.0%{opacity:0.0}26.25%{opacity:1.0}38.333%{opacity:1.0}39.583%{opacity:0.0}100.0%{opacity:0.0}}
-	.hero-art .h23{animation:hero-h23 12s linear infinite}@keyframes hero-h23{0.0%{opacity:0.0}2.0%{opacity:0.0}2.083%{opacity:1.0}30.833%{opacity:1.0}31.667%{opacity:0.0}35.333%{opacity:0.0}35.417%{opacity:1.0}64.167%{opacity:1.0}65.0%{opacity:0.0}68.667%{opacity:0.0}68.75%{opacity:1.0}97.5%{opacity:1.0}98.333%{opacity:0.0}100.0%{opacity:0.0}}
-	.hero-art .h24{animation:hero-h24 12s linear infinite}@keyframes hero-h24{0.0%{opacity:0.0}4.917%{opacity:0.0}5.0%{opacity:1.0}30.833%{opacity:1.0}31.667%{opacity:0.0}38.25%{opacity:0.0}38.333%{opacity:1.0}64.167%{opacity:1.0}65.0%{opacity:0.0}71.583%{opacity:0.0}71.667%{opacity:1.0}97.5%{opacity:1.0}98.333%{opacity:0.0}100.0%{opacity:0.0}}
-	.hero-art .h25{animation:hero-h25 12s linear infinite}@keyframes hero-h25{0.0%{opacity:0.0}7.833%{opacity:0.0}7.917%{opacity:1.0}30.833%{opacity:1.0}31.667%{opacity:0.0}41.167%{opacity:0.0}41.25%{opacity:1.0}64.167%{opacity:1.0}65.0%{opacity:0.0}74.5%{opacity:0.0}74.583%{opacity:1.0}97.5%{opacity:1.0}98.333%{opacity:0.0}100.0%{opacity:0.0}}
-	.hero-art .h26{animation:hero-h26 12s linear infinite}@keyframes hero-h26{0.0%{opacity:0.0}8.333%{opacity:0.0}9.167%{opacity:1.0}12.5%{opacity:1.0}13.333%{opacity:0.0}41.667%{opacity:0.0}42.5%{opacity:1.0}45.833%{opacity:1.0}46.667%{opacity:0.0}75.0%{opacity:0.0}75.833%{opacity:1.0}79.167%{opacity:1.0}80.0%{opacity:0.0}100.0%{opacity:0.0}}
-	.hero-art .h27{animation:hero-h27 12s linear infinite}@keyframes hero-h27{0.0%{opacity:0.0;transform:scale(1.0)}20.75%{opacity:0.0;transform:scale(1.0)}20.833%{opacity:0.7;transform:scale(1.0)}28.333%{opacity:0.0;transform:scale(1.7)}28.417%{opacity:0.0;transform:scale(1.0)}54.083%{opacity:0.0;transform:scale(1.0)}54.167%{opacity:0.7;transform:scale(1.0)}61.667%{opacity:0.0;transform:scale(1.7)}61.75%{opacity:0.0;transform:scale(1.0)}87.417%{opacity:0.0;transform:scale(1.0)}87.5%{opacity:0.7;transform:scale(1.0)}95.0%{opacity:0.0;transform:scale(1.7)}95.083%{opacity:0.0;transform:scale(1.0)}100.0%{opacity:0.0;transform:scale(1.0)}}
-	.hero-art .h28{animation:hero-h28 12s linear infinite}@keyframes hero-h28{0.0%{opacity:1.0;stroke-dashoffset:0.0}8.333%{opacity:1.0;stroke-dashoffset:-100.0}8.417%{opacity:0.0;stroke-dashoffset:-100.0}8.5%{opacity:0.0;stroke-dashoffset:0.0}99.917%{opacity:0.0;stroke-dashoffset:0.0}100.0%{opacity:1.0;stroke-dashoffset:0.0}}
-	.hero-art .h29{animation:hero-h29 12s linear infinite}@keyframes hero-h29{0.0%{opacity:0.0;stroke-dashoffset:0.0}16.583%{opacity:0.0;stroke-dashoffset:0.0}16.667%{opacity:1.0;stroke-dashoffset:0.0}25.0%{opacity:1.0;stroke-dashoffset:-100.0}25.083%{opacity:0.0;stroke-dashoffset:-100.0}25.167%{opacity:0.0;stroke-dashoffset:0.0}41.583%{opacity:0.0;stroke-dashoffset:0.0}41.667%{opacity:1.0;stroke-dashoffset:0.0}50.0%{opacity:1.0;stroke-dashoffset:-100.0}50.083%{opacity:0.0;stroke-dashoffset:-100.0}50.167%{opacity:0.0;stroke-dashoffset:0.0}100.0%{opacity:0.0;stroke-dashoffset:0.0}}
-	.hero-art .h30{animation:hero-h30 12s linear infinite}@keyframes hero-h30{0.0%{opacity:0.0;stroke-dashoffset:0.0}58.25%{opacity:0.0;stroke-dashoffset:0.0}58.333%{opacity:1.0;stroke-dashoffset:0.0}66.667%{opacity:1.0;stroke-dashoffset:-100.0}66.75%{opacity:0.0;stroke-dashoffset:-100.0}66.833%{opacity:0.0;stroke-dashoffset:0.0}100.0%{opacity:0.0;stroke-dashoffset:0.0}}
-	.hero-art .h31{animation:hero-h31 12s linear infinite}@keyframes hero-h31{0.0%{opacity:0.0;stroke-dashoffset:0.0}79.083%{opacity:0.0;stroke-dashoffset:0.0}79.167%{opacity:1.0;stroke-dashoffset:0.0}87.5%{opacity:1.0;stroke-dashoffset:-100.0}87.583%{opacity:0.0;stroke-dashoffset:-100.0}87.667%{opacity:0.0;stroke-dashoffset:0.0}100.0%{opacity:0.0;stroke-dashoffset:0.0}}
-	.hero-art .h32{animation:hero-h32 12s linear infinite}@keyframes hero-h32{0.0%{opacity:0.0;stroke-dashoffset:0.0}33.25%{opacity:0.0;stroke-dashoffset:0.0}33.333%{opacity:1.0;stroke-dashoffset:0.0}41.667%{opacity:1.0;stroke-dashoffset:-100.0}41.75%{opacity:0.0;stroke-dashoffset:-100.0}41.833%{opacity:0.0;stroke-dashoffset:0.0}100.0%{opacity:0.0;stroke-dashoffset:0.0}}
-	.hero-art .h33{animation:hero-h33 12s linear infinite}@keyframes hero-h33{0.0%{opacity:0.0;stroke-dashoffset:0.0}74.917%{opacity:0.0;stroke-dashoffset:0.0}75.0%{opacity:1.0;stroke-dashoffset:0.0}83.333%{opacity:1.0;stroke-dashoffset:-100.0}83.417%{opacity:0.0;stroke-dashoffset:-100.0}83.5%{opacity:0.0;stroke-dashoffset:0.0}100.0%{opacity:0.0;stroke-dashoffset:0.0}}
-	.hero-art .h34{animation:hero-h34 12s linear infinite}@keyframes hero-h34{0.0%{opacity:1.0;stroke-dashoffset:-100.0}0.083%{opacity:0.0;stroke-dashoffset:-100.0}0.167%{opacity:0.0;stroke-dashoffset:0.0}91.583%{opacity:0.0;stroke-dashoffset:0.0}91.667%{opacity:1.0;stroke-dashoffset:0.0}100.0%{opacity:1.0;stroke-dashoffset:-100.0}}
-	.hero-art .h35{animation:hero-h35 12s linear infinite}@keyframes hero-h35{0.0%{opacity:0.0;stroke-dashoffset:0.0}12.417%{opacity:0.0;stroke-dashoffset:0.0}12.5%{opacity:1.0;stroke-dashoffset:0.0}20.833%{opacity:1.0;stroke-dashoffset:-100.0}20.917%{opacity:0.0;stroke-dashoffset:-100.0}21.0%{opacity:0.0;stroke-dashoffset:0.0}100.0%{opacity:0.0;stroke-dashoffset:0.0}}
-	.hero-art .h36{animation:hero-h36 12s linear infinite}@keyframes hero-h36{0.0%{opacity:0.0;stroke-dashoffset:0.0}66.583%{opacity:0.0;stroke-dashoffset:0.0}66.667%{opacity:1.0;stroke-dashoffset:0.0}75.0%{opacity:1.0;stroke-dashoffset:-100.0}75.083%{opacity:0.0;stroke-dashoffset:-100.0}75.167%{opacity:0.0;stroke-dashoffset:0.0}100.0%{opacity:0.0;stroke-dashoffset:0.0}}
-	.hero-art .h37{animation:hero-h37 12s linear infinite}@keyframes hero-h37{0.0%{opacity:0.0;stroke-dashoffset:0.0}8.25%{opacity:0.0;stroke-dashoffset:0.0}8.333%{opacity:1.0;stroke-dashoffset:0.0}16.667%{opacity:1.0;stroke-dashoffset:-100.0}16.75%{opacity:0.0;stroke-dashoffset:-100.0}16.833%{opacity:0.0;stroke-dashoffset:0.0}100.0%{opacity:0.0;stroke-dashoffset:0.0}}
-	.hero-art .h38{animation:hero-h38 12s linear infinite}@keyframes hero-h38{0.0%{opacity:0.0;stroke-dashoffset:0.0}24.917%{opacity:0.0;stroke-dashoffset:0.0}25.0%{opacity:1.0;stroke-dashoffset:0.0}33.333%{opacity:1.0;stroke-dashoffset:-100.0}33.417%{opacity:0.0;stroke-dashoffset:-100.0}33.5%{opacity:0.0;stroke-dashoffset:0.0}100.0%{opacity:0.0;stroke-dashoffset:0.0}}
-	.hero-art .h39{animation:hero-h39 12s linear infinite}@keyframes hero-h39{0.0%{opacity:0.0;stroke-dashoffset:0.0}45.75%{opacity:0.0;stroke-dashoffset:0.0}45.833%{opacity:1.0;stroke-dashoffset:0.0}54.167%{opacity:1.0;stroke-dashoffset:-100.0}54.25%{opacity:0.0;stroke-dashoffset:-100.0}54.333%{opacity:0.0;stroke-dashoffset:0.0}100.0%{opacity:0.0;stroke-dashoffset:0.0}}
-	.hero-art .h40{animation:hero-h40 12s linear infinite}@keyframes hero-h40{0.0%{opacity:0.0;stroke-dashoffset:0.0}29.917%{opacity:0.0;stroke-dashoffset:0.0}30.0%{opacity:1.0;stroke-dashoffset:0.0}35.833%{opacity:1.0;stroke-dashoffset:-100.0}35.917%{opacity:0.0;stroke-dashoffset:-100.0}36.0%{opacity:0.0;stroke-dashoffset:0.0}100.0%{opacity:0.0;stroke-dashoffset:0.0}}
-	@media (prefers-reduced-motion: reduce){.hero-art *{animation:none !important}.hero-art .dot.still{opacity:1;stroke-dashoffset:-55}.hero-art g.hid{opacity:1}}
+
+	.hero-art .a-p1{animation:hero-p1 12s linear infinite}@keyframes hero-p1{0%,1%{opacity:0}1.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-p2{animation:hero-p2 12s linear infinite}@keyframes hero-p2{0%,3.5%{opacity:0}4.3%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-p3{animation:hero-p3 12s linear infinite}@keyframes hero-p3{0%,6%{opacity:0}6.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-d1{animation:hero-d1 12s linear infinite}@keyframes hero-d1{0%,8%{opacity:0;stroke-dashoffset:0}8.1%{opacity:1;stroke-dashoffset:0}12%{opacity:1;stroke-dashoffset:-100}12.1%,100%{opacity:0;stroke-dashoffset:-100}}
+	.hero-art .a-mhl{animation:hero-mhl 12s linear infinite}@keyframes hero-mhl{0%,12%{opacity:0}12.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-d2{animation:hero-d2 12s linear infinite}@keyframes hero-d2{0%,15%{opacity:0;stroke-dashoffset:0}15.1%{opacity:1;stroke-dashoffset:0}19%{opacity:1;stroke-dashoffset:-100}19.1%,100%{opacity:0;stroke-dashoffset:-100}}
+	.hero-art .a-l1{animation:hero-l1 12s linear infinite}@keyframes hero-l1{0%,20%{transform:scaleX(0)}21.5%,98.5%{transform:scaleX(1)}99%,100%{transform:scaleX(0)}}
+	.hero-art .a-l2{animation:hero-l2 12s linear infinite}@keyframes hero-l2{0%,22%{transform:scaleX(0)}23.5%,98.5%{transform:scaleX(1)}99%,100%{transform:scaleX(0)}}
+	.hero-art .a-l3{animation:hero-l3 12s linear infinite}@keyframes hero-l3{0%,24%{transform:scaleX(0)}25.5%,98.5%{transform:scaleX(1)}99%,100%{transform:scaleX(0)}}
+	.hero-art .a-l4{animation:hero-l4 12s linear infinite}@keyframes hero-l4{0%,26%{transform:scaleX(0)}27.5%,52%{transform:scaleX(1)}52.1%{transform:scaleX(0)}55%,98.5%{transform:scaleX(1)}99%,100%{transform:scaleX(0)}}
+	.hero-art .a-l5{animation:hero-l5 12s linear infinite}@keyframes hero-l5{0%,28%{transform:scaleX(0)}29.5%,98.5%{transform:scaleX(1)}99%,100%{transform:scaleX(0)}}
+	.hero-art .a-l6{animation:hero-l6 12s linear infinite}@keyframes hero-l6{0%,30%{transform:scaleX(0)}31.5%,98.5%{transform:scaleX(1)}99%,100%{transform:scaleX(0)}}
+	.hero-art .a-d3{animation:hero-d3 12s linear infinite}@keyframes hero-d3{0%,33%{opacity:0;stroke-dashoffset:0}33.1%{opacity:1;stroke-dashoffset:0}37%{opacity:1;stroke-dashoffset:-100}37.1%{opacity:0;stroke-dashoffset:-100}37.2%,64%{opacity:0;stroke-dashoffset:0}64.1%{opacity:1;stroke-dashoffset:0}68%{opacity:1;stroke-dashoffset:-100}68.1%,100%{opacity:0;stroke-dashoffset:-100}}
+	.hero-art .a-sel{animation:hero-sel 12s linear infinite}@keyframes hero-sel{0%,38%{opacity:0}38.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-cmt{animation:hero-cmt 12s linear infinite}@keyframes hero-cmt{0%,41%{opacity:0}41.8%,49%{opacity:1}49.8%,100%{opacity:0}}
+	.hero-art .a-dfix{animation:hero-dfix 12s linear infinite}@keyframes hero-dfix{0%,44%{opacity:0;stroke-dashoffset:0}44.1%{opacity:1;stroke-dashoffset:0}50%{opacity:1;stroke-dashoffset:-100}50.1%,100%{opacity:0;stroke-dashoffset:-100}}
+	.hero-art .a-fix{animation:hero-fix 12s linear infinite}@keyframes hero-fix{0%,50%{opacity:0}50.8%,62%{opacity:1}62.8%,100%{opacity:0}}
+	.hero-art .a-ok{animation:hero-ok 12s linear infinite}@keyframes hero-ok{0%,70%{opacity:0}70.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-d5{animation:hero-d5 12s linear infinite}@keyframes hero-d5{0%,74%{opacity:0;stroke-dashoffset:0}74.1%{opacity:1;stroke-dashoffset:0}78%{opacity:1;stroke-dashoffset:-100}78.1%,100%{opacity:0;stroke-dashoffset:-100}}
+	.hero-art .a-c1{animation:hero-c1 12s linear infinite}@keyframes hero-c1{0%,79%{opacity:0}79.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-c2{animation:hero-c2 12s linear infinite}@keyframes hero-c2{0%,82%{opacity:0}82.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-c3{animation:hero-c3 12s linear infinite}@keyframes hero-c3{0%,85%{opacity:0}85.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-mb{animation:hero-mb 12s linear infinite}@keyframes hero-mb{0%,87%{opacity:0}87.8%,98.5%{opacity:1}99.3%,100%{opacity:0}}
+	.hero-art .a-d6{animation:hero-d6 12s linear infinite}@keyframes hero-d6{0%,88%{opacity:0;stroke-dashoffset:0}88.1%{opacity:1;stroke-dashoffset:0}92%{opacity:1;stroke-dashoffset:-100}92.1%,100%{opacity:0;stroke-dashoffset:-100}}
+	.hero-art .a-ring{animation:hero-ring 12s linear infinite}@keyframes hero-ring{0%,92%{opacity:0;transform:scale(1)}92.1%{opacity:0.7;transform:scale(1)}96%{opacity:0;transform:scale(1.6)}96.1%,100%{opacity:0;transform:scale(1)}}
+
+	/* Without motion, show the finished run: everything checked, two reviewers picked. */
+	@media (prefers-reduced-motion: reduce){.hero-art *{animation:none !important}.hero-art .dot.still{opacity:1;stroke-dashoffset:-55}.hero-art .rm{opacity:1}}
 </style>
