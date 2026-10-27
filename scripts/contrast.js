@@ -89,7 +89,7 @@ async () => {
 			// Brand icons are graphics: they need 3:1 against their card (WCAG 1.4.11).
 			for (const icon of doc.querySelectorAll('.tools svg')) {
 				const r = ratio(parse(win.getComputedStyle(icon).color), parse(win.getComputedStyle(icon.closest('.card')).backgroundColor));
-				if (r < 3) bad.push({ icon: icon.getAttribute('aria-label'), ratio: +r.toFixed(2) });
+				if (r < 3) bad.push({ icon: icon.querySelector('title')?.textContent, ratio: +r.toFixed(2) });
 			}
 			out[`${route} ${theme}`] = { checked, min: +min.toFixed(2), bad };
 			f.remove();

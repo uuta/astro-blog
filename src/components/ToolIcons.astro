@@ -1,5 +1,5 @@
 ---
-import { tools, type Tool } from '../lib/tools';
+import { toolColor, tools, type Tool } from '../lib/tools';
 
 interface Props {
 	tools: Tool[];
@@ -11,12 +11,12 @@ const list = Astro.props.tools.map((key) => tools[key]);
 {
 	list.length > 0 && (
 		<ul class="tools">
-			{list.map(({ name, icon }) => (
-				<li>
+			{list.map((tool) => (
+				<li style={`color: ${toolColor(tool)}`}>
 					{/* The title is both the accessible name and the hover tooltip. */}
 					<svg role="img" viewBox="0 0 24 24" width="22" height="22">
-						<title>{name}</title>
-						<path d={icon.path} fill="currentColor" />
+						<title>{tool.name}</title>
+						<path d={tool.icon.path} fill="currentColor" />
 					</svg>
 				</li>
 			))}
@@ -33,7 +33,6 @@ const list = Astro.props.tools.map((key) => tools[key]);
 		margin: 0;
 		padding: 0;
 		list-style: none;
-		color: var(--muted);
 	}
 	svg {
 		display: block;
