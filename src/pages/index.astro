@@ -1,0 +1,62 @@
+---
+// `/` has no content of its own: it sends the visitor to /en/ or /ja/.
+import '../styles/global.css';
+import ThemeScript from '../components/ThemeScript.astro';
+import { home } from '../i18n/home';
+
+const absolute = (path: string) => new URL(path, Astro.site).href;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script is:inline>
+			// The visitor's saved choice wins; otherwise a browser whose first language is
+			// Japanese goes to /ja/ and everyone else to /en/. Query and #hash carry over.
+			(function () {
+				var lang;
+				try {
+					lang = localStorage.getItem('lang');
+				} catch (e) {}
+				if (lang !== 'en' && lang !== 'ja') {
+					var first = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+					lang = first.toLowerCase().indexOf('ja') === 0 ? 'ja' : 'en';
+				}
+				location.replace('/' + lang + '/' + location.search + location.hash);
+			})();
+		</script>
+		<noscript><meta http-equiv="refresh" content="0; url=/en/" /></noscript>
+		<ThemeScript />
+		<title>{home.en.meta.title}</title>
+		<meta name="description" content={home.en.meta.description} />
+		<link rel="alternate" hreflang="en" href={absolute('/en/')} />
+		<link rel="alternate" hreflang="ja" href={absolute('/ja/')} />
+		<link rel="alternate" hreflang="x-default" href={absolute('/')} />
+	</head>
+	<body>
+		<main class="wrap choose">
+			<p class="logo mono">uuta<span class="logo-mark">_</span></p>
+			<div class="btn-row">
+				<a class="btn btn--secondary" href="/en/" hreflang="en">English</a>
+				<a class="btn btn--secondary" href="/ja/" hreflang="ja" lang="ja">日本語</a>
+			</div>
+		</main>
+	</body>
+</html>
+
+<style>
+	.choose {
+		padding-top: 88px;
+		padding-bottom: 88px;
+	}
+	.logo {
+		margin: 0 0 28px;
+		font-weight: 500;
+		font-size: 18px;
+	}
+	.logo-mark {
+		color: var(--accent);
+	}
+</style>

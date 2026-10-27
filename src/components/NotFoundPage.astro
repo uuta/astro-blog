@@ -1,0 +1,79 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from './Icon.astro';
+import { notFound } from '../i18n/notFound';
+import { localeUrl, otherLang, type Lang } from '../i18n/ui';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = notFound[lang];
+const home = localeUrl(lang);
+---
+
+<Base
+	lang={lang}
+	title={`${t.title.replace(/[.。]$/, '')} — uuta`}
+	description={t.lead}
+	counterpart={{ href: localeUrl(otherLang(lang)), translated: false }}
+	selfHref={home}
+	noindex
+>
+	<main class="wrap page">
+		<div class="body">
+			<p class="kicker">404</p>
+			<h1 class="page-title">{t.title}</h1>
+			<p class="lead">{t.lead}</p>
+			<p class="request mono" data-request hidden></p>
+			<script is:inline>
+				// Show which path was requested. Text only, and only when scripts run.
+				(function () {
+					var line = document.querySelector('[data-request]');
+					var path = location.pathname;
+					try {
+						path = decodeURI(path);
+					} catch (e) {}
+					line.textContent = 'GET ' + path + ' → 404 Not Found';
+					line.hidden = false;
+				})();
+			</script>
+			<div class="btn-row">
+				<a class="btn btn--primary" href={home}>{t.home}<Icon name="arrow-right" /></a>
+				<a class="btn btn--secondary" href={`${home}#writing`}>{t.writing}</a>
+			</div>
+		</div>
+	</main>
+</Base>
+
+<style>
+	.page {
+		padding-top: 80px;
+		padding-bottom: 96px;
+	}
+	.body {
+		max-width: 44rem;
+	}
+	.kicker {
+		margin-bottom: 20px;
+	}
+	.lead {
+		margin: 20px 0 0;
+		font-size: 19px;
+		line-height: 1.7;
+		color: var(--body);
+	}
+	.lead:lang(ja) {
+		line-height: 1.9;
+	}
+	.request {
+		margin: 16px 0 0;
+		font-size: 14px;
+		color: var(--muted);
+		overflow-wrap: anywhere;
+	}
+	.btn-row {
+		margin-top: 40px;
+	}
+</style>

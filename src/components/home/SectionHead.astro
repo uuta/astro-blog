@@ -1,0 +1,44 @@
+---
+interface Props {
+	kicker: string;
+	title: string;
+	/** The Writing list sits closer to its heading. */
+	tight?: boolean;
+}
+
+const { kicker, title, tight = false } = Astro.props;
+---
+
+<div class:list={['section-head', { tight }]}>
+	<p class="kicker">{kicker}</p>
+	<h2>{title}</h2>
+</div>
+
+<style>
+	.section-head {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px 48px;
+		align-items: baseline;
+		margin-bottom: 48px;
+	}
+	.tight {
+		margin-bottom: 40px;
+	}
+	.kicker {
+		min-width: 140px;
+	}
+	h2 {
+		margin: 0;
+		flex: 1 1 520px;
+		font-size: 34px;
+		line-height: 1.25;
+		letter-spacing: -0.01em;
+		font-weight: 600;
+	}
+	h2:lang(ja) {
+		font-size: 30px;
+		line-height: 1.5;
+		letter-spacing: normal;
+	}
+</style>

@@ -1,0 +1,111 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+import { localeUrl, otherLang, ui, type Lang } from '../i18n/ui';
+
+interface Props {
+	lang: Lang;
+	/** Where the toggle for this language points; defaults to the current page. */
+	selfHref?: string | undefined;
+	/** Where the toggle for the other language points. */
+	counterpartHref: string;
+	current?: 'writing' | 'profile' | undefined;
+}
+
+const { lang, selfHref = Astro.url.pathname, counterpartHref, current } = Astro.props;
+const t = ui[lang];
+const home = localeUrl(lang);
+const profile = localeUrl(lang, 'profile/');
+const switchHref = { [lang]: selfHref, [otherLang(lang)]: counterpartHref };
+---
+
+<header class="site-header">
+	<div class="wrap header-inner">
+		<a class="logo mono" href={home}>uuta<span class="logo-mark">_</span></a>
+		<nav class="nav" aria-label={t.mainNav}>
+			<a href={`${home}#work`}>{t.work}</a>
+			<a href={`${home}#writing`} aria-current={current === 'writing' ? 'true' : undefined}>{t.writing}</a>
+			<a href={`${home}#services`}>{t.services}</a>
+			<a href={profile} aria-current={current === 'profile' ? 'page' : undefined}>{t.profile}</a>
+			<a class="nav-contact" href={`${home}#contact`}>{t.contact}</a>
+			<div class="lang-switch mono" data-lang-switch>
+				<a href={switchHref.en} hreflang="en" lang="en" aria-current={lang === 'en' ? 'page' : undefined}>EN</a>
+				<a href={switchHref.ja} hreflang="ja" lang="ja" aria-current={lang === 'ja' ? 'page' : undefined}>JA</a>
+			</div>
+			<ThemeToggle lang={lang} />
+		</nav>
+	</div>
+</header>
+
+<script>
+	// Remember the language the visitor picked; the page at `/` sends them back to it.
+	for (const link of document.querySelectorAll<HTMLAnchorElement>('[data-lang-switch] a')) {
+		link.addEventListener('click', () => {
+			try {
+				localStorage.setItem('lang', link.hreflang);
+			} catch {
+				// Storage can be blocked; `/` then falls back to the browser language.
+			}
+		});
+	}
+</script>
+
+<style>
+	.site-header {
+		border-bottom: 1px solid var(--rule);
+	}
+	.header-inner {
+		padding-top: 16px;
+		padding-bottom: 16px;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px 24px;
+	}
+	.logo,
+	.logo:hover {
+		font-weight: 500;
+		font-size: 18px;
+		text-decoration: none;
+		color: var(--ink);
+		padding: 10px 0;
+	}
+	.logo-mark {
+		color: var(--accent);
+	}
+	.nav {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 4px 24px;
+		font-size: 15px;
+	}
+	.nav > a {
+		text-decoration: none;
+		padding: 12px 0;
+	}
+	.nav > a[aria-current] {
+		box-shadow: inset 0 -2px 0 var(--accent);
+	}
+	.nav > .nav-contact {
+		padding: 11px 16px;
+		border: 1px solid var(--ink);
+		border-radius: 4px;
+	}
+	.lang-switch {
+		display: flex;
+		font-size: 13px;
+		border: 1px solid var(--line);
+		border-radius: 4px;
+		overflow: hidden;
+	}
+	.lang-switch a {
+		padding: 12px;
+		text-decoration: none;
+	}
+	.lang-switch a[aria-current],
+	.lang-switch a[aria-current]:hover {
+		background: var(--inverse);
+		color: var(--on-inverse);
+	}
+</style>

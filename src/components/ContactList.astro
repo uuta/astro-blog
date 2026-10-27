@@ -1,0 +1,51 @@
+---
+// The only way to reach the owner: no form, no backend.
+// X and LinkedIn are placeholders until the owner fills in the handles and URLs.
+const links = [
+	{ name: 'X', handle: '[@HANDLE]', href: '#' },
+	{ name: 'LinkedIn', handle: '[PROFILE URL]', href: '#' },
+	{ name: 'GitHub', handle: 'github.com/uuta', href: 'https://github.com/uuta' },
+];
+
+interface Props {
+	id?: string;
+}
+
+const { id } = Astro.props;
+---
+
+<ul id={id} class="contact-list">
+	{
+		links.map((link) => (
+			<li>
+				<a href={link.href}>
+					<span>{link.name}</span>
+					<span class="handle mono">{link.handle}</span>
+				</a>
+			</li>
+		))
+	}
+</ul>
+
+<style>
+	.contact-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		border-bottom: 1px solid var(--rule);
+	}
+	li {
+		border-top: 1px solid var(--rule);
+	}
+	a {
+		display: flex;
+		justify-content: space-between;
+		gap: 16px;
+		padding: 14px 0;
+		text-decoration: none;
+	}
+	.handle {
+		font-size: 14px;
+		color: var(--muted);
+	}
+</style>

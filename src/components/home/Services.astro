@@ -1,0 +1,80 @@
+---
+import SectionHead from './SectionHead.astro';
+import Icon from '../Icon.astro';
+import { home } from '../../i18n/home';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+	lang: Lang;
+}
+
+const t = home[Astro.props.lang].services;
+---
+
+<section id="services" class="section">
+	<div class="wrap section-inner">
+		<SectionHead kicker={t.kicker} title={t.title} />
+		<div class="columns">
+			{
+				t.columns.map((column) => (
+					<div class="column">
+						<h3>{column.title}</h3>
+						<p>{column.body}</p>
+					</div>
+				))
+			}
+		</div>
+		<div class="strip">
+			<p>{t.strip}</p>
+			<a class="btn btn--on-strip" href="#contact">{t.cta}<Icon name="arrow-right" /></a>
+		</div>
+	</div>
+</section>
+
+<style>
+	.columns {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 24px;
+	}
+	.column {
+		flex: 1 1 300px;
+		min-width: 0;
+		border-top: 2px solid var(--ink);
+		padding-top: 24px;
+	}
+	h3 {
+		margin: 0;
+		font-size: 22px;
+		line-height: 1.3;
+		font-weight: 600;
+	}
+	h3:lang(ja) {
+		font-size: 20px;
+		line-height: 1.45;
+	}
+	.column p {
+		margin: 12px 0 0;
+		font-size: 16px;
+		line-height: 1.65;
+		color: var(--body);
+	}
+	.column p:lang(ja) {
+		font-size: 15px;
+		line-height: 1.85;
+	}
+	.strip {
+		margin-top: 56px;
+		padding: 32px;
+		gap: 20px;
+	}
+	.strip p {
+		font-size: 22px;
+		line-height: 1.4;
+		max-width: 36rem;
+	}
+	.strip p:lang(ja) {
+		font-size: 20px;
+		line-height: 1.6;
+	}
+</style>

@@ -1,0 +1,179 @@
+---
+import { Image } from 'astro:assets';
+import SectionHead from './SectionHead.astro';
+import Icon from '../Icon.astro';
+import { home } from '../../i18n/home';
+import type { Lang } from '../../i18n/ui';
+import enLight from '../../assets/speakgain/speakgain-home-en.png';
+import enDark from '../../assets/speakgain/speakgain-home-en-dark.png';
+import jaLight from '../../assets/speakgain/speakgain-home-ja.png';
+import jaDark from '../../assets/speakgain/speakgain-home-ja-dark.png';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = home[lang].work;
+const shots = { en: { light: enLight, dark: enDark }, ja: { light: jaLight, dark: jaDark } }[lang];
+---
+
+<section id="work" class="section section--soft">
+	<div class="wrap section-inner">
+		<SectionHead kicker={t.kicker} title={t.title} />
+		<div class="grid">
+			<article class="card feature">
+				<div class="feature-body">
+					<p class="meta-label">{t.feature.meta}</p>
+					<h3>{t.feature.title}</h3>
+					<p class="body">{t.feature.body}</p>
+					<div class="facts">
+						{
+							t.feature.facts.map((fact) => (
+								<div class="fact">
+									<span class="meta-label">{fact.label}</span>
+									<span class="value mono">{fact.value}</span>
+								</div>
+							))
+						}
+					</div>
+					<div class="tags">{t.feature.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
+					<div class="links">
+						<a class="accent-link" href="https://speakgain.com">speakgain.com<Icon name="external" size={14} /></a>
+						<a class="accent-link" href="#">{t.caseStudy}<Icon name="arrow-right" /></a>
+					</div>
+				</div>
+				<div class="shot-wrap">
+					<Image class="shot only-light" src={shots.light} alt={t.feature.shotAlt} widths={[240, 360]} sizes="240px" />
+					<Image class="shot only-dark" src={shots.dark} alt={t.feature.shotAlt} widths={[240, 360]} sizes="240px" />
+				</div>
+			</article>
+
+			{
+				t.cards.map((card) => (
+					<article class:list={['card', 'case', { draft: card.draft }]}>
+						<p class="meta-label">{card.meta}</p>
+						<h3>{card.title}</h3>
+						<p class="body">{card.body}</p>
+						<div class="fact fact--ruled">
+							<span class="meta-label">{card.resultLabel}</span>
+							<span class="value mono">{card.result}</span>
+						</div>
+						<div class="tags">{card.tags.map((tag) => <span class="tag">{tag}</span>)}</div>
+						<a class="accent-link case-link" href="#">{t.caseStudy}<Icon name="arrow-right" /></a>
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.grid {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 24px;
+	}
+	.card {
+		min-width: 0;
+		background: var(--card);
+		border: 1px solid var(--rule);
+		border-radius: 6px;
+		padding: 32px;
+	}
+	.card.draft {
+		border: 1px dashed var(--dashed);
+	}
+	.feature {
+		flex: 1 1 100%;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 32px 48px;
+	}
+	.feature-body {
+		flex: 999 1 420px;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	.case {
+		flex: 1 1 460px;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	h3 {
+		margin: 0;
+		font-size: 24px;
+		line-height: 1.3;
+		font-weight: 600;
+	}
+	h3:lang(ja) {
+		font-size: 22px;
+		line-height: 1.45;
+	}
+	.feature h3 {
+		font-size: 28px;
+		line-height: 1.25;
+	}
+	.feature h3:lang(ja) {
+		font-size: 26px;
+		line-height: 1.4;
+	}
+	.body {
+		margin: 0;
+		font-size: 16px;
+		line-height: 1.65;
+		color: var(--body);
+	}
+	.body:lang(ja) {
+		font-size: 15px;
+		line-height: 1.85;
+	}
+	.feature .body {
+		max-width: 38rem;
+	}
+	.facts {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 40px;
+		border-top: 1px solid var(--rule);
+		border-bottom: 1px solid var(--rule);
+	}
+	.fact {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		padding: 14px 0;
+	}
+	.fact--ruled {
+		border-top: 1px solid var(--rule);
+		border-bottom: 1px solid var(--rule);
+	}
+	.value {
+		font-size: 15px;
+	}
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px 28px;
+	}
+	.case-link {
+		margin-top: auto;
+	}
+	.shot-wrap {
+		flex: 1 1 240px;
+		display: flex;
+		justify-content: center;
+	}
+	.shot {
+		width: 240px;
+		height: auto;
+		/* Both screenshots are 360 × 780. */
+		aspect-ratio: 360 / 780;
+		border: 1px solid var(--line);
+		border-radius: 28px;
+	}
+</style>

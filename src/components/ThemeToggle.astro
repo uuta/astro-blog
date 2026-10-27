@@ -1,0 +1,52 @@
+---
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props {
+	lang: Lang;
+}
+
+const t = ui[Astro.props.lang];
+// The icon and the accessible label follow the visible theme through
+// .only-dark / .only-light, so nothing here depends on script at load.
+---
+
+<button type="button" class="theme-toggle" data-theme-toggle>
+	<svg class="only-dark" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg>
+	<svg class="only-light" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg>
+	<span class="sr-only only-dark">{t.toLight}</span>
+	<span class="sr-only only-light">{t.toDark}</span>
+</button>
+
+<script>
+	const root = document.documentElement;
+	const systemDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+	for (const button of document.querySelectorAll('[data-theme-toggle]')) {
+		button.addEventListener('click', () => {
+			const current = root.dataset.theme ?? (systemDark.matches ? 'dark' : 'light');
+			const next = current === 'dark' ? 'light' : 'dark';
+			root.dataset.theme = next;
+			try {
+				localStorage.setItem('theme', next);
+			} catch {
+				// Storage can be blocked; the choice then lasts for this page only.
+			}
+		});
+	}
+</script>
+
+<style>
+	.theme-toggle {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 44px;
+		height: 44px;
+		padding: 0;
+		border: 1px solid var(--line);
+		border-radius: 4px;
+		background: transparent;
+		color: var(--ink);
+		cursor: pointer;
+	}
+</style>

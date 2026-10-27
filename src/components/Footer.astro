@@ -1,0 +1,47 @@
+---
+import { localeUrl, ui, type Lang } from '../i18n/ui';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<footer class="site-footer">
+	<div class="wrap footer-inner">
+		<span class="mono">© 2026 uuta</span>
+		<nav class="footer-nav" aria-label={t.footerNav}>
+			<a href={localeUrl(lang, 'profile/')}>{t.profile}</a>
+			<a href={localeUrl(lang, 'privacy/')}>{t.privacy}</a>
+		</nav>
+	</div>
+</footer>
+
+<style>
+	.site-footer {
+		border-top: 1px solid var(--rule);
+	}
+	.footer-inner {
+		padding-top: 32px;
+		padding-bottom: 40px;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px 32px;
+		font-size: 14px;
+		color: var(--muted);
+	}
+	.footer-nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 24px;
+	}
+	.footer-nav a,
+	.footer-nav a:hover {
+		padding: 12px 0;
+		color: var(--muted);
+	}
+</style>

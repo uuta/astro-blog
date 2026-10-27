@@ -1,0 +1,11 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	// Serves the static Astro build as Workers static assets; there is no Worker script.
+	"name": "uuta-site",
+	"compatibility_date": "2026-10-23",
+	"assets": {
+		"directory": "./dist",
+		// Unknown paths get the nearest 404.html going up: ja/404.html under /ja/, else 404.html (EN).
+		"not_found_handling": "404-page"
+	}
+}

@@ -1,0 +1,16 @@
+---
+const paths = {
+	'arrow-right': 'M3 8h10M9 4l4 4-4 4',
+	'arrow-left': 'M13 8H3M7 4L3 8l4 4',
+	external: 'M6 3h7v7M13 3L4 12',
+};
+
+interface Props {
+	name: keyof typeof paths;
+	size?: number;
+}
+
+const { name, size = 16 } = Astro.props;
+---
+
+<svg aria-hidden="true" width={size} height={size} viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={paths[name]}></path></svg>
