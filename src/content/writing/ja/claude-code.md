@@ -3,6 +3,7 @@ title: "5時間でできるClaude Codeを使ったMVP"
 date: 2025-06-01T01:11:06.130Z
 lang: ja
 section: writing
+key: claude-code
 tags:
   - "Tech"
   - "AI"

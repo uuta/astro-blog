@@ -6,6 +6,9 @@ const en = {
 	// {n} is replaced with the estimated minutes.
 	readingTime: '{n} min read',
 	readInOther: '日本語で読む',
+	// {link} is replaced with a link to the original, labeled originalLink.
+	translatedFrom: 'Translated from the {link}.',
+	originalLink: 'Japanese original',
 	howTitle: 'How this was written',
 	howBody:
 		'Drafted by an agent from my notes and commit history. Every claim, number and command checked and rewritten by me before merge.',
@@ -19,6 +22,8 @@ const ja: typeof en = {
 	allJournal: '日常の記事一覧',
 	readingTime: '{n}分で読めます',
 	readInOther: 'Read in English',
+	translatedFrom: '{link}から翻訳しました。',
+	originalLink: '英語の原文',
 	howTitle: 'この記事の書き方',
 	howBody:
 		'自分のメモとコミット履歴から、エージェントが下書きしました。主張・数字・コマンドはすべて、マージ前に自分が確認して書き直しています。',

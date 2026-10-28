@@ -55,6 +55,7 @@ date: 2026-11-01        # or a placeholder such as "[DATE]"
 lang: en                # en or ja
 section: writing        # writing (default) or journal
 key: some-article       # optional; the same key on an EN and a JA file links the translations
+translated: true        # optional; on the translated side of a pair, shows a note linking the original
 tags: [Agentic workflow] # optional; only used by search
 agentDrafted: true      # optional; shows the "How this was written" note
 ---

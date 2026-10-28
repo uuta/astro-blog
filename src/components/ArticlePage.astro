@@ -28,6 +28,8 @@ const { Content } = await render(post);
 // posts page, and the in-article link to the other language is left out.
 const translation = await findTranslation(post);
 const otherHref = translation ? postUrl(translation) : sectionUrl(otherLang(lang), section);
+// A translation links back to its original; the note waits until that original exists.
+const [translatedBefore, translatedAfter] = t.translatedFrom.split('{link}');
 const next = await nextPost(post);
 ---
 
@@ -51,6 +53,13 @@ const next = await nextPost(post);
 					<a class="other" href={otherHref} hreflang={otherLang(lang)} lang={otherLang(lang)}>{t.readInOther}</a>
 				)}
 			</div>
+			{
+				post.data.translated && translation && (
+					<p class="translated mono">
+						{translatedBefore}<a href={otherHref} hreflang={otherLang(lang)}>{t.originalLink}</a>{translatedAfter}
+					</p>
+				)
+			}
 
 			{
 				post.data.agentDrafted && (
@@ -135,6 +144,16 @@ const next = await nextPost(post);
 		min-height: 44px;
 		color: var(--accent);
 		text-decoration: none;
+	}
+	.translated {
+		margin: 4px 0 0;
+		font-size: 14px;
+		line-height: 1.6;
+		color: var(--muted);
+	}
+	.translated a {
+		color: var(--accent);
+		text-underline-offset: 3px;
 	}
 	.how {
 		margin-top: 32px;

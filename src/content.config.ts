@@ -17,6 +17,8 @@ const writing = defineCollection({
 		section: z.enum(['writing', 'journal']).default('writing'),
 		// Shared by an article and its translation.
 		key: z.string().optional(),
+		// Marks this file as the translation, not the original, of the article that shares its key.
+		translated: z.boolean().default(false),
 		tags: z.array(z.string()).default([]),
 		// Shows the "How this was written" note on an article an agent drafted.
 		agentDrafted: z.boolean().default(false),
