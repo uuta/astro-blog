@@ -54,6 +54,8 @@ const t = home[lang].hero;
 		line-height: 1.35;
 		letter-spacing: -0.01em;
 		max-width: 13em;
+		/* Break Japanese lines between phrases, not inside a word. */
+		word-break: auto-phrase;
 	}
 	.lead {
 		margin: 28px 0 0;

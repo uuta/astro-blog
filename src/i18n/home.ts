@@ -23,16 +23,16 @@ const en = {
   meta: {
     title: "uuta — Growth with agents · Security",
     description:
-      "I run the whole loop on my own app: analyze the market, build with an agent pipeline, and reach users with content that agents make and post.",
+      "I run the whole loop on my own products: analyze the market, build with an agent pipeline, and reach users with content that agents make and post.",
   },
   hero: {
-    title: "Grow an app with agents, from the market to its users.",
-    lead: "I run the whole loop on my own app: analyze the market, build with an agent pipeline, and reach users with content that agents make and post. I can help you set up the same loop, with guardrails where agents need them.",
+    title: "Grow a product with agents, from the market to its users.",
+    lead: "I run the whole loop on my own products: analyze the market, build with an agent pipeline, and reach users with content that agents make and post. I can help you set up the same loop, with guardrails where agents need them.",
     primary: "Work with me",
     secondary: "Read the writing",
     art: {
       label:
-        "Pipeline diagram: first an analysis of the market, the infrastructure the work touches and the expected cost. A manager agent then assigns the task to one engineer agent working in its own git worktree. Reviewers are picked by what the change touched. Work that fails review goes back to the engineer for a fix; clean work becomes a pull request whose checks must pass, and I merge it. Last, agents make and post content so the app reaches its users.",
+        "Pipeline diagram: first an analysis of the market, the infrastructure the work touches and the expected cost. A manager agent then assigns the task to one engineer agent working in its own git worktree. Reviewers are picked by what the change touched. Work that fails review goes back to the engineer for a fix; clean work becomes a pull request whose checks must pass, and I merge it. Last, agents make and post content so the product reaches its users.",
       // Top row (Analysis, Manager, Engineer) is labelled above the cards, the bottom row below;
       // Merged is a small circle between cards, so its label sits above it.
       // On narrow screens a sub-label wraps; the no-break spaces keep each "·" at a line end.
@@ -111,7 +111,7 @@ const en = {
       {
         icon: "distribution",
         title: "Distribution",
-        body: "Content agents make and post, so the app reaches people. An ongoing experiment on SpeakGain.",
+        body: "Content agents make and post, so the product reaches people. An ongoing experiment on SpeakGain.",
         items: [
           "Short videos and photo carousels made with image and video models",
           "Posted as drafts through Zernio",
@@ -222,7 +222,7 @@ const en = {
         body: "Full-time or contract, working alongside your team on agentic workflows, growth or security. Remote, with teams in Japan or abroad.",
       },
       {
-        title: "Growing an app with agents",
+        title: "Growing a product with agents",
         body: "Where agents fit in your product's growth, from market analysis to distribution: what it will cost, and how to set it up.",
       },
       {
@@ -239,16 +239,16 @@ const ja: typeof en = {
   meta: {
     title: "uuta — エージェントでグロース · セキュリティ",
     description:
-      "自分のアプリで、この流れを丸ごと回しています。市場を分析し、エージェントのパイプラインで作り、エージェントが作って投稿するコンテンツでユーザーに届けます。",
+      "自分のプロダクトで、この流れを丸ごと回しています。市場を分析し、エージェントのパイプラインで作り、エージェントが作って投稿するコンテンツでユーザーに届けます。",
   },
   hero: {
-    title: "市場からユーザーまで、エージェントでアプリを育てる。",
-    lead: "自分のアプリで、この流れを丸ごと回しています。市場を分析し、エージェントのパイプラインで作り、エージェントが作って投稿するコンテンツでユーザーに届ける。同じ流れを、エージェントに必要な安全策とあわせて組むお手伝いをします。",
+    title: "市場からユーザーまで、エージェントでプロダクトを育てる。",
+    lead: "自分のプロダクトで、この流れを丸ごと回しています。市場を分析し、エージェントのパイプラインで作り、エージェントが作って投稿するコンテンツでユーザーに届ける。同じ流れを、エージェントに必要な安全策とあわせて組むお手伝いをします。",
     primary: "相談する",
     secondary: "記事を読む",
     art: {
       label:
-        "パイプラインの図：まず市場、作業が触れるインフラ、想定コストを分析します。次にマネージャーのエージェントが、専用の git worktree で作業するエンジニアのエージェント1つにタスクを割り当てます。レビュアーは変更が触れた範囲に応じて選ばれます。レビューを通らなければ修正のためエンジニアに戻り、通ったものだけがチェックを通過した Pull Request になって、自分がマージします。最後に、エージェントがコンテンツを作って投稿し、アプリをユーザーに届けます。",
+        "パイプラインの図：まず市場、作業が触れるインフラ、想定コストを分析します。次にマネージャーのエージェントが、専用の git worktree で作業するエンジニアのエージェント1つにタスクを割り当てます。レビュアーは変更が触れた範囲に応じて選ばれます。レビューを通らなければ修正のためエンジニアに戻り、通ったものだけがチェックを通過した Pull Request になって、自分がマージします。最後に、エージェントがコンテンツを作って投稿し、プロダクトをユーザーに届けます。",
       nodes: [
         {
           x: "21%",
@@ -329,7 +329,7 @@ const ja: typeof en = {
       {
         icon: "distribution",
         title: "配信",
-        body: "エージェントが作って投稿するコンテンツで、アプリを人に届ける。SpeakGain で続けている実験です。",
+        body: "エージェントが作って投稿するコンテンツで、プロダクトを人に届ける。SpeakGain で続けている実験です。",
         items: [
           "画像・動画モデルで作るショート動画と写真カルーセル",
           "Zernio から下書きとして投稿",
@@ -443,7 +443,7 @@ const ja: typeof en = {
         body: "正社員でも業務委託でも、チームと一緒にエージェント開発、グロース、セキュリティに取り組みます。国内外のチームとフルリモートで。",
       },
       {
-        title: "エージェントでアプリを育てる",
+        title: "エージェントでプロダクトを育てる",
         body: "市場分析から配信まで、プロダクトの成長のどこにエージェントが合うか。かかるコストと、組み方まで。",
       },
       {
