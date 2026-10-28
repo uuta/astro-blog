@@ -44,12 +44,19 @@ const shots = { en: { light: enLight, dark: enDark }, ja: { light: jaLight, dark
 					<article class:list={['card', 'case', { draft: card.draft }]}>
 						<h3>{card.title}</h3>
 						<p class="body">{card.body}</p>
-						<div class="result">
-							<span class="meta-label">{card.resultLabel}</span>
-							<span class="value mono">{card.result}</span>
-						</div>
+						{card.result && (
+							<div class="result">
+								<span class="meta-label">{card.resultLabel}</span>
+								<span class="value mono">{card.result}</span>
+							</div>
+						)}
 						<ToolIcons tools={card.tools} />
-						<a class="accent-link case-link" href="#">{t.caseStudy}<Icon name="arrow-right" /></a>
+						<div class="links case-link">
+							{card.site && (
+								<a class="accent-link" href={card.site.href}>{card.site.label}<Icon name="external" size={14} /></a>
+							)}
+							<a class="accent-link" href="#">{t.caseStudy}<Icon name="arrow-right" /></a>
+						</div>
 					</article>
 				))
 			}

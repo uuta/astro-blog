@@ -2,6 +2,17 @@ import type { Lang } from './ui';
 import type { Tool } from '../lib/tools';
 
 /** A row in the Writing list. `post` is the key of a writing post; rows without one stay placeholders. */
+/** A Work card under the feature. A card with a live `site` links to it instead of showing a Result row. */
+export interface CaseCard {
+	title: string;
+	body: string;
+	resultLabel?: string;
+	result?: string;
+	site?: { label: string; href: string };
+	tools: Tool[];
+	draft: boolean;
+}
+
 export interface WritingRow {
 	date: string;
 	title: string;
@@ -109,11 +120,10 @@ const en = {
 				draft: false,
 			},
 			{
-				title: 'A resort-job aggregator, built by agents',
-				body: 'A real product built end to end with Claude as the manager and Codex as implementer and reviewer, from the plan to a running web app. A test of how far the workflow holds up outside of tooling.',
-				resultLabel: 'Result',
-				result: '[WHAT SHIPPED · LINK]',
-				tools: ['go', 'nextjs', 'claudeCode', 'codex'] as Tool[],
+				title: 'RESORN, structured search for resort jobs',
+				body: 'Live-in resort jobs across Japan, searchable by area, job type and conditions like a free dorm or meals. A Go crawler collects the listings and pulls those conditions out of free text. Claude managed it and Codex built and reviewed it, from the plan to the live site.',
+				site: { label: 'resorn.net', href: 'https://resorn.net/' },
+				tools: ['go', 'nextjs', 'postgresql', 'claudeCode', 'codex'] as Tool[],
 				draft: false,
 			},
 			{
@@ -124,7 +134,7 @@ const en = {
 				tools: [] as Tool[],
 				draft: true,
 			},
-		],
+		] as CaseCard[],
 	},
 	writing: {
 		title: 'Notes from running agents on real work.',
@@ -265,11 +275,10 @@ const ja: typeof en = {
 				draft: false,
 			},
 			{
-				title: 'エージェントで開発したリゾートバイト求人アグリゲーター',
-				body: 'Claude をマネージャー、Codex を実装とレビュー担当にして、計画から動く Web アプリまで一通り作ったプロダクトです。ツールづくりの外で、このワークフローがどこまで通用するかの検証でもあります。',
-				resultLabel: '成果',
-				result: '[リリースした内容 · リンク]',
-				tools: ['go', 'nextjs', 'claudeCode', 'codex'] as Tool[],
+				title: 'RESORN — 条件で探せるリゾートバイト求人',
+				body: '全国の住み込みリゾートバイトを、エリアや職種、寮費無料・食事付きといった条件で探せる求人検索サイトです。Go のクローラーが求人を集め、本文に埋もれた条件を取り出します。計画から公開まで、Claude がマネージャー、Codex が実装とレビューを担当しました。',
+				site: { label: 'resorn.net', href: 'https://resorn.net/' },
+				tools: ['go', 'nextjs', 'postgresql', 'claudeCode', 'codex'] as Tool[],
 				draft: false,
 			},
 			{
@@ -280,7 +289,7 @@ const ja: typeof en = {
 				tools: [] as Tool[],
 				draft: true,
 			},
-		],
+		] as CaseCard[],
 	},
 	writing: {
 		title: '実務でエージェントを動かして分かったこと。',

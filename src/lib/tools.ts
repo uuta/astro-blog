@@ -8,6 +8,7 @@ import {
 	siGo,
 	siGooglegemini,
 	siNextdotjs,
+	siPostgresql,
 	siPosthog,
 	siQwen,
 	siSupabase,
@@ -52,6 +53,7 @@ export const tools = {
 	tmux: { name: 'tmux', icon: siTmux, light: '#18A51C' },
 	go: { name: 'Go', icon: siGo, light: '#009BC1' },
 	nextjs: { name: 'Next.js', icon: siNextdotjs, ink: true },
+	postgresql: { name: 'PostgreSQL', icon: siPostgresql },
 	tiktok: { name: 'TikTok', icon: siTiktok, ink: true },
 	supabase: { name: 'Supabase', icon: siSupabase, light: '#249361' }, // the darker green in Supabase's logo
 	gemini: { name: 'Gemini', icon: siGooglegemini },
