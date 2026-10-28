@@ -6,11 +6,16 @@ import {
 	siGit,
 	siGithub,
 	siGo,
+	siGooglebigquery,
+	siGooglecloud,
 	siGooglegemini,
+	siMysql,
 	siNextdotjs,
 	siPostgresql,
 	siPosthog,
 	siQwen,
+	siReact,
+	siStorybook,
 	siSupabase,
 	siTiktok,
 	siTmux,
@@ -54,6 +59,11 @@ export const tools = {
 	go: { name: 'Go', icon: siGo, light: '#009BC1' },
 	nextjs: { name: 'Next.js', icon: siNextdotjs, ink: true },
 	postgresql: { name: 'PostgreSQL', icon: siPostgresql },
+	react: { name: 'React', icon: siReact, light: '#087EA4' }, // react.dev's darker blue
+	storybook: { name: 'Storybook', icon: siStorybook },
+	bigquery: { name: 'BigQuery', icon: siGooglebigquery, light: '#4386FA' }, // the darker blue in BigQuery's logo
+	mysql: { name: 'MySQL', icon: siMysql },
+	googleCloud: { name: 'Google Cloud', icon: siGooglecloud },
 	tiktok: { name: 'TikTok', icon: siTiktok, ink: true },
 	supabase: { name: 'Supabase', icon: siSupabase, light: '#249361' }, // the darker green in Supabase's logo
 	gemini: { name: 'Gemini', icon: siGooglegemini },
