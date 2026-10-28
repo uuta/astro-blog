@@ -43,7 +43,8 @@ src/
 ## Writing
 
 Add a Markdown file at `src/content/writing/<lang>/<slug>.md`; it is published at
-`/en/writing/<slug>/` or `/ja/writing/<slug>/`.
+`/en/posts/<slug>/` or `/ja/posts/<slug>/`, and listed on `/en/posts/` and `/ja/posts/`
+(a post that has no translation also shows on the other language's list, marked with its language).
 
 ```yaml
 ---
@@ -57,7 +58,7 @@ tags: [Agentic workflow]
 ```
 
 Without a translation, the EN/JA toggle on an article goes to the other language's
-home page, at the Writing list.
+posts page.
 
 The Writing list on the home pages is set in `src/i18n/home.ts`. A row links to an
 article through `post: '<key>'`, preferring the translation in the page's language.
@@ -82,7 +83,6 @@ serve these; check them with `npx wrangler dev`.
 These are placeholders in the mock and stay as they are until the owner fills them in:
 
 - `site` in `astro.config.mjs` is `https://example.com`; the sitemap and hreflang links use it.
-- `[BRACKETED]` text across the pages: dates, background, X and LinkedIn
-  handles, hosting provider, analytics, full name.
-- Links that point to `#`: the case studies, X and LinkedIn, and the Writing
-  rows that have no article yet.
+- `[BRACKETED]` text across the pages: dates, background, hosting provider, analytics,
+  full name.
+- Links that point to `#`: the case studies and the Writing rows that have no article yet.

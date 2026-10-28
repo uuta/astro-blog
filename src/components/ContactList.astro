@@ -1,26 +1,26 @@
 ---
+import { siGithub, siX, siZenn } from 'simple-icons';
+import { toolColor } from '../lib/tools';
+
 // The only way to reach the owner: no form, no backend.
-// X and LinkedIn are placeholders until the owner fills in the handles and URLs.
+// Colors follow the tool icons: near-black logos use the text color, and Zenn's blue
+// gets a darker shade of the same hue in light mode to keep 3:1.
 const links = [
-	{ name: 'X', handle: '[@HANDLE]', href: '#' },
-	{ name: 'LinkedIn', handle: '[PROFILE URL]', href: '#' },
-	{ name: 'GitHub', handle: 'github.com/uuta', href: 'https://github.com/uuta' },
+	{ name: 'X', href: 'https://x.com/xXxuutaxXx', icon: siX, ink: true },
+	{ name: 'GitHub', href: 'https://github.com/uuta', icon: siGithub, ink: true },
+	{ name: 'Zenn', href: 'https://zenn.dev/yutti', icon: siZenn, light: '#0091FF' },
 ];
-
-interface Props {
-	id?: string;
-}
-
-const { id } = Astro.props;
 ---
 
-<ul id={id} class="contact-list">
+<ul class="contact-icons">
 	{
 		links.map((link) => (
 			<li>
-				<a href={link.href}>
-					<span>{link.name}</span>
-					<span class="handle mono">{link.handle}</span>
+				{/* The title is both the accessible name and the hover tooltip. */}
+				<a href={link.href} title={link.name} style={`color: ${toolColor(link)}`}>
+					<svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
+						<path d={link.icon.path} fill="currentColor" />
+					</svg>
 				</a>
 			</li>
 		))
@@ -28,24 +28,39 @@ const { id } = Astro.props;
 </ul>
 
 <style>
-	.contact-list {
-		list-style: none;
+	.contact-icons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
 		margin: 0;
 		padding: 0;
-		border-bottom: 1px solid var(--rule);
-	}
-	li {
-		border-top: 1px solid var(--rule);
+		list-style: none;
 	}
 	a {
-		display: flex;
-		justify-content: space-between;
-		gap: 16px;
-		padding: 14px 0;
-		text-decoration: none;
+		display: grid;
+		place-items: center;
+		width: 52px;
+		height: 52px;
+		border: 1px solid var(--rule);
+		border-radius: 10px;
+		background: var(--card);
+		transition:
+			border-color 0.15s,
+			transform 0.15s;
 	}
-	.handle {
-		font-size: 14px;
-		color: var(--muted);
+	a:hover {
+		border-color: var(--line);
+		transform: translateY(-2px);
+	}
+	svg {
+		display: block;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		a {
+			transition: none;
+		}
+		a:hover {
+			transform: none;
+		}
 	}
 </style>

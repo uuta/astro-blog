@@ -1,0 +1,134 @@
+---
+import Base from '../layouts/Base.astro';
+import { home } from '../i18n/home';
+import { posts } from '../i18n/posts';
+import { otherLang, type Lang } from '../i18n/ui';
+import { formatDate, getListedPosts, postUrl, postsUrl } from '../lib/writing';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = posts[lang];
+const { kicker, title } = home[lang].writing;
+const list = await getListedPosts(lang);
+---
+
+<Base
+	lang={lang}
+	title={t.metaTitle}
+	description={title}
+	counterpart={{ href: postsUrl(otherLang(lang)), translated: true }}
+	current="writing"
+>
+	<main class="wrap page">
+		<p class="kicker">{kicker}</p>
+		<h1>{title}</h1>
+		{
+			list.length === 0 ? (
+				<p class="empty">{t.empty}</p>
+			) : (
+				<ul>
+					{list.map((post) => {
+						const foreign = post.data.lang !== lang;
+						return (
+							<li>
+								<a href={postUrl(post)} hreflang={foreign ? post.data.lang : undefined}>
+									<span class="date mono">{formatDate(post.data.date)}</span>
+									<span class="text" lang={foreign ? post.data.lang : undefined}>
+										<span class="title">{post.data.title}</span>
+										<span class="desc">{post.data.description}</span>
+									</span>
+									{foreign && <span class="badge mono">{t.otherLang}</span>}
+								</a>
+							</li>
+						);
+					})}
+				</ul>
+			)
+		}
+	</main>
+</Base>
+
+<style>
+	.page {
+		padding-top: 80px;
+		padding-bottom: 96px;
+	}
+	h1 {
+		margin: 16px 0 48px;
+		max-width: 44rem;
+		font-size: clamp(2rem, 4.5vw, 3rem);
+		line-height: 1.2;
+		letter-spacing: -0.015em;
+		font-weight: 600;
+	}
+	h1:lang(ja) {
+		line-height: 1.45;
+		letter-spacing: normal;
+	}
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		border-bottom: 1px solid var(--rule);
+	}
+	li {
+		border-top: 1px solid var(--rule);
+	}
+	a {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 8px 32px;
+		padding: 28px 0;
+		text-decoration: none;
+	}
+	.date {
+		width: 120px;
+		font-size: 14px;
+		color: var(--muted);
+	}
+	.text {
+		flex: 1 1 420px;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+	.title {
+		font-size: 22px;
+		font-weight: 500;
+		line-height: 1.35;
+	}
+	a:hover .title {
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+	.desc {
+		font-size: 16px;
+		line-height: 1.65;
+		color: var(--body);
+	}
+	.title:lang(ja) {
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.desc:lang(ja) {
+		font-size: 15px;
+		line-height: 1.85;
+	}
+	.badge {
+		padding: 4px 10px;
+		border: 1px solid var(--line);
+		border-radius: 999px;
+		font-size: 12px;
+		color: var(--muted);
+	}
+	.empty {
+		margin: 0;
+		font-size: 17px;
+		color: var(--body);
+	}
+</style>

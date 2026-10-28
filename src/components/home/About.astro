@@ -1,5 +1,4 @@
 ---
-import ContactList from '../ContactList.astro';
 import { home } from '../../i18n/home';
 import type { Lang } from '../../i18n/ui';
 
@@ -18,9 +17,20 @@ const t = home[lang].about;
 			<p class="lead">{t.lead}</p>
 			<p class="body">{t.body}</p>
 		</div>
-		<div id="contact" class="contact">
-			<p class="kicker kicker--muted">{t.contact}</p>
-			<ContactList />
+		<div class="calls">
+			<p class="meta-label">{t.callsTitle}</p>
+			{/* Solid dots are my calls; the dashed line between two of them is the agents' work. */}
+			<ol class="track">
+				{
+					t.calls.map((call) => (
+						<li>
+							<p class="call">{call.title}</p>
+							<p class="sub">{call.sub}</p>
+							{call.handoff && <p class="handoff mono">{call.handoff}</p>}
+						</li>
+					))
+				}
+			</ol>
 		</div>
 	</div>
 </section>
@@ -29,7 +39,7 @@ const t = home[lang].about;
 	.row {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 48px;
+		gap: 56px 72px;
 	}
 	.intro {
 		flex: 1 1 520px;
@@ -40,15 +50,18 @@ const t = home[lang].about;
 	}
 	.lead {
 		margin: 0;
-		font-size: 20px;
-		line-height: 1.65;
+		font-size: 24px;
+		line-height: 1.5;
+		font-weight: 500;
+		letter-spacing: -0.005em;
 	}
 	.lead:lang(ja) {
-		font-size: 19px;
-		line-height: 1.85;
+		font-size: 21px;
+		line-height: 1.8;
+		letter-spacing: normal;
 	}
 	.body {
-		margin: 20px 0 0;
+		margin: 24px 0 0;
 		font-size: 18px;
 		line-height: 1.7;
 		color: var(--body);
@@ -57,11 +70,54 @@ const t = home[lang].about;
 		font-size: 17px;
 		line-height: 1.9;
 	}
-	.contact {
-		flex: 1 1 320px;
+	.calls {
+		flex: 1 1 340px;
 		min-width: 0;
 	}
-	.contact .kicker {
-		margin-bottom: 12px;
+	.track {
+		list-style: none;
+		margin: 24px 0 0;
+		padding: 0;
+	}
+	.track li {
+		position: relative;
+		padding-left: 40px;
+	}
+	.track li::before {
+		content: '';
+		position: absolute;
+		left: 0;
+		top: 6px;
+		width: 16px;
+		height: 16px;
+		border-radius: 50%;
+		background: var(--accent);
+		box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent) 18%, transparent);
+	}
+	.track li:not(:last-child)::after {
+		content: '';
+		position: absolute;
+		left: 7px;
+		top: 36px;
+		bottom: 10px;
+		border-left: 2px dashed var(--line);
+	}
+	.call {
+		margin: 0;
+		font-size: 20px;
+		line-height: 1.4;
+		font-weight: 600;
+	}
+	.sub {
+		margin: 4px 0 0;
+		font-size: 15px;
+		line-height: 1.6;
+		color: var(--muted);
+	}
+	.handoff {
+		margin: 0;
+		padding: 22px 0 30px;
+		font-size: 13px;
+		color: var(--muted);
 	}
 </style>

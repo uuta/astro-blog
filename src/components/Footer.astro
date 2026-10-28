@@ -1,4 +1,5 @@
 ---
+import ContactList from './ContactList.astro';
 import { localeUrl, ui, type Lang } from '../i18n/ui';
 
 interface Props {
@@ -10,11 +11,24 @@ const t = ui[lang];
 ---
 
 <footer class="site-footer">
-	<div class="wrap footer-inner">
-		<span class="mono">© 2026 uuta</span>
-		<nav class="footer-nav" aria-label={t.footerNav}>
-			<a href={localeUrl(lang, 'privacy/')}>{t.privacy}</a>
-		</nav>
+	<div class="wrap">
+		<div class="footer-top">
+			<div>
+				<a class="logo mono" href={localeUrl(lang)}>uuta<span class="logo-mark">_</span></a>
+				<p class="tagline mono">{t.tagline}</p>
+			</div>
+			{/* Every "Contact" and "Get in touch" link on the site points here. */}
+			<div id="contact" class="reach" role="group" aria-labelledby="contact-label">
+				<p id="contact-label" class="meta-label">{t.contact}</p>
+				<ContactList />
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<span class="mono">© 2026 uuta</span>
+			<nav class="footer-nav" aria-label={t.footerNav}>
+				<a href={localeUrl(lang, 'privacy/')}>{t.privacy}</a>
+			</nav>
+		</div>
 	</div>
 </footer>
 
@@ -22,24 +36,67 @@ const t = ui[lang];
 	.site-footer {
 		border-top: 1px solid var(--rule);
 	}
-	.footer-inner {
-		padding-top: 32px;
-		padding-bottom: 40px;
+	.footer-top {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 32px 48px;
+		padding: 56px 0 40px;
+	}
+	.logo,
+	.logo:hover {
+		font-size: 24px;
+		font-weight: 500;
+		text-decoration: none;
+		color: var(--ink);
+	}
+	.logo-mark {
+		color: var(--accent);
+	}
+	.tagline {
+		margin: 8px 0 0;
+		font-size: 13px;
+		color: var(--muted);
+	}
+	.reach {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		scroll-margin-bottom: 24px;
+	}
+	/* Arriving from a Contact link: a short ring around the icons shows where to look. */
+	.reach:target :global(.contact-icons a) {
+		animation: contact-ping 1.2s ease-out 2;
+	}
+	@keyframes contact-ping {
+		from {
+			box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
+		}
+		to {
+			box-shadow: 0 0 0 12px transparent;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.reach:target :global(.contact-icons a) {
+			animation: none;
+			border-color: var(--accent);
+		}
+	}
+	.footer-bottom {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
 		justify-content: space-between;
 		gap: 12px 32px;
+		padding: 12px 0 28px;
+		border-top: 1px solid var(--rule);
 		font-size: 14px;
 		color: var(--muted);
 	}
-	.footer-nav {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0 24px;
-	}
 	.footer-nav a,
 	.footer-nav a:hover {
+		display: inline-block;
 		padding: 12px 0;
 		color: var(--muted);
 	}

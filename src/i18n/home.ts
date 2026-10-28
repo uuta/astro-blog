@@ -137,6 +137,7 @@ const en = {
 	writing: {
 		kicker: 'Writing',
 		title: 'Notes from running agents on real work.',
+		all: 'All writing',
 		rows: [
 			{ date: '[DATE]', title: "Agents write my site. They can't publish it.", post: 'agents-write-my-site' },
 			{ date: '[DATE]', title: 'Leaving coding agents on full autonomy: what I contain, and how' },
@@ -167,8 +168,13 @@ const en = {
 	about: {
 		kicker: 'About',
 		lead: "I'm uuta, a software engineer based in Japan. [ONE LINE ON BACKGROUND: years, stack, past roles.]",
-		body: 'These days agents I direct write most of my code, and they take part from market analysis to the content that reaches users. Most of my time goes into the system around them: how work is split and reviewed, how they stay inside safe bounds, and how to see what they actually did.',
-		contact: 'Contact',
+		body: 'Agents I direct write most of my code. Most of my time goes into the system around them: how work is split and reviewed, how they stay inside safe bounds, and how to see what they actually did.',
+		callsTitle: 'Three calls I keep',
+		calls: [
+			{ title: 'What to build', sub: 'after looking at the market, infrastructure and cost', handoff: 'agents build it' },
+			{ title: 'What merges', sub: 'after the reviewers and CI', handoff: 'agents make the content' },
+			{ title: 'What gets posted', sub: 'before anything goes out' },
+		] as { title: string; sub: string; handoff?: string }[],
 	},
 };
 
@@ -298,6 +304,7 @@ const ja: typeof en = {
 	writing: {
 		kicker: '記事',
 		title: '実務でエージェントを動かして分かったこと。',
+		all: '記事一覧',
 		rows: [
 			// Links to the English article until a Japanese translation with the same key exists.
 			{ date: '[日付]', title: 'エージェントがこのサイトの記事を書く。でも公開はできない。', post: 'agents-write-my-site' },
@@ -329,8 +336,13 @@ const ja: typeof en = {
 	about: {
 		kicker: '自己紹介',
 		lead: 'uuta です。日本在住のソフトウェアエンジニアです。[経歴を1行で：年数・技術スタック・これまでの役割]',
-		body: '今はコードの大半を、自分が指示するエージェントが書いています。市場の分析から、ユーザーに届くコンテンツまで、エージェントが関わります。時間の多くは、その周りの仕組みに使っています。作業の分け方とレビューの通し方、エージェントを安全な範囲に留める方法、そして実際に何をしたかを見えるようにする方法です。',
-		contact: '連絡先',
+		body: '今はコードの大半を、自分が指示するエージェントが書いています。時間の多くは、その周りの仕組みに使っています。作業の分け方とレビューの通し方、エージェントを安全な範囲に留める方法、そして実際に何をしたかを見えるようにする方法です。',
+		callsTitle: '自分で持つ3つの判断',
+		calls: [
+			{ title: '何を作るか', sub: '市場・インフラ・コストを見てから', handoff: 'エージェントが作る' },
+			{ title: '何をマージするか', sub: 'レビューと CI を通ったあとで', handoff: 'エージェントがコンテンツを作る' },
+			{ title: '何を投稿するか', sub: '公開する前に' },
+		],
 	},
 };
 

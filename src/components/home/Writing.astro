@@ -2,7 +2,8 @@
 import SectionHead from './SectionHead.astro';
 import { home } from '../../i18n/home';
 import type { Lang } from '../../i18n/ui';
-import { keyedPostUrl } from '../../lib/writing';
+import Icon from '../Icon.astro';
+import { keyedPostUrl, postsUrl } from '../../lib/writing';
 
 interface Props {
 	lang: Lang;
@@ -30,6 +31,7 @@ const rows = await Promise.all(
 				))
 			}
 		</ul>
+		<a class="accent-link all" href={postsUrl(lang)}>{t.all}<Icon name="arrow-right" /></a>
 	</div>
 </section>
 
@@ -61,6 +63,9 @@ const rows = await Promise.all(
 		font-size: 22px;
 		font-weight: 500;
 		line-height: 1.35;
+	}
+	.all {
+		margin-top: 24px;
 	}
 	.title:lang(ja) {
 		font-size: 20px;

@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Icon from './Icon.astro';
 import { notFound } from '../i18n/notFound';
 import { localeUrl, otherLang, type Lang } from '../i18n/ui';
+import { postsUrl } from '../lib/writing';
 
 interface Props {
 	lang: Lang;
@@ -41,7 +42,7 @@ const home = localeUrl(lang);
 			</script>
 			<div class="btn-row">
 				<a class="btn btn--primary" href={home}>{t.home}<Icon name="arrow-right" /></a>
-				<a class="btn btn--secondary" href={`${home}#writing`}>{t.writing}</a>
+				<a class="btn btn--secondary" href={postsUrl(lang)}>{t.writing}</a>
 			</div>
 		</div>
 	</main>

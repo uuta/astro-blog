@@ -91,6 +91,12 @@ async () => {
 				const r = ratio(parse(win.getComputedStyle(icon).color), parse(win.getComputedStyle(icon.closest('.card')).backgroundColor));
 				if (r < 3) bad.push({ icon: icon.querySelector('title')?.textContent, ratio: +r.toFixed(2) });
 			}
+			// Contact icons in the footer sit on their own button background.
+			for (const link of doc.querySelectorAll('.contact-icons a')) {
+				const cs = win.getComputedStyle(link);
+				const r = ratio(parse(cs.color), parse(cs.backgroundColor));
+				if (r < 3) bad.push({ icon: link.title, ratio: +r.toFixed(2) });
+			}
 			out[`${route} ${theme}`] = { checked, min: +min.toFixed(2), bad };
 			f.remove();
 		}

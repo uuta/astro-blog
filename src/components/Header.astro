@@ -1,6 +1,7 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
 import { localeUrl, otherLang, ui, type Lang } from '../i18n/ui';
+import { postsUrl } from '../lib/writing';
 
 interface Props {
 	lang: Lang;
@@ -14,6 +15,7 @@ interface Props {
 const { lang, selfHref = Astro.url.pathname, counterpartHref, current } = Astro.props;
 const t = ui[lang];
 const home = localeUrl(lang);
+const posts = postsUrl(lang);
 const switchHref = { [lang]: selfHref, [otherLang(lang)]: counterpartHref };
 ---
 
@@ -22,9 +24,9 @@ const switchHref = { [lang]: selfHref, [otherLang(lang)]: counterpartHref };
 		<a class="logo mono" href={home}>uuta<span class="logo-mark">_</span></a>
 		<nav class="nav" aria-label={t.mainNav}>
 			<a href={`${home}#work`}>{t.work}</a>
-			<a href={`${home}#writing`} aria-current={current === 'writing' ? 'true' : undefined}>{t.writing}</a>
+			<a href={posts} aria-current={current === 'writing' ? (Astro.url.pathname === posts ? 'page' : 'true') : undefined}>{t.writing}</a>
 			<a href={`${home}#services`}>{t.services}</a>
-			<a class="nav-contact" href={`${home}#contact`}>{t.contact}</a>
+			<a class="nav-contact" href="#contact">{t.contact}</a>
 			<div class="lang-switch mono" data-lang-switch>
 				<a href={switchHref.en} hreflang="en" lang="en" aria-current={lang === 'en' ? 'page' : undefined}>EN</a>
 				<a href={switchHref.ja} hreflang="ja" lang="ja" aria-current={lang === 'ja' ? 'page' : undefined}>JA</a>

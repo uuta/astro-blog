@@ -4,8 +4,8 @@ import Base from '../layouts/Base.astro';
 import Icon from './Icon.astro';
 import { article } from '../i18n/article';
 import { home } from '../i18n/home';
-import { localeUrl, otherLang } from '../i18n/ui';
-import { findTranslation, formatDate, keyedPostUrl, postUrl, type Post } from '../lib/writing';
+import { otherLang } from '../i18n/ui';
+import { findTranslation, formatDate, keyedPostUrl, postUrl, postsUrl, type Post } from '../lib/writing';
 
 interface Props {
 	post: Post;
@@ -16,9 +16,9 @@ const { lang } = post.data;
 const t = article[lang];
 const { Content } = await render(post);
 
-// Without a translation, both language links fall back to the other home's Writing list.
+// Without a translation, both language links fall back to the other language's posts page.
 const translation = await findTranslation(post);
-const otherHref = translation ? postUrl(translation) : `${localeUrl(otherLang(lang))}#writing`;
+const otherHref = translation ? postUrl(translation) : postsUrl(otherLang(lang));
 
 // "Next" follows the order of the Writing list on the home page.
 const rows = home[lang].writing.rows;
@@ -39,7 +39,7 @@ const next = nextRow && {
 >
 	<main>
 		<article class="wrap article">
-			<a class="back mono" href={`${localeUrl(lang)}#writing`}><Icon name="arrow-left" size={14} />{t.allWriting}</a>
+			<a class="back mono" href={postsUrl(lang)}><Icon name="arrow-left" size={14} />{t.allWriting}</a>
 			{post.data.tags.length > 0 && <div class="tags">{post.data.tags.map((tag) => <span class="tag">{tag}</span>)}</div>}
 			<h1>{post.data.title}</h1>
 			<div class="meta mono">
@@ -71,7 +71,7 @@ const next = nextRow && {
 
 			<div class="strip">
 				<p>{t.cta}</p>
-				<a class="btn btn--on-strip" href={`${localeUrl(lang)}#contact`}>{t.ctaButton}</a>
+				<a class="btn btn--on-strip" href="#contact">{t.ctaButton}</a>
 			</div>
 		</article>
 	</main>
