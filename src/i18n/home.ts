@@ -15,7 +15,6 @@ const en = {
 			'I run the whole loop on my own app: analyze the market, build with an agent pipeline, and reach users with content that agents make and post.',
 	},
 	hero: {
-		kicker: 'Growth with agents · Security',
 		title: 'Grow an app with agents, from the market to its users.',
 		lead: 'I run the whole loop on my own app: analyze the market, build with an agent pipeline, and reach users with content that agents make and post. I can help you set up the same loop, with guardrails where agents need them.',
 		primary: 'Work with me',
@@ -36,11 +35,6 @@ const en = {
 				{ x: '18.5%', y: '79.25%', above: false, name: 'Distribution', sub: 'content agents post' },
 			],
 			fixRequested: 'fix requested',
-			legend: {
-				forward: 'work moving forward',
-				back: 'sent back for a fix',
-				note: 'My own pipeline. Every run, fix and merge stays visible.',
-			},
 		},
 	},
 	focus: {
@@ -185,7 +179,6 @@ const ja: typeof en = {
 			'自分のアプリで、この流れを丸ごと回しています。市場を分析し、エージェントのパイプラインで作り、エージェントが作って投稿するコンテンツでユーザーに届けます。',
 	},
 	hero: {
-		kicker: 'エージェントでグロース · セキュリティ',
 		title: '市場からユーザーまで、エージェントでアプリを育てる。',
 		lead: '自分のアプリで、この流れを丸ごと回しています。市場を分析し、エージェントのパイプラインで作り、エージェントが作って投稿するコンテンツでユーザーに届ける。同じ流れを、エージェントに必要な安全策とあわせて組むお手伝いをします。',
 		primary: '相談する',
@@ -203,11 +196,6 @@ const ja: typeof en = {
 				{ x: '18.5%', y: '79.25%', above: false, name: '配信', sub: 'エージェントが投稿' },
 			],
 			fixRequested: '修正依頼',
-			legend: {
-				forward: '進んでいる作業',
-				back: '修正のため差し戻し',
-				note: '自分のパイプラインです。実行・修正・マージがすべて見えます。',
-			},
 		},
 	},
 	focus: {

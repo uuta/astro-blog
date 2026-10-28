@@ -7,7 +7,7 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const { label, nodes, fixRequested, legend } = home[lang].hero.art;
+const { label, nodes, fixRequested } = home[lang].hero.art;
 
 // Card frames [x, y, width] in the 1000 × 800 drawing, all 150 tall. The top row runs
 // left to right; the bottom row comes back right to left after review and ends with
@@ -232,11 +232,6 @@ const picked = [44, 132];
 		}
 		<div class="fix mono" aria-hidden="true">{fixRequested}</div>
 	</div>
-	<figcaption class="mono">
-		<span class="legend"><span class="swatch swatch--accent" aria-hidden="true"></span>{legend.forward}</span>
-		<span class="legend"><span class="swatch swatch--ink" aria-hidden="true"></span>{legend.back}</span>
-		<span>{legend.note}</span>
-	</figcaption>
 </figure>
 
 <style>
@@ -296,31 +291,6 @@ const picked = [44, 132];
 		font-size: 11px;
 		line-height: 1.3;
 		color: var(--muted);
-	}
-	figcaption {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 8px 20px;
-		margin-top: 14px;
-		font-size: 12px;
-		line-height: 1.5;
-		color: var(--muted);
-	}
-	.legend {
-		display: inline-flex;
-		align-items: center;
-		gap: 8px;
-	}
-	.swatch {
-		width: 10px;
-		height: 10px;
-		border-radius: 50%;
-	}
-	.swatch--accent {
-		background: var(--accent);
-	}
-	.swatch--ink {
-		background: var(--ink);
 	}
 </style>
 
