@@ -8,13 +8,12 @@ interface Props {
 	selfHref?: string | undefined;
 	/** Where the toggle for the other language points. */
 	counterpartHref: string;
-	current?: 'writing' | 'profile' | undefined;
+	current?: 'writing' | undefined;
 }
 
 const { lang, selfHref = Astro.url.pathname, counterpartHref, current } = Astro.props;
 const t = ui[lang];
 const home = localeUrl(lang);
-const profile = localeUrl(lang, 'profile/');
 const switchHref = { [lang]: selfHref, [otherLang(lang)]: counterpartHref };
 ---
 
@@ -25,7 +24,6 @@ const switchHref = { [lang]: selfHref, [otherLang(lang)]: counterpartHref };
 			<a href={`${home}#work`}>{t.work}</a>
 			<a href={`${home}#writing`} aria-current={current === 'writing' ? 'true' : undefined}>{t.writing}</a>
 			<a href={`${home}#services`}>{t.services}</a>
-			<a href={profile} aria-current={current === 'profile' ? 'page' : undefined}>{t.profile}</a>
 			<a class="nav-contact" href={`${home}#contact`}>{t.contact}</a>
 			<div class="lang-switch mono" data-lang-switch>
 				<a href={switchHref.en} hreflang="en" lang="en" aria-current={lang === 'en' ? 'page' : undefined}>EN</a>

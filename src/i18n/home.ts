@@ -168,7 +168,6 @@ const en = {
 		kicker: 'About',
 		lead: "I'm uuta, a software engineer based in Japan. [ONE LINE ON BACKGROUND: years, stack, past roles.]",
 		body: 'These days agents I direct write most of my code, and they take part from market analysis to the content that reaches users. Most of my time goes into the system around them: how work is split and reviewed, how they stay inside safe bounds, and how to see what they actually did.',
-		profileLink: 'Full profile',
 		contact: 'Contact',
 	},
 };
@@ -331,7 +330,6 @@ const ja: typeof en = {
 		kicker: '自己紹介',
 		lead: 'uuta です。日本在住のソフトウェアエンジニアです。[経歴を1行で：年数・技術スタック・これまでの役割]',
 		body: '今はコードの大半を、自分が指示するエージェントが書いています。市場の分析から、ユーザーに届くコンテンツまで、エージェントが関わります。時間の多くは、その周りの仕組みに使っています。作業の分け方とレビューの通し方、エージェントを安全な範囲に留める方法、そして実際に何をしたかを見えるようにする方法です。',
-		profileLink: 'プロフィールを見る',
 		contact: '連絡先',
 	},
 };

@@ -1,8 +1,7 @@
 ---
 import ContactList from '../ContactList.astro';
-import Icon from '../Icon.astro';
 import { home } from '../../i18n/home';
-import { localeUrl, type Lang } from '../../i18n/ui';
+import type { Lang } from '../../i18n/ui';
 
 interface Props {
 	lang: Lang;
@@ -18,7 +17,6 @@ const t = home[lang].about;
 			<p class="kicker">{t.kicker}</p>
 			<p class="lead">{t.lead}</p>
 			<p class="body">{t.body}</p>
-			<a class="profile-link" href={localeUrl(lang, 'profile/')}>{t.profileLink}<Icon name="arrow-right" /></a>
 		</div>
 		<div id="contact" class="contact">
 			<p class="kicker kicker--muted">{t.contact}</p>
@@ -58,15 +56,6 @@ const t = home[lang].about;
 	.body:lang(ja) {
 		font-size: 17px;
 		line-height: 1.9;
-	}
-	.profile-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 8px;
-		margin-top: 16px;
-		padding: 12px 0;
-		font-size: 16px;
-		font-weight: 500;
 	}
 	.contact {
 		flex: 1 1 320px;
