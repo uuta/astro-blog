@@ -218,7 +218,7 @@ const en = {
     title: "Let's work together, on your team or on a project.",
     columns: [
       {
-        title: "Joining your team",
+        title: "Growing your team",
         body: "Working alongside your team on agentic workflows, growth or security.",
       },
       {
@@ -439,7 +439,7 @@ const ja: typeof en = {
     title: "チームの一員としても、プロジェクト単位でも、一緒に進めます。",
     columns: [
       {
-        title: "チームに加わる",
+        title: "チームを育てる",
         body: "チームと一緒に、エージェント開発、グロース、セキュリティに取り組みます。",
       },
       {
