@@ -83,6 +83,5 @@ serve these; check them with `npx wrangler dev`.
 These are placeholders in the mock and stay as they are until the owner fills them in:
 
 - `site` in `astro.config.mjs` is `https://example.com`; the sitemap and hreflang links use it.
-- `[BRACKETED]` text across the pages: dates, background, hosting provider, analytics,
-  full name.
+- `[BRACKETED]` text across the pages: dates and the hosting provider.
 - Links that point to `#`: the case studies and the Writing rows that have no article yet.
