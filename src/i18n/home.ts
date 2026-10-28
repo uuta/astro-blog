@@ -141,11 +141,11 @@ const en = {
 	},
 	services: {
 		kicker: 'Work with me',
-		title: 'Hire me, or bring me in for a project.',
+		title: "Let's work together, on your team or on a project.",
 		columns: [
 			{
-				title: 'Hiring',
-				body: 'Full-time or contract roles in agentic workflow, growth or security engineering. Remote, with teams in Japan or abroad.',
+				title: 'Joining your team',
+				body: 'Full-time or contract, working alongside your team on agentic workflows, growth or security. Remote, with teams in Japan or abroad.',
 			},
 			{
 				title: 'Growing an app with agents',
@@ -303,11 +303,11 @@ const ja: typeof en = {
 	},
 	services: {
 		kicker: 'ご相談',
-		title: '採用でも、プロジェクト単位のご依頼でも。',
+		title: 'チームの一員としても、プロジェクト単位でも、一緒に進めます。',
 		columns: [
 			{
-				title: '採用のご相談',
-				body: 'エージェント開発、グロース、セキュリティ領域の、正社員・業務委託のポジション。国内外のチームとフルリモートで。',
+				title: 'チームに加わる',
+				body: '正社員でも業務委託でも、チームと一緒にエージェント開発、グロース、セキュリティに取り組みます。国内外のチームとフルリモートで。',
 			},
 			{
 				title: 'エージェントでアプリを育てる',
