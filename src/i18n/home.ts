@@ -219,7 +219,7 @@ const en = {
     columns: [
       {
         title: "Joining your team",
-        body: "Full-time or contract, working alongside your team on agentic workflows, growth or security. Remote, with teams in Japan or abroad.",
+        body: "Working alongside your team on agentic workflows, growth or security.",
       },
       {
         title: "Growing a product with agents",
@@ -440,7 +440,7 @@ const ja: typeof en = {
     columns: [
       {
         title: "チームに加わる",
-        body: "正社員でも業務委託でも、チームと一緒にエージェント開発、グロース、セキュリティに取り組みます。国内外のチームとフルリモートで。",
+        body: "チームと一緒に、エージェント開発、グロース、セキュリティに取り組みます。",
       },
       {
         title: "エージェントでプロダクトを育てる",
