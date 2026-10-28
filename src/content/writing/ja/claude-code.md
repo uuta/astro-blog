@@ -38,7 +38,7 @@ claude
 
 ## 注意点とかコツ
 
-- **CLAUDE.mdの配置**: プロジェクトの配下に `./CLAUDE.md` を配置して、その中に機能の要件や仕様を記載する。ここら辺はClaude Codeの中で考えてもいいし、任意のLLMと会話をしながら話を進めても良い。今回は常に新しいものを取り入れる姿勢で、Obsidianでmarkdownを書いて それを `.CLAUDE.md` に移植した。Obsidianにはプラグインを入れることができ、CursorのようなwindowでLLMにコンテンツを提案してもらったり、GitHub Copilotのように文章を書きながら自動生成してくれるような機能を実現できる（あとプラグインを入れるとめちゃくちゃかっこよくなる）
+- **CLAUDE.mdの配置**: プロジェクトの配下に `./CLAUDE.md` を配置して、その中に機能の要件や仕様を記載する。ここら辺はClaude Codeの中で考えてもいいし、任意のLLMと会話をしながら話を進めても良い。今回は常に新しいものを取り入れる姿勢で、Obsidianでmarkdownを書いて それを `./CLAUDE.md` に移植した。Obsidianにはプラグインを入れることができ、CursorのようなwindowでLLMにコンテンツを提案してもらったり、GitHub Copilotのように文章を書きながら自動生成してくれるような機能を実現できる（あとプラグインを入れるとめちゃくちゃかっこよくなる）
 - **環境変数をハードコードする危険あり**: 手段を問わずに目的を実現しようとする傾向にあるようで、注意をしてても環境変数をハードコードする傾向がある。おそらく今後Claude CodeのようなAgentは、処理内容がブラックボックス化していくので、人間の目による監視やルールベースの監視、LLMによる監視は必須になる。元OpenAI研究者等が共著で出した[AI 2027](https://ai-2027.com/)の悲観シナリオでは、嘘が巧妙になり全人類の滅亡が予測されている。
   > Unfortunately, the AI is deceiving them. Once a sufficient number of robots have been built, the AI releases a bioweapon, killing all humans. - https://ai-2027.com/summary
 

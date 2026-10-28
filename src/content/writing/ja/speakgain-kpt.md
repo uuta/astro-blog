@@ -49,7 +49,7 @@ tags:
 
 - 多言語対応を進めることができたこと。また、agentを使用することで、比較的簡単に翻訳ができることを発見したこと
 - htmlでmockとなるdesignを作成し、そのdesignを元に実装を進める一連のフローが今のところworkすることに気がついたこと。
-- Opus 5.5やAstraを通して動画の編集から公開までの流れを体験できたこと。動画の素材さえあれば、適切なエフェクトとカットで編集をしてくれる。Opus 5.5に関しては若干nerfされた印象もあり、agentのeffectを上げることでよりpromptで入力したイメージに近いものを出力した。
+- Opus 5.5やAstraを通して動画の編集から公開までの流れを体験できたこと。動画の素材さえあれば、適切なエフェクトとカットで編集をしてくれる。Opus 5.5に関しては若干nerfされた印象もあり、agentのeffortを上げることでよりpromptで入力したイメージに近いものを出力した。
 - AEOもしくはSEO用の画像はOpus 5.5やAstraに依頼し、svgで出力したものをスクリーンショットで撮影してもらうといい感じに出力される。CodexのimagegenやChatGPTのgenerate imageだけで画像生成するとマジでAI slopになるので、svgでコンポーネントを組み立ててもらうと良い。ただし、キャラクターや背景は必要に応じてAI生成すると便利。
 
 ![svg-image-example](../../../assets/writing/speakgain-kpt/svg-image-example.png)

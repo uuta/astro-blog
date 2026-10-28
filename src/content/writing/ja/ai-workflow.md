@@ -10,7 +10,7 @@ tags:
 ---
 2週間ぐらい前の話だが、前々職で定期的に開催されているLT会で機会をもらって、AI agentのworkflow構築に関する話をさせてもらった。
 
-<iframe class="speakerdeck-iframe" frameborder="0" src="https://speakerdeck.com/player/d8347f0987a24ffa8a48f53aad76d791" title="AI agentworkのworkflowを構築してみた。そしてFable 5" allowfullscreen="true" allow="web-share" style="border: 0px; background: padding-box padding-box rgba(0, 0, 0, 0.1); margin: 0px; padding: 0px; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 100%; height: auto; aspect-ratio: 560 / 315;" data-dashlane-frameid="628" data-ratio="1.7777777777777777"></iframe>
+<iframe class="speakerdeck-iframe" frameborder="0" src="https://speakerdeck.com/player/d8347f0987a24ffa8a48f53aad76d791" title="AI agentのworkflowを構築してみた。そしてFable 5" allowfullscreen="true" allow="web-share" style="border: 0px; background: padding-box padding-box rgba(0, 0, 0, 0.1); margin: 0px; padding: 0px; border-radius: 6px; box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 40px; width: 100%; height: auto; aspect-ratio: 560 / 315;" data-dashlane-frameid="628" data-ratio="1.7777777777777777"></iframe>
 
 ざっくりと説明すると、自動でissueを見にいき、merge可能なPRを作成する流れになっている。
 
