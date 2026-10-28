@@ -3,7 +3,7 @@ import Base from '../layouts/Base.astro';
 import { home } from '../i18n/home';
 import { posts } from '../i18n/posts';
 import { otherLang, type Lang } from '../i18n/ui';
-import { formatDate, getListedPosts, postUrl, postsUrl } from '../lib/writing';
+import { formatDate, getListedPosts, postUrl, postsUrl, type Post } from '../lib/writing';
 
 interface Props {
 	lang: Lang;
@@ -13,6 +13,12 @@ const { lang } = Astro.props;
 const t = posts[lang];
 const { title } = home[lang].writing;
 const list = await getListedPosts(lang);
+
+// What the keyword box matches against, normalized the same way as the query in the
+// browser: NFKC folds full-width and half-width forms, so 'ＧＯ' finds 'Go'.
+const normalize = (text: string) => text.normalize('NFKC').toLowerCase();
+const searchText = ({ data, body = '' }: Post) =>
+	normalize([data.title, data.description, ...data.tags, body.replace(/[#>*_`~[\]()!|-]+/g, ' ')].join(' ')).replace(/\s+/g, ' ');
 ---
 
 <Base
@@ -28,11 +34,18 @@ const list = await getListedPosts(lang);
 			list.length === 0 ? (
 				<p class="empty">{t.empty}</p>
 			) : (
-				<ul>
+				<>
+					{/* Filters in the browser; shown only once the script runs. */}
+					<form class="search" role="search" data-search data-one={t.countOne} data-many={t.countMany} hidden>
+						<label class="sr-only" for="post-search">{t.searchLabel}</label>
+						<input id="post-search" type="search" name="q" placeholder={t.searchPlaceholder} autocomplete="off" />
+						<p class="count mono" aria-live="polite" data-count></p>
+					</form>
+					<ul data-posts>
 					{list.map((post) => {
 						const foreign = post.data.lang !== lang;
 						return (
-							<li>
+							<li data-text={searchText(post)}>
 								<a href={postUrl(post)} hreflang={foreign ? post.data.lang : undefined}>
 									<span class="date mono">{formatDate(post.data.date)}</span>
 									<span class="text" lang={foreign ? post.data.lang : undefined}>
@@ -44,11 +57,47 @@ const list = await getListedPosts(lang);
 							</li>
 						);
 					})}
-				</ul>
+					</ul>
+					<p class="empty" data-no-match hidden>{t.noMatch}</p>
+				</>
 			)
 		}
 	</main>
 </Base>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>('[data-search]');
+	const input = form?.querySelector('input');
+	const count = form?.querySelector<HTMLElement>('[data-count]');
+	const noMatch = document.querySelector<HTMLElement>('[data-no-match]');
+	const rows = [...document.querySelectorAll<HTMLLIElement>('[data-posts] > li')];
+
+	if (form && input && count && noMatch) {
+		const normalize = (text: string) => text.normalize('NFKC').toLowerCase();
+		const update = () => {
+			// Every word must appear somewhere in the post.
+			const terms = normalize(input.value).split(/\s+/).filter(Boolean);
+			let shown = 0;
+			for (const row of rows) {
+				row.hidden = !terms.every((term) => row.dataset.text?.includes(term));
+				if (!row.hidden) shown++;
+			}
+			noMatch.hidden = shown > 0;
+			count.textContent =
+				terms.length === 0 ? '' : shown === 1 ? form.dataset.one! : form.dataset.many!.replace('{n}', String(shown));
+			// Keep the keyword in the address so a search can be shared or reloaded.
+			const url = new URL(location.href);
+			if (terms.length > 0) url.searchParams.set('q', input.value.trim());
+			else url.searchParams.delete('q');
+			history.replaceState(null, '', url);
+		};
+		input.value = new URLSearchParams(location.search).get('q') ?? '';
+		input.addEventListener('input', update);
+		form.addEventListener('submit', (event) => event.preventDefault());
+		form.hidden = false;
+		update();
+	}
+</script>
 
 <style>
 	.page {
@@ -125,8 +174,43 @@ const list = await getListedPosts(lang);
 		font-size: 12px;
 		color: var(--muted);
 	}
-	.empty {
+	.search {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 12px 20px;
+		margin-bottom: 32px;
+	}
+	.search[hidden] {
+		display: none;
+	}
+	input {
+		flex: 0 1 420px;
+		min-width: 0;
+		min-height: 48px;
+		padding: 0 16px;
+		border: 1px solid var(--line);
+		border-radius: 6px;
+		background: var(--card);
+		color: var(--ink);
+		font: inherit;
+		font-size: 16px;
+	}
+	input::placeholder {
+		color: var(--muted);
+		opacity: 1;
+	}
+	input:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+	.count {
 		margin: 0;
+		font-size: 14px;
+		color: var(--muted);
+	}
+	.empty {
+		margin: 32px 0 0;
 		font-size: 17px;
 		color: var(--body);
 	}

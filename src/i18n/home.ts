@@ -409,7 +409,7 @@ const ja: typeof en = {
     ] as CaseCard[],
   },
   writing: {
-    title: "実務でエージェントを動かして分かったこと。",
+    title: "エージェント開発の現場から。",
     all: "記事一覧",
     rows: [
       // Links to the English article until a Japanese translation with the same key exists.
