@@ -43,8 +43,8 @@ src/
 ## Writing
 
 Add a Markdown file at `src/content/writing/<lang>/<slug>.md`; it is published at
-`/en/posts/<slug>/` or `/ja/posts/<slug>/`, and listed on `/en/posts/` and `/ja/posts/`
-(a post that has no translation also shows on the other language's list, marked with its language).
+`/en/posts/<slug>/` or `/ja/posts/<slug>/`, and listed on the posts page of its own language
+(`/en/posts/` or `/ja/posts/`). Lists never show articles in the other language.
 
 ```yaml
 ---
@@ -58,10 +58,11 @@ tags: [Agentic workflow]
 ```
 
 Without a translation, the EN/JA toggle on an article goes to the other language's
-posts page.
+posts page, and the article's own "read in the other language" link is hidden.
 
 The Writing list on the home pages is set in `src/i18n/home.ts`. A row links to an
-article through `post: '<key>'`, preferring the translation in the page's language.
+article in the page's language through `post: '<key>'`; until that translation exists, the
+row stays a placeholder.
 
 ## Routes
 

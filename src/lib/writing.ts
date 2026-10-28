@@ -16,17 +16,10 @@ export const formatDate = (date: Post['data']['date']): string =>
 export const getPosts = async (lang: Lang): Promise<Post[]> =>
 	getCollection('writing', (post) => post.data.lang === lang);
 
-/**
- * Posts listed on a language's posts page, newest first: every post in that language,
- * plus the ones that only exist in the other language. Undated posts come first.
- */
+/** Posts on a language's posts page: only that language, newest first, undated ones on top. */
 export const getListedPosts = async (lang: Lang): Promise<Post[]> => {
-	const all = await getCollection('writing');
-	const here = new Set(all.filter((post) => post.data.lang === lang).map((post) => post.data.key));
 	const time = ({ data }: Post) => (typeof data.date === 'string' ? Infinity : data.date.getTime());
-	return all
-		.filter((post) => post.data.lang === lang || !post.data.key || !here.has(post.data.key))
-		.sort((a, b) => (time(a) === time(b) ? 0 : time(b) - time(a)));
+	return (await getPosts(lang)).sort((a, b) => (time(a) === time(b) ? 0 : time(b) - time(a)));
 };
 
 /** The same article in the other language, if one shares its key. */
@@ -38,12 +31,12 @@ export const findTranslation = async (post: Post): Promise<Post | undefined> => 
 };
 
 /**
- * URL of the post with this key, in `lang` when that translation exists, otherwise
- * in the other language. Fails the build if no post has the key.
+ * URL of the post with this key in `lang`, or undefined until that translation exists.
+ * Fails the build if no post in either language has the key.
  */
-export const keyedPostUrl = async (key: string, lang: Lang): Promise<string> => {
+export const keyedPostUrl = async (key: string, lang: Lang): Promise<string | undefined> => {
 	const posts = await getCollection('writing', (post) => post.data.key === key);
-	const post = posts.find((p) => p.data.lang === lang) ?? posts[0];
-	if (!post) throw new Error(`Writing list links to a missing post key: ${key}`);
-	return postUrl(post);
+	if (posts.length === 0) throw new Error(`Writing list links to a missing post key: ${key}`);
+	const post = posts.find((p) => p.data.lang === lang);
+	return post && postUrl(post);
 };

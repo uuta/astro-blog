@@ -12,7 +12,7 @@ interface Props {
 const { lang } = Astro.props;
 const t = home[lang].writing;
 const rows = await Promise.all(
-	t.rows.map(async (row) => ({ ...row, href: row.post ? await keyedPostUrl(row.post, lang) : '#' })),
+	t.rows.map(async (row) => ({ ...row, href: (row.post && (await keyedPostUrl(row.post, lang))) || '#' })),
 );
 ---
 

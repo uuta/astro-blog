@@ -16,7 +16,8 @@ const { lang } = post.data;
 const t = article[lang];
 const { Content } = await render(post);
 
-// Without a translation, both language links fall back to the other language's posts page.
+// Without a translation, the header's language toggle falls back to the other language's
+// posts page, and the in-article link to the other language is left out.
 const translation = await findTranslation(post);
 const otherHref = translation ? postUrl(translation) : postsUrl(otherLang(lang));
 
@@ -26,7 +27,7 @@ const index = post.data.key ? rows.findIndex((row) => row.post === post.data.key
 const nextRow = index >= 0 ? rows[index + 1] : undefined;
 const next = nextRow && {
 	title: nextRow.title,
-	href: nextRow.post ? await keyedPostUrl(nextRow.post, lang) : '#',
+	href: (nextRow.post && (await keyedPostUrl(nextRow.post, lang))) || '#',
 };
 ---
 
@@ -45,7 +46,9 @@ const next = nextRow && {
 			<div class="meta mono">
 				<span>{formatDate(post.data.date)}</span>
 				<span>{t.readingTime}</span>
-				<a class="other" href={otherHref} hreflang={otherLang(lang)} lang={otherLang(lang)}>{t.readInOther}</a>
+				{translation && (
+					<a class="other" href={otherHref} hreflang={otherLang(lang)} lang={otherLang(lang)}>{t.readInOther}</a>
+				)}
 			</div>
 
 			<div class="how">

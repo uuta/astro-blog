@@ -47,21 +47,17 @@ const searchText = ({ data, body = '' }: Post) =>
 						<p class="count mono" aria-live="polite" data-count></p>
 					</form>
 					<ul data-posts>
-					{list.map((post) => {
-						const foreign = post.data.lang !== lang;
-						return (
+						{list.map((post) => (
 							<li data-text={searchText(post)}>
-								<a href={postUrl(post)} hreflang={foreign ? post.data.lang : undefined}>
+								<a href={postUrl(post)}>
 									<span class="date mono">{formatDate(post.data.date)}</span>
-									<span class="text" lang={foreign ? post.data.lang : undefined}>
+									<span class="text">
 										<span class="title">{post.data.title}</span>
 										<span class="desc">{post.data.description}</span>
 									</span>
-									{foreign && <span class="badge mono">{t.otherLang}</span>}
 								</a>
 							</li>
-						);
-					})}
+						))}
 					</ul>
 					<p class="empty" data-no-match hidden>{t.noMatch}</p>
 				</>
@@ -159,13 +155,6 @@ const searchText = ({ data, body = '' }: Post) =>
 	.desc:lang(ja) {
 		font-size: 15px;
 		line-height: 1.85;
-	}
-	.badge {
-		padding: 4px 10px;
-		border: 1px solid var(--line);
-		border-radius: 999px;
-		font-size: 12px;
-		color: var(--muted);
 	}
 	.search {
 		display: flex;

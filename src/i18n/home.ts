@@ -412,7 +412,7 @@ const ja: typeof en = {
     title: "エージェント開発の現場から。",
     all: "記事一覧",
     rows: [
-      // Links to the English article until a Japanese translation with the same key exists.
+      // Stays a placeholder until a Japanese article with the same key exists.
       {
         date: "[日付]",
         title: "エージェントがこのサイトの記事を書く。でも公開はできない。",
