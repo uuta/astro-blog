@@ -5,7 +5,6 @@ import Focus from './Focus.astro';
 import Work from './Work.astro';
 import Writing from './Writing.astro';
 import Services from './Services.astro';
-import About from './About.astro';
 import { home } from '../../i18n/home';
 import { localeUrl, otherLang, type Lang } from '../../i18n/ui';
 
@@ -30,6 +29,5 @@ const { meta } = home[lang];
 		<Work lang={lang} />
 		<Writing lang={lang} />
 		<Services lang={lang} />
-		<About lang={lang} />
 	</main>
 </Base>
