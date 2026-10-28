@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+import Icon from './Icon.astro';
 import { home } from '../i18n/home';
 import { posts } from '../i18n/posts';
 import { otherLang, type Lang } from '../i18n/ui';
@@ -29,7 +30,8 @@ const searchText = ({ data, body = '' }: Post) =>
 	current="writing"
 >
 	<main class="wrap page">
-		<h1>{title}</h1>
+		{/* The list speaks for itself; the heading stays for screen readers and the outline. */}
+		<h1 class="sr-only">{title}</h1>
 		{
 			list.length === 0 ? (
 				<p class="empty">{t.empty}</p>
@@ -38,7 +40,10 @@ const searchText = ({ data, body = '' }: Post) =>
 					{/* Filters in the browser; shown only once the script runs. */}
 					<form class="search" role="search" data-search data-one={t.countOne} data-many={t.countMany} hidden>
 						<label class="sr-only" for="post-search">{t.searchLabel}</label>
-						<input id="post-search" type="search" name="q" placeholder={t.searchPlaceholder} autocomplete="off" />
+						<div class="field">
+							<Icon name="search" size={18} />
+							<input id="post-search" type="search" name="q" placeholder={t.searchPlaceholder} autocomplete="off" />
+						</div>
 						<p class="count mono" aria-live="polite" data-count></p>
 					</form>
 					<ul data-posts>
@@ -103,18 +108,6 @@ const searchText = ({ data, body = '' }: Post) =>
 	.page {
 		padding-top: 80px;
 		padding-bottom: 96px;
-	}
-	h1 {
-		margin: 0 0 48px;
-		max-width: 44rem;
-		font-size: clamp(2rem, 4.5vw, 3rem);
-		line-height: 1.2;
-		letter-spacing: -0.015em;
-		font-weight: 600;
-	}
-	h1:lang(ja) {
-		line-height: 1.45;
-		letter-spacing: normal;
 	}
 	ul {
 		list-style: none;
@@ -184,11 +177,24 @@ const searchText = ({ data, body = '' }: Post) =>
 	.search[hidden] {
 		display: none;
 	}
-	input {
+	.field {
+		position: relative;
 		flex: 0 1 420px;
 		min-width: 0;
+		display: flex;
+	}
+	.field :global(svg) {
+		position: absolute;
+		left: 16px;
+		top: 50%;
+		transform: translateY(-50%);
+		color: var(--muted);
+		pointer-events: none;
+	}
+	input {
+		width: 100%;
 		min-height: 48px;
-		padding: 0 16px;
+		padding: 0 16px 0 44px;
 		border: 1px solid var(--line);
 		border-radius: 6px;
 		background: var(--card);

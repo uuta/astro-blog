@@ -7,7 +7,7 @@ const en = {
 	otherLang: 'In Japanese',
 	empty: 'Nothing published yet.',
 	searchLabel: 'Search posts',
-	searchPlaceholder: 'Search by keyword',
+	searchPlaceholder: 'Search…',
 	// {n} is replaced with the number of matching posts.
 	countOne: '1 post',
 	countMany: '{n} posts',
@@ -19,7 +19,7 @@ const ja: typeof en = {
 	otherLang: '英語',
 	empty: 'まだ記事はありません。',
 	searchLabel: '記事を検索',
-	searchPlaceholder: 'キーワードで検索',
+	searchPlaceholder: '検索…',
 	countOne: '1件',
 	countMany: '{n}件',
 	noMatch: '該当する記事はありません。',
