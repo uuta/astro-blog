@@ -25,7 +25,6 @@ const switchHref = { [lang]: selfHref, [otherLang(lang)]: counterpartHref };
 		<nav class="nav" aria-label={t.mainNav}>
 			<a href={`${home}#work`}>{t.work}</a>
 			<a href={posts} aria-current={current === 'writing' ? (Astro.url.pathname === posts ? 'page' : 'true') : undefined}>{t.writing}</a>
-			<a href={`${home}#services`}>{t.services}</a>
 			<a class="nav-contact" href="#contact">{t.contact}</a>
 			<div class="lang-switch mono" data-lang-switch>
 				<a href={switchHref.en} hreflang="en" lang="en" aria-current={lang === 'en' ? 'page' : undefined}>EN</a>
