@@ -22,8 +22,8 @@ const en = {
 const ja: typeof en = {
 	writing: { metaTitle: '記事 — uuta' },
 	journal: {
-		metaTitle: '雑記 — uuta',
-		title: '雑記',
+		metaTitle: '日常 — uuta',
+		title: '日常',
 		description: '旅や日々のことを書いた個人的な文章です。',
 	},
 	empty: 'まだ記事はありません。',

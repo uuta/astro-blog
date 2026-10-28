@@ -9,7 +9,7 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = ui[lang];
-// Personal writing stays out of the header and the home page; the footer is its only way in.
+// Only in a language that has Journal entries.
 const hasJournal = (await getPosts(lang, 'journal')).length > 0;
 ---
 
@@ -91,6 +91,11 @@ const hasJournal = (await getPosts(lang, 'journal')).length > 0;
 		border-top: 1px solid var(--rule);
 		font-size: 14px;
 		color: var(--muted);
+	}
+	.footer-nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 24px;
 	}
 	.footer-nav a,
 	.footer-nav a:hover {

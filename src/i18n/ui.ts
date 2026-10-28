@@ -27,7 +27,7 @@ export const ui = {
     work: "実績",
     writing: "記事",
     contact: "お問い合わせ",
-    journal: "雑記",
+    journal: "日常",
     privacy: "プライバシーポリシー",
     toLight: "ライトモードに切り替え",
     toDark: "ダークモードに切り替え",

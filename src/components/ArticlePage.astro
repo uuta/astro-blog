@@ -36,7 +36,7 @@ const next = await nextPost(post);
 	title={`${post.data.title} — uuta`}
 	description={postDescription(post)}
 	counterpart={{ href: otherHref, translated: Boolean(translation) }}
-	current={section === 'writing' ? 'writing' : undefined}
+	current={section}
 >
 	<main>
 		<article class="wrap article">

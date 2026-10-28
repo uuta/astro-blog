@@ -16,7 +16,7 @@ const en = {
 
 const ja: typeof en = {
 	allWriting: '記事一覧',
-	allJournal: '雑記一覧',
+	allJournal: '日常の記事一覧',
 	readingTime: '{n}分で読めます',
 	readInOther: 'Read in English',
 	howTitle: 'この記事の書き方',

@@ -26,7 +26,7 @@ const list = await getList(lang, section);
 	title={page.metaTitle}
 	description={page.description}
 	counterpart={{ href: sectionUrl(otherLang(lang), section), translated: true }}
-	current={section === 'writing' ? 'writing' : undefined}
+	current={section}
 >
 	<main class="wrap page">
 		{/* The list speaks for itself; the heading stays for screen readers and the outline. */}

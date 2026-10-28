@@ -7,6 +7,7 @@ import ThemeScript from '../components/ThemeScript.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { otherLang, type Lang } from '../i18n/ui';
+import type { Section } from '../lib/writing';
 
 interface Props {
 	lang: Lang;
@@ -19,7 +20,7 @@ interface Props {
 	counterpart: { href: string; translated: boolean };
 	/** Where the toggle for this page's own language points; defaults to this page. */
 	selfHref?: string;
-	current?: 'writing';
+	current?: Section;
 	noindex?: boolean;
 	/** The page that picks a language for visitors, listed as hreflang x-default. */
 	xDefault?: string;

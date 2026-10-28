@@ -1,7 +1,7 @@
 ---
 import ThemeToggle from './ThemeToggle.astro';
 import { localeUrl, otherLang, ui, type Lang } from '../i18n/ui';
-import { postsUrl } from '../lib/writing';
+import { getPosts, postsUrl, sectionUrl, type Section } from '../lib/writing';
 
 interface Props {
 	lang: Lang;
@@ -9,13 +9,19 @@ interface Props {
 	selfHref?: string | undefined;
 	/** Where the toggle for the other language points. */
 	counterpartHref: string;
-	current?: 'writing' | undefined;
+	current?: Section | undefined;
 }
 
 const { lang, selfHref = Astro.url.pathname, counterpartHref, current } = Astro.props;
 const t = ui[lang];
 const home = localeUrl(lang);
 const posts = postsUrl(lang);
+const journal = sectionUrl(lang, 'journal');
+// Only in a language that has Journal entries.
+const hasJournal = (await getPosts(lang, 'journal')).length > 0;
+// The list page itself is the current page; on an article the section is only "current".
+const currentFor = (section: Section, href: string) =>
+	current === section ? (Astro.url.pathname === href ? 'page' : 'true') : undefined;
 const switchHref = { [lang]: selfHref, [otherLang(lang)]: counterpartHref };
 ---
 
@@ -24,7 +30,8 @@ const switchHref = { [lang]: selfHref, [otherLang(lang)]: counterpartHref };
 		<a class="logo mono" href={home}>uuta<span class="logo-mark">_</span></a>
 		<nav class="nav" aria-label={t.mainNav}>
 			<a href={`${home}#work`}>{t.work}</a>
-			<a href={posts} aria-current={current === 'writing' ? (Astro.url.pathname === posts ? 'page' : 'true') : undefined}>{t.writing}</a>
+			<a href={posts} aria-current={currentFor('writing', posts)}>{t.writing}</a>
+			{hasJournal && <a href={journal} aria-current={currentFor('journal', journal)}>{t.journal}</a>}
 			<a class="nav-contact" href="#contact">{t.contact}</a>
 			<div class="lang-switch mono" data-lang-switch>
 				<a href={switchHref.en} hreflang="en" lang="en" aria-current={lang === 'en' ? 'page' : undefined}>EN</a>
