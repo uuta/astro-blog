@@ -38,7 +38,6 @@ const en = {
 		},
 	},
 	focus: {
-		kicker: 'Focus',
 		title: 'One loop from the market to its users, and the guardrails around it.',
 		cards: [
 			{
@@ -84,7 +83,6 @@ const en = {
 		],
 	},
 	work: {
-		kicker: 'Work',
 		title: 'Systems I run every day, and what they produced.',
 		caseStudy: 'Read the case study',
 		feature: {
@@ -129,7 +127,6 @@ const en = {
 		],
 	},
 	writing: {
-		kicker: 'Writing',
 		title: 'Notes from running agents on real work.',
 		all: 'All writing',
 		rows: [
@@ -140,7 +137,6 @@ const en = {
 		] as WritingRow[],
 	},
 	services: {
-		kicker: 'Work with me',
 		title: "Let's work together, on your team or on a project.",
 		columns: [
 			{
@@ -160,7 +156,6 @@ const en = {
 		cta: 'Get in touch',
 	},
 	about: {
-		kicker: 'About',
 		lead: "I'm uuta, a software engineer based in Japan. [ONE LINE ON BACKGROUND: years, stack, past roles.]",
 		body: 'Agents I direct write most of my code. Most of my time goes into the system around them: how work is split and reviewed, how they stay inside safe bounds, and how to see what they actually did.',
 		callsTitle: 'Three calls I keep',
@@ -199,7 +194,6 @@ const ja: typeof en = {
 		},
 	},
 	focus: {
-		kicker: '領域',
 		title: '市場からユーザーまでの一つの流れと、それを囲む安全策。',
 		cards: [
 			{
@@ -245,7 +239,6 @@ const ja: typeof en = {
 		],
 	},
 	work: {
-		kicker: '実績',
 		title: '毎日動かしている仕組みと、そこから生まれたもの。',
 		caseStudy: '事例を読む',
 		feature: {
@@ -290,7 +283,6 @@ const ja: typeof en = {
 		],
 	},
 	writing: {
-		kicker: '記事',
 		title: '実務でエージェントを動かして分かったこと。',
 		all: '記事一覧',
 		rows: [
@@ -302,7 +294,6 @@ const ja: typeof en = {
 		],
 	},
 	services: {
-		kicker: 'ご相談',
 		title: 'チームの一員としても、プロジェクト単位でも、一緒に進めます。',
 		columns: [
 			{
@@ -322,7 +313,6 @@ const ja: typeof en = {
 		cta: 'お問い合わせ',
 	},
 	about: {
-		kicker: '自己紹介',
 		lead: 'uuta です。日本在住のソフトウェアエンジニアです。[経歴を1行で：年数・技術スタック・これまでの役割]',
 		body: '今はコードの大半を、自分が指示するエージェントが書いています。時間の多くは、その周りの仕組みに使っています。作業の分け方とレビューの通し方、エージェントを安全な範囲に留める方法、そして実際に何をしたかを見えるようにする方法です。',
 		callsTitle: '自分で持つ3つの判断',

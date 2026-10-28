@@ -162,9 +162,6 @@ a:hover {
 	text-transform: uppercase;
 	color: var(--accent);
 }
-.kicker--muted {
-	color: var(--muted);
-}
 .meta-label {
 	margin: 0;
 	font-family: var(--font-mono);

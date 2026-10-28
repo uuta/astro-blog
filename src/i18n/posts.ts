@@ -1,6 +1,6 @@
 import type { Lang } from './ui';
 
-/** The posts page; its kicker and heading come from the home page's Writing section. */
+/** The posts page; its heading comes from the home page's Writing section. */
 const en = {
 	metaTitle: 'Writing — uuta',
 	// Marks a post that only exists in the other language.
