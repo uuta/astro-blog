@@ -90,7 +90,7 @@ const en = {
 		feature: {
 			title: 'SpeakGain, an English speaking app',
 			body: 'Flashcards built from the English you wanted to say, learned out loud, with native-speaker audio, AI explanations, and pronunciation scoring. I build and run all of it with my agent workflow: the Flutter app, the Cloudflare Workers backend, the site, and the TikTok content that brings users in.',
-			tools: ['flutter', 'cloudflareWorkers', 'astro', 'claudeCode', 'tiktok'] as Tool[],
+			tools: ['flutter', 'cloudflareWorkers', 'supabase', 'astro', 'claudeCode', 'codex', 'gemini', 'qwen', 'posthog', 'tiktok'] as Tool[],
 			shotAlt: "SpeakGain home screen: today's review, a progress ring and a Practice now button",
 		},
 		cards: [
@@ -99,7 +99,7 @@ const en = {
 				body: 'Workflow rules used to live in prompts I retyped. Now both agents load the same model-neutral skills (how to split an issue, review a diff, set up a worktree), so fixing a rule once fixes it for both.',
 				resultLabel: 'Result',
 				result: '[N skills, in daily use across N repos]',
-				tools: ['claudeCode'] as Tool[],
+				tools: ['claudeCode', 'codex'] as Tool[],
 				draft: false,
 			},
 			{
@@ -115,7 +115,7 @@ const en = {
 				body: 'A real product built end to end with Claude as the manager and Codex as implementer and reviewer, from the plan to a running web app. A test of how far the workflow holds up outside of tooling.',
 				resultLabel: 'Result',
 				result: '[WHAT SHIPPED · LINK]',
-				tools: ['go', 'nextjs', 'claudeCode'] as Tool[],
+				tools: ['go', 'nextjs', 'claudeCode', 'codex'] as Tool[],
 				draft: false,
 			},
 			{
@@ -251,7 +251,7 @@ const ja: typeof en = {
 		feature: {
 			title: 'SpeakGain — 英語スピーキングアプリ',
 			body: '言いたかった英語を口で覚える、自分だけの暗記カードアプリです。ネイティブ音声・AI 解説・発音採点つき。Flutter のアプリ、Cloudflare Workers のバックエンド、サイト、そしてユーザーを呼び込む TikTok のコンテンツまで、自分のエージェント開発フローで作り、運用しています。',
-			tools: ['flutter', 'cloudflareWorkers', 'astro', 'claudeCode', 'tiktok'] as Tool[],
+			tools: ['flutter', 'cloudflareWorkers', 'supabase', 'astro', 'claudeCode', 'codex', 'gemini', 'qwen', 'posthog', 'tiktok'] as Tool[],
 			shotAlt: 'SpeakGain のホーム画面。今日の復習の進み具合と「今すぐ学習する」ボタン',
 		},
 		cards: [
@@ -260,7 +260,7 @@ const ja: typeof en = {
 				body: '以前はワークフローのルールを毎回プロンプトに書いていました。今は両方のエージェントが同じモデル非依存の skill（Issue の分割、差分レビュー、worktree の準備など）を読み込むので、ルールを一度直せば両方に効きます。',
 				resultLabel: '成果',
 				result: '[skill N 個 · N リポジトリで毎日利用]',
-				tools: ['claudeCode'] as Tool[],
+				tools: ['claudeCode', 'codex'] as Tool[],
 				draft: false,
 			},
 			{
@@ -276,7 +276,7 @@ const ja: typeof en = {
 				body: 'Claude をマネージャー、Codex を実装とレビュー担当にして、計画から動く Web アプリまで一通り作ったプロダクトです。ツールづくりの外で、このワークフローがどこまで通用するかの検証でもあります。',
 				resultLabel: '成果',
 				result: '[リリースした内容 · リンク]',
-				tools: ['go', 'nextjs', 'claudeCode'] as Tool[],
+				tools: ['go', 'nextjs', 'claudeCode', 'codex'] as Tool[],
 				draft: false,
 			},
 			{
