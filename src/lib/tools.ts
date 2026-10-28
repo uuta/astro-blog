@@ -19,6 +19,7 @@ import {
 	siSupabase,
 	siTiktok,
 	siTmux,
+	siZenn,
 	type SimpleIcon,
 } from 'simple-icons';
 
@@ -64,6 +65,8 @@ export const tools = {
 	bigquery: { name: 'BigQuery', icon: siGooglebigquery, light: '#4386FA' }, // the darker blue in BigQuery's logo
 	mysql: { name: 'MySQL', icon: siMysql },
 	googleCloud: { name: 'Google Cloud', icon: siGooglecloud },
+	// Not on a Work card: the contact links and the Zenn rows of the Writing list use it.
+	zenn: { name: 'Zenn', icon: siZenn, light: '#0091FF' },
 	tiktok: { name: 'TikTok', icon: siTiktok, ink: true },
 	supabase: { name: 'Supabase', icon: siSupabase, light: '#249361' }, // the darker green in Supabase's logo
 	gemini: { name: 'Gemini', icon: siGooglegemini },

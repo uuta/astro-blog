@@ -35,34 +35,49 @@ src/
   components/               Header, Footer, ThemeToggle, page components
   components/home/          Home page sections
   i18n/                     Copy per page, per language (ui.ts holds shared labels)
-  content/writing/<lang>/   Articles (Markdown)
+  content/writing/<lang>/   Articles (Markdown), Writing and Journal
+  assets/writing/<slug>/    Article images
+  lib/                      Article lists, Zenn fetch, tool icons
   pages/                    Routes: English under /en/, Japanese under /ja/, plus / and 404
   styles/global.css         Color tokens (light and dark) and shared styles
 ```
 
 ## Writing
 
-Add a Markdown file at `src/content/writing/<lang>/<slug>.md`; it is published at
-`/en/posts/<slug>/` or `/ja/posts/<slug>/`, and listed on the posts page of its own language
-(`/en/posts/` or `/ja/posts/`). Lists never show articles in the other language.
+Add a Markdown file at `src/content/writing/<lang>/<slug>.md`. Lists never show articles
+in the other language.
 
 ```yaml
 ---
 title: "…"
-description: "…"        # meta description
+description: "…"        # optional; without it, the opening of the article is used
 date: 2026-11-01        # or a placeholder such as "[DATE]"
 lang: en                # en or ja
+section: writing        # writing (default) or journal
 key: some-article       # optional; the same key on an EN and a JA file links the translations
-tags: [Agentic workflow]
+tags: [Agentic workflow] # optional; only used by search
+agentDrafted: true      # optional; shows the "How this was written" note
 ---
 ```
 
-Without a translation, the EN/JA toggle on an article goes to the other language's
-posts page, and the article's own "read in the other language" link is hidden.
+- **Writing** (`section: writing`) is the professional list: `/<lang>/posts/<slug>/`, listed
+  on `/<lang>/posts/`. The header links here, and the home page shows its latest four.
+- **Journal** (`section: journal`) keeps personal essays and travel apart:
+  `/<lang>/journal/<slug>/`, listed on `/<lang>/journal/` and linked only from the footer
+  (and only in a language that has entries).
+- **Zenn**: `src/lib/zenn.ts` fetches the articles of `yutti` from the Zenn API at build time
+  and adds them to the Japanese Writing list, linking out to zenn.dev. If the API fails, the
+  build goes on without them. New Zenn articles appear only after a rebuild, so schedule one
+  (the old blog ran a daily GitHub Action that called a Netlify build hook).
+- Put an article's images in `src/assets/writing/<slug>/` and link them relatively
+  (`../../../assets/writing/<slug>/photo.jpg`); they get a responsive `srcset` at build.
+- Reading time is estimated from the text. Code blocks are highlighted in both themes.
 
-The Writing list on the home pages is set in `src/i18n/home.ts`. A row links to an
-article in the page's language through `post: '<key>'`; until that translation exists, the
-row stays a placeholder.
+Without a translation, the EN/JA toggle on an article goes to the other language's list,
+and the article's own "read in the other language" link is hidden.
+
+The articles of the old blog (`~/astro-blog`) were imported once: drafts were left out, and
+eight Gyazo images that Gyazo no longer serves were dropped.
 
 ## Routes
 

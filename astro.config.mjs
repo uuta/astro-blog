@@ -18,9 +18,15 @@ export default defineConfig({
 		// Every page lives under /en/ or /ja/; src/pages/index.astro picks one for `/`.
 		routing: { prefixDefaultLocale: true, redirectToDefaultLocale: false },
 	},
+	image: {
+		// Article images get a srcset, so a phone doesn't download the full-size photo.
+		layout: 'constrained',
+	},
 	markdown: {
 		// Keep the copy's straight quotes and apostrophes exactly as written.
 		processor: satteri({ features: { smartPunctuation: false } }),
+		// Code blocks carry both themes' colors; global.css switches to the dark set with the site.
+		shikiConfig: { themes: { light: 'github-light', dark: 'github-dark' } },
 	},
 	vite: {
 		build: {

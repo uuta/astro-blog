@@ -1,6 +1,7 @@
 ---
 import ContactList from './ContactList.astro';
 import { localeUrl, ui, type Lang } from '../i18n/ui';
+import { getPosts, sectionUrl } from '../lib/writing';
 
 interface Props {
 	lang: Lang;
@@ -8,6 +9,8 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = ui[lang];
+// Personal writing stays out of the header and the home page; the footer is its only way in.
+const hasJournal = (await getPosts(lang, 'journal')).length > 0;
 ---
 
 <footer class="site-footer">
@@ -25,6 +28,7 @@ const t = ui[lang];
 		<div class="footer-bottom">
 			<span class="mono">© 2026 uuta</span>
 			<nav class="footer-nav" aria-label={t.footerNav}>
+				{hasJournal && <a href={sectionUrl(lang, 'journal')}>{t.journal}</a>}
 				<a href={localeUrl(lang, 'privacy/')}>{t.privacy}</a>
 			</nav>
 		</div>

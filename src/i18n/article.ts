@@ -2,7 +2,9 @@ import type { Lang } from './ui';
 
 const en = {
 	allWriting: 'All writing',
-	readingTime: '[N] min read',
+	allJournal: 'Journal',
+	// {n} is replaced with the estimated minutes.
+	readingTime: '{n} min read',
 	readInOther: '日本語で読む',
 	howTitle: 'How this was written',
 	howBody:
@@ -12,11 +14,10 @@ const en = {
 	ctaButton: 'Get in touch',
 };
 
-// No Japanese article exists in the mock yet; these labels are unreviewed and
-// only render once a Japanese post is added.
 const ja: typeof en = {
 	allWriting: '記事一覧',
-	readingTime: '[N]分で読めます',
+	allJournal: '雑記一覧',
+	readingTime: '{n}分で読めます',
 	readInOther: 'Read in English',
 	howTitle: 'この記事の書き方',
 	howBody:

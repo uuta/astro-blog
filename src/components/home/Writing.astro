@@ -3,7 +3,9 @@ import SectionHead from './SectionHead.astro';
 import { home } from '../../i18n/home';
 import type { Lang } from '../../i18n/ui';
 import Icon from '../Icon.astro';
-import { keyedPostUrl, postsUrl } from '../../lib/writing';
+import ZennMark from '../ZennMark.astro';
+import { posts } from '../../i18n/posts';
+import { formatDate, getList, postsUrl } from '../../lib/writing';
 
 interface Props {
 	lang: Lang;
@@ -11,9 +13,8 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = home[lang].writing;
-const rows = await Promise.all(
-	t.rows.map(async (row) => ({ ...row, href: (row.post && (await keyedPostUrl(row.post, lang))) || '#' })),
-);
+// The latest four from the Writing list, Zenn articles included.
+const rows = (await getList(lang, 'writing')).slice(0, 4);
 ---
 
 <section id="writing" class="section">
@@ -24,8 +25,11 @@ const rows = await Promise.all(
 				rows.map((row) => (
 					<li>
 						<a href={row.href}>
-							<span class="date mono">{row.date}</span>
-							<span class="title">{row.title}</span>
+							<span class="date mono">{formatDate(row.date)}</span>
+							<span class="title">
+								{row.title}
+								{row.external === 'zenn' && <ZennMark label={posts[lang].onZenn} />}
+							</span>
 						</a>
 					</li>
 				))

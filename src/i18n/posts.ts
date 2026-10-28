@@ -1,8 +1,13 @@
 import type { Lang } from './ui';
 
-/** The posts page; its heading comes from the home page's Writing section. */
+/** The list pages. Writing takes its heading from the home page's Writing section. */
 const en = {
-	metaTitle: 'Writing — uuta',
+	writing: { metaTitle: 'Writing — uuta' },
+	journal: {
+		metaTitle: 'Journal — uuta',
+		title: 'Journal',
+		description: 'Personal essays and travel notes.',
+	},
 	empty: 'Nothing published yet.',
 	searchLabel: 'Search posts',
 	searchPlaceholder: 'Search…',
@@ -10,16 +15,24 @@ const en = {
 	countOne: '1 post',
 	countMany: '{n} posts',
 	noMatch: 'No posts match your search.',
+	// Read after the title of an article hosted on Zenn.
+	onZenn: 'on Zenn',
 };
 
 const ja: typeof en = {
-	metaTitle: '記事 — uuta',
+	writing: { metaTitle: '記事 — uuta' },
+	journal: {
+		metaTitle: '雑記 — uuta',
+		title: '雑記',
+		description: '旅や日々のことを書いた個人的な文章です。',
+	},
 	empty: 'まだ記事はありません。',
 	searchLabel: '記事を検索',
 	searchPlaceholder: '検索…',
 	countOne: '1件',
 	countMany: '{n}件',
 	noMatch: '該当する記事はありません。',
+	onZenn: '（Zenn）',
 };
 
 export const posts: Record<Lang, typeof en> = { en, ja };

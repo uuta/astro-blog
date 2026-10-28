@@ -3,58 +3,63 @@ import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Icon from './Icon.astro';
 import { article } from '../i18n/article';
-import { home } from '../i18n/home';
 import { otherLang } from '../i18n/ui';
-import { findTranslation, formatDate, keyedPostUrl, postUrl, postsUrl, type Post } from '../lib/writing';
+import {
+	findTranslation,
+	formatDate,
+	nextPost,
+	postDescription,
+	postUrl,
+	readingMinutes,
+	sectionUrl,
+	type Post,
+} from '../lib/writing';
 
 interface Props {
 	post: Post;
 }
 
 const { post } = Astro.props;
-const { lang } = post.data;
+const { lang, section } = post.data;
 const t = article[lang];
 const { Content } = await render(post);
 
 // Without a translation, the header's language toggle falls back to the other language's
 // posts page, and the in-article link to the other language is left out.
 const translation = await findTranslation(post);
-const otherHref = translation ? postUrl(translation) : postsUrl(otherLang(lang));
-
-// "Next" follows the order of the Writing list on the home page.
-const rows = home[lang].writing.rows;
-const index = post.data.key ? rows.findIndex((row) => row.post === post.data.key) : -1;
-const nextRow = index >= 0 ? rows[index + 1] : undefined;
-const next = nextRow && {
-	title: nextRow.title,
-	href: (nextRow.post && (await keyedPostUrl(nextRow.post, lang))) || '#',
-};
+const otherHref = translation ? postUrl(translation) : sectionUrl(otherLang(lang), section);
+const next = await nextPost(post);
 ---
 
 <Base
 	lang={lang}
 	title={`${post.data.title} — uuta`}
-	description={post.data.description}
+	description={postDescription(post)}
 	counterpart={{ href: otherHref, translated: Boolean(translation) }}
-	current="writing"
+	current={section === 'writing' ? 'writing' : undefined}
 >
 	<main>
 		<article class="wrap article">
-			<a class="back mono" href={postsUrl(lang)}><Icon name="arrow-left" size={14} />{t.allWriting}</a>
-			{post.data.tags.length > 0 && <div class="tags">{post.data.tags.map((tag) => <span class="tag">{tag}</span>)}</div>}
+			<a class="back mono" href={sectionUrl(lang, section)}>
+				<Icon name="arrow-left" size={14} />{section === 'writing' ? t.allWriting : t.allJournal}
+			</a>
 			<h1>{post.data.title}</h1>
 			<div class="meta mono">
 				<span>{formatDate(post.data.date)}</span>
-				<span>{t.readingTime}</span>
+				<span>{t.readingTime.replace('{n}', String(readingMinutes(post)))}</span>
 				{translation && (
 					<a class="other" href={otherHref} hreflang={otherLang(lang)} lang={otherLang(lang)}>{t.readInOther}</a>
 				)}
 			</div>
 
-			<div class="how">
-				<p class="meta-label">{t.howTitle}</p>
-				<p class="how-body">{t.howBody}</p>
-			</div>
+			{
+				post.data.agentDrafted && (
+					<div class="how">
+						<p class="meta-label">{t.howTitle}</p>
+						<p class="how-body">{t.howBody}</p>
+					</div>
+				)
+			}
 
 			<div class="prose">
 				<Content />
@@ -64,18 +69,22 @@ const next = nextRow && {
 				next && (
 					<div class="next">
 						<p class="meta-label">{t.next}</p>
-						<a href={next.href}>
-							{next.title}
+						<a href={postUrl(next)}>
+							{next.data.title}
 							<Icon name="arrow-right" />
 						</a>
 					</div>
 				)
 			}
 
-			<div class="strip">
-				<p>{t.cta}</p>
-				<a class="btn btn--on-strip" href="#contact">{t.ctaButton}</a>
-			</div>
+			{
+				section === 'writing' && (
+					<div class="strip">
+						<p>{t.cta}</p>
+						<a class="btn btn--on-strip" href="#contact">{t.ctaButton}</a>
+					</div>
+				)
+			}
 		</article>
 	</main>
 </Base>
@@ -95,15 +104,19 @@ const next = nextRow && {
 		color: var(--muted);
 		text-decoration: none;
 	}
-	.tags {
-		margin-top: 24px;
-	}
 	h1 {
 		margin: 20px 0 0;
 		font-size: clamp(2.25rem, 5vw, 3.25rem);
 		line-height: 1.1;
 		letter-spacing: -0.02em;
 		font-weight: 600;
+	}
+	h1:lang(ja) {
+		font-size: clamp(1.75rem, 4vw, 2.5rem);
+		line-height: 1.45;
+		letter-spacing: normal;
+		/* Break Japanese lines between phrases, not inside a word. */
+		word-break: auto-phrase;
 	}
 	.meta {
 		display: flex;
@@ -172,6 +185,101 @@ const next = nextRow && {
 	}
 	.prose > :global(ul + p) {
 		margin-top: 32px;
+	}
+	/* Imported posts also use h3, ordered lists, quotes, images, code and embeds. */
+	.prose > :global(h3) {
+		margin-top: 40px;
+		font-size: 22px;
+		line-height: 1.4;
+		font-weight: 600;
+	}
+	.prose > :global(h3 + p),
+	.prose > :global(h3 + ul),
+	.prose > :global(p + ul),
+	.prose > :global(p + ol) {
+		margin-top: 16px;
+	}
+	.prose > :global(ol) {
+		padding-left: 24px;
+		font-size: 19px;
+		line-height: 1.75;
+	}
+	.prose :global(li > ul),
+	.prose :global(li > ol) {
+		margin-top: 6px;
+		padding-left: 22px;
+	}
+	.prose > :global(blockquote) {
+		margin-top: 24px;
+		padding-left: 20px;
+		border-left: 3px solid var(--line);
+		color: var(--body);
+	}
+	.prose > :global(blockquote p) {
+		margin: 0;
+		font-size: 18px;
+		line-height: 1.75;
+	}
+	.prose :global(a) {
+		color: var(--accent);
+		text-underline-offset: 3px;
+		overflow-wrap: anywhere;
+	}
+	.prose :global(img) {
+		display: block;
+		max-width: 100%;
+		height: auto;
+		margin: 0 auto;
+		border-radius: 6px;
+	}
+	.prose > :global(p:has(> img)) {
+		margin-top: 32px;
+	}
+	.prose :global(:not(pre) > code) {
+		padding: 2px 6px;
+		border: 1px solid var(--rule);
+		border-radius: 4px;
+		background: var(--soft);
+		font-family: var(--font-mono);
+		font-size: 0.86em;
+	}
+	.prose > :global(pre) {
+		margin-top: 24px;
+		font-family: var(--font-mono);
+		padding: 16px 20px;
+		border: 1px solid var(--rule);
+		border-radius: 6px;
+		overflow-x: auto;
+		font-size: 14px;
+		line-height: 1.6;
+	}
+	.prose > :global(hr) {
+		margin-top: 48px;
+		border: 0;
+		border-top: 1px solid var(--rule);
+	}
+	.prose :global(iframe) {
+		display: block;
+		width: 100%;
+		height: auto;
+		aspect-ratio: 16 / 9;
+		margin-top: 24px;
+		border: 0;
+		border-radius: 6px;
+	}
+	.prose:lang(ja) > :global(p),
+	.prose:lang(ja) > :global(ul),
+	.prose:lang(ja) > :global(ol) {
+		font-size: 17px;
+		line-height: 1.95;
+	}
+	.prose:lang(ja) > :global(h2) {
+		font-size: 24px;
+		line-height: 1.5;
+	}
+	.prose:lang(ja) > :global(h3) {
+		font-size: 20px;
+		line-height: 1.6;
 	}
 	.prose > :global(p.placeholder) {
 		color: var(--muted);

@@ -4,34 +4,33 @@ import Icon from './Icon.astro';
 import { home } from '../i18n/home';
 import { posts } from '../i18n/posts';
 import { otherLang, type Lang } from '../i18n/ui';
-import { formatDate, getListedPosts, postUrl, postsUrl, type Post } from '../lib/writing';
+import ZennMark from './ZennMark.astro';
+import { formatDate, getList, sectionUrl, type Section } from '../lib/writing';
 
 interface Props {
 	lang: Lang;
+	section: Section;
 }
 
-const { lang } = Astro.props;
+const { lang, section } = Astro.props;
 const t = posts[lang];
-const { title } = home[lang].writing;
-const list = await getListedPosts(lang);
-
-// What the keyword box matches against, normalized the same way as the query in the
-// browser: NFKC folds full-width and half-width forms, so 'ＧＯ' finds 'Go'.
-const normalize = (text: string) => text.normalize('NFKC').toLowerCase();
-const searchText = ({ data, body = '' }: Post) =>
-	normalize([data.title, data.description, ...data.tags, body.replace(/[#>*_`~[\]()!|-]+/g, ' ')].join(' ')).replace(/\s+/g, ' ');
+const page =
+	section === 'writing'
+		? { ...t.writing, title: home[lang].writing.title, description: home[lang].writing.title }
+		: t.journal;
+const list = await getList(lang, section);
 ---
 
 <Base
 	lang={lang}
-	title={t.metaTitle}
-	description={title}
-	counterpart={{ href: postsUrl(otherLang(lang)), translated: true }}
-	current="writing"
+	title={page.metaTitle}
+	description={page.description}
+	counterpart={{ href: sectionUrl(otherLang(lang), section), translated: true }}
+	current={section === 'writing' ? 'writing' : undefined}
 >
 	<main class="wrap page">
 		{/* The list speaks for itself; the heading stays for screen readers and the outline. */}
-		<h1 class="sr-only">{title}</h1>
+		<h1 class="sr-only">{page.title}</h1>
 		{
 			list.length === 0 ? (
 				<p class="empty">{t.empty}</p>
@@ -47,13 +46,16 @@ const searchText = ({ data, body = '' }: Post) =>
 						<p class="count mono" aria-live="polite" data-count></p>
 					</form>
 					<ul data-posts>
-						{list.map((post) => (
-							<li data-text={searchText(post)}>
-								<a href={postUrl(post)}>
-									<span class="date mono">{formatDate(post.data.date)}</span>
+						{list.map((item) => (
+							<li data-text={item.searchText}>
+								<a href={item.href}>
+									<span class="date mono">{formatDate(item.date)}</span>
 									<span class="text">
-										<span class="title">{post.data.title}</span>
-										<span class="desc">{post.data.description}</span>
+										<span class="title">
+											{item.title}
+											{item.external === 'zenn' && <ZennMark label={t.onZenn} />}
+										</span>
+										{item.description && <span class="desc">{item.description}</span>}
 									</span>
 								</a>
 							</li>

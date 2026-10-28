@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+import { toolColor, tools } from '../lib/tools';
+
+interface Props {
+	/** Read by screen readers after the title, e.g. "on Zenn". */
+	label: string;
+}
+---
+
+<span class="zenn">
+	<svg aria-hidden="true" viewBox="0 0 24 24" width="14" height="14" style={`color: ${toolColor(tools.zenn)}`}>
+		<path d={tools.zenn.icon.path} fill="currentColor" />
+	</svg>
+	<Icon name="external" size={14} />
+	<span class="sr-only">{Astro.props.label}</span>
+</span>
+
+<style>
+	.zenn {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		margin-left: 10px;
+		vertical-align: 0.05em;
+		color: var(--muted);
+	}
+</style>

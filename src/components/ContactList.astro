@@ -1,6 +1,6 @@
 ---
-import { siGithub, siX, siZenn } from 'simple-icons';
-import { toolColor } from '../lib/tools';
+import { siGithub, siX } from 'simple-icons';
+import { toolColor, tools } from '../lib/tools';
 
 // The only way to reach the owner: no form, no backend.
 // Colors follow the tool icons: near-black logos use the text color, and Zenn's blue
@@ -8,7 +8,7 @@ import { toolColor } from '../lib/tools';
 const links = [
 	{ name: 'X', href: 'https://x.com/xXxuutaxXx', icon: siX, ink: true },
 	{ name: 'GitHub', href: 'https://github.com/uuta', icon: siGithub, ink: true },
-	{ name: 'Zenn', href: 'https://zenn.dev/yutti', icon: siZenn, light: '#0091FF' },
+	{ ...tools.zenn, href: 'https://zenn.dev/yutti' },
 ];
 ---
 

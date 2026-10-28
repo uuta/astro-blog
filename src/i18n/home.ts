@@ -1,7 +1,6 @@
 import type { Lang } from "./ui";
 import type { Tool } from "../lib/tools";
 
-/** A row in the Writing list. `post` is the key of a writing post; rows without one stay placeholders. */
 /** A Work card under the feature. A card with a live `site` links to it instead of showing a Result row. */
 export interface CaseCard {
   title: string;
@@ -11,12 +10,6 @@ export interface CaseCard {
   site?: { label: string; href: string };
   tools: Tool[];
   draft: boolean;
-}
-
-export interface WritingRow {
-  date: string;
-  title: string;
-  post?: string;
 }
 
 const en = {
@@ -191,28 +184,6 @@ const en = {
   writing: {
     title: "Notes from running agents on real work.",
     all: "All writing",
-    rows: [
-      {
-        date: "[DATE]",
-        title: "Agents write my site. They can't publish it.",
-        post: "agents-write-my-site",
-      },
-      {
-        date: "[DATE]",
-        title:
-          "Leaving coding agents on full autonomy: what I contain, and how",
-      },
-      {
-        date: "[DATE]",
-        title:
-          "Prompt injection through GitHub issues: a threat model for agent pipelines",
-      },
-      {
-        date: "[DATE]",
-        title:
-          "One instruction set, two models: sharing skills across Claude Code and Codex",
-      },
-    ] as WritingRow[],
   },
   services: {
     title: "Let's work together, on your team or on a project.",
@@ -411,29 +382,6 @@ const ja: typeof en = {
   writing: {
     title: "エージェント開発の現場から。",
     all: "記事一覧",
-    rows: [
-      // Stays a placeholder until a Japanese article with the same key exists.
-      {
-        date: "[日付]",
-        title: "エージェントがこのサイトの記事を書く。でも公開はできない。",
-        post: "agents-write-my-site",
-      },
-      {
-        date: "[日付]",
-        title:
-          "コーディングエージェントをフル権限で回すとき、何をどう閉じ込めているか",
-      },
-      {
-        date: "[日付]",
-        title:
-          "GitHub Issue 経由のプロンプトインジェクション：エージェント開発の脅威モデル",
-      },
-      {
-        date: "[日付]",
-        title:
-          "1つの指示セットを2つのモデルで：Claude Code と Codex で skill を共有する",
-      },
-    ],
   },
   services: {
     title: "チームの一員としても、プロジェクト単位でも、一緒に進めます。",

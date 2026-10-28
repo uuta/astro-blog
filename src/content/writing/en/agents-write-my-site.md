@@ -4,6 +4,7 @@ description: "Every article on this site starts as a pile of my notes: commit me
 date: "[DATE]"
 lang: en
 key: agents-write-my-site
+agentDrafted: true
 tags:
   - Agentic workflow
   - Security
