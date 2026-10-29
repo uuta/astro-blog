@@ -55,7 +55,8 @@ async () => {
 			let checked = 0;
 			let min = Infinity;
 			for (const el of doc.body.querySelectorAll('*')) {
-				if (el.closest('svg')) continue;
+				// Icons are checked separately; visually hidden text (.sr-only) is never seen.
+				if (el.closest('svg, .sr-only')) continue;
 				const own = [...el.childNodes]
 					.filter((n) => n.nodeType === 3 && n.textContent.trim())
 					.map((n) => n.textContent.trim())

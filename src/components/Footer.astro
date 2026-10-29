@@ -22,7 +22,7 @@ const hasJournal = (await getPosts(lang, 'journal')).length > 0;
 			{/* Every "Contact" and "Get in touch" link on the site points here. */}
 			<div id="contact" class="reach" role="group" aria-labelledby="contact-label">
 				<p id="contact-label" class="meta-label">{t.contact}</p>
-				<ContactList />
+				<ContactList lang={lang} />
 			</div>
 		</div>
 		<div class="footer-bottom">

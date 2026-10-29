@@ -1,6 +1,13 @@
 ---
 import { siGithub, siX } from 'simple-icons';
 import { toolColor, tools } from '../lib/tools';
+import { ui, type Lang } from '../i18n/ui';
+
+interface Props {
+	lang: Lang;
+}
+
+const t = ui[Astro.props.lang];
 
 // The only way to reach the owner: no form, no backend.
 // Colors follow the tool icons: near-black logos use the text color, and Zenn's blue
@@ -16,11 +23,16 @@ const links = [
 	{
 		links.map((link) => (
 			<li>
-				{/* The title is both the accessible name and the hover tooltip. */}
-				<a href={link.href} title={link.name} style={`color: ${toolColor(link)}`}>
+				{/*
+					Opens in a new tab. rel keeps the other site from reaching back through
+					window.opener (tab-nabbing) and from seeing this page as the referrer.
+					The title is the hover tooltip; the hidden text is what screen readers announce.
+				*/}
+				<a href={link.href} target="_blank" rel="noopener noreferrer" title={link.name} style={`color: ${toolColor(link)}`}>
 					<svg aria-hidden="true" viewBox="0 0 24 24" width="22" height="22">
 						<path d={link.icon.path} fill="currentColor" />
 					</svg>
+					<span class="sr-only">{link.name} ({t.newTab})</span>
 				</a>
 			</li>
 		))
