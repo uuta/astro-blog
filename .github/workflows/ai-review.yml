@@ -1,0 +1,20 @@
+name: AI Review
+
+on:
+  pull_request:
+    types: [opened, reopened, ready_for_review]
+  issue_comment:
+    types: [created]
+  # Manual runs have no PR context, so the central review job safely skips them.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+
+jobs:
+  review:
+    uses: uuta/github-workflows/.github/workflows/pr-review.yml@main
+    secrets:
+      OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
