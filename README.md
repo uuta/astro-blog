@@ -115,3 +115,11 @@ These are placeholders in the mock and stay as they are until the owner fills th
 - `site` in `astro.config.mjs` is `https://example.com`; the sitemap and hreflang links use it.
 - `[BRACKETED]` text across the pages: dates and the hosting provider.
 - Links that point to `#`: the case studies and the Writing rows that have no article yet.
+
+## Logo and favicon
+
+- `public/favicon.svg` is drawn on a 16-unit grid so its eye holes land on whole pixels at
+  16px; `favicon-32.png` and `apple-touch-icon.png` are rendered from it with sharp.
+- `brand/logo.svg` is the same mask with smooth eyes for large sizes, exported as
+  `logo-512/1024/2048.png`. `brand/logo-mark.svg` (and `logo-mark-2048.png`) is the mask
+  alone, with the eyes cut out, for any background.
