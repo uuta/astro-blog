@@ -4,7 +4,7 @@ import SectionHead from './SectionHead.astro';
 import Icon from '../Icon.astro';
 import ToolIcons from '../ToolIcons.astro';
 import { home } from '../../i18n/home';
-import type { Lang } from '../../i18n/ui';
+import { ui, type Lang } from '../../i18n/ui';
 import enLight from '../../assets/speakgain/speakgain-home-en.png';
 import enDark from '../../assets/speakgain/speakgain-home-en-dark.png';
 import jaLight from '../../assets/speakgain/speakgain-home-ja.png';
@@ -16,6 +16,8 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = home[lang].work;
+// Product sites open in a new tab; rel keeps them from reaching back via window.opener.
+const newTab = ui[lang].newTab;
 const shots = { en: { light: enLight, dark: enDark }, ja: { light: jaLight, dark: jaDark } }[lang];
 ---
 
@@ -29,7 +31,9 @@ const shots = { en: { light: enLight, dark: enDark }, ja: { light: jaLight, dark
 					<p class="body">{t.feature.body}</p>
 					<ToolIcons tools={t.feature.tools} />
 					<div class="links">
-						<a class="accent-link" href="https://speakgain.com">speakgain.com<Icon name="external" size={14} /></a>
+						<a class="accent-link" href="https://speakgain.com" target="_blank" rel="noopener noreferrer">
+							speakgain.com<Icon name="external" size={14} /><span class="sr-only">{` (${newTab})`}</span>
+						</a>
 						<a class="accent-link" href="#">{t.caseStudy}<Icon name="arrow-right" /></a>
 					</div>
 				</div>
@@ -53,7 +57,9 @@ const shots = { en: { light: enLight, dark: enDark }, ja: { light: jaLight, dark
 						<ToolIcons tools={card.tools} />
 						<div class="links case-link">
 							{card.site && (
-								<a class="accent-link" href={card.site.href}>{card.site.label}<Icon name="external" size={14} /></a>
+								<a class="accent-link" href={card.site.href} target="_blank" rel="noopener noreferrer">
+									{card.site.label}<Icon name="external" size={14} /><span class="sr-only">{` (${newTab})`}</span>
+								</a>
 							)}
 							<a class="accent-link" href="#">{t.caseStudy}<Icon name="arrow-right" /></a>
 						</div>
