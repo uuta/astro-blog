@@ -12,7 +12,7 @@ const en = {
 	sections: [
 		{
 			title: 'Hosting',
-			body: 'The site is static and served by [HOSTING PROVIDER]. Like any web host, it may keep standard access logs, such as IP address, browser and the pages requested, to keep the site running and secure.',
+			body: 'The site is static and served by Netlify. Like any web host, it may keep standard access logs, such as IP address, browser and the pages requested, to keep the site running and secure.',
 		},
 		{
 			title: 'Analytics and cookies',
@@ -46,7 +46,7 @@ const ja: typeof en = {
 	sections: [
 		{
 			title: 'アクセスログ',
-			body: 'このサイトは静的サイトで、[ホスティング事業者] から配信しています。サイトの運用と安全のため、事業者が IP アドレス、ブラウザの種類、閲覧したページなどのアクセスログを記録する場合があります。',
+			body: 'このサイトは静的サイトで、Netlify から配信しています。サイトの運用と安全のため、事業者が IP アドレス、ブラウザの種類、閲覧したページなどのアクセスログを記録する場合があります。',
 		},
 		{
 			title: 'アクセス解析と Cookie',

@@ -1,15 +1,12 @@
 import type { Lang } from "./ui";
 import type { Tool } from "../lib/tools";
 
-/** A Work card under the feature. A card with a live `site` links to it instead of showing a Result row. */
+/** A Work card under the feature; `site` links to the live product. */
 export interface CaseCard {
   title: string;
   body: string;
-  resultLabel?: string;
-  result?: string;
   site?: { label: string; href: string };
   tools: Tool[];
-  draft: boolean;
 }
 
 const en = {
@@ -125,7 +122,6 @@ const en = {
   },
   work: {
     title: "Systems I run every day, and what they produced.",
-    caseStudy: "Read the case study",
     feature: {
       title: "SpeakGain, an English speaking app",
       body: "Flashcards built from the English you wanted to say, learned out loud, with native-speaker audio, AI explanations, and pronunciation scoring. I build and run all of it with my agent workflow: the Flutter app, the Cloudflare Workers backend, the site, and the TikTok content that brings users in.",
@@ -148,23 +144,18 @@ const en = {
       {
         title: "One skill library for Claude Code and Codex",
         body: "Workflow rules used to live in prompts I retyped. Now both agents load the same model-neutral skills (how to split an issue, review a diff, set up a worktree), so fixing a rule once fixes it for both.",
-        resultLabel: "Result",
         tools: ["claudeCode", "codex"] as Tool[],
-        draft: false,
       },
       {
         title: "Issue-to-PR loop with a manager agent",
         body: "A manager agent hands each issue to an engineer agent in its own worktree. Reviewers are picked by the change: one for a small change, several for a risky one. Failures go back for a fix; clean work becomes a pull request I merge.",
-        resultLabel: "Caught before merge",
         tools: ["github", "gitWorktree", "tmux"] as Tool[],
-        draft: false,
       },
       {
         title: "RESORN, structured search for resort jobs",
         body: "Live-in resort jobs across Japan, searchable by area, job type and conditions like a free dorm or meals. A Go crawler collects the listings and pulls those conditions out of free text. Claude managed it and Codex built and reviewed it, from the plan to the live site.",
         site: { label: "resorn.net", href: "https://resorn.net/" },
         tools: ["go", "nextjs", "postgresql", "claudeCode", "codex"] as Tool[],
-        draft: false,
       },
       {
         title: "Social media analytics for X and Instagram",
@@ -177,7 +168,6 @@ const en = {
           "mysql",
           "googleCloud",
         ] as Tool[],
-        draft: false,
       },
     ] as CaseCard[],
   },
@@ -321,7 +311,6 @@ const ja: typeof en = {
   },
   work: {
     title: "毎日動かしている仕組みと、そこから生まれたもの。",
-    caseStudy: "事例を読む",
     feature: {
       title: "SpeakGain — 英語スピーキングアプリ",
       body: "言いたかった英語を口で覚える、自分だけの暗記カードアプリです。ネイティブ音声・AI 解説・発音採点つき。Flutter のアプリ、Cloudflare Workers のバックエンド、サイト、そしてユーザーを呼び込む TikTok のコンテンツまで、自分のエージェント開発フローで作り、運用しています。",
@@ -344,25 +333,18 @@ const ja: typeof en = {
       {
         title: "Claude Code と Codex で共有する skill ライブラリ",
         body: "以前はワークフローのルールを毎回プロンプトに書いていました。今は両方のエージェントが同じモデル非依存の skill（Issue の分割、差分レビュー、worktree の準備など）を読み込むので、ルールを一度直せば両方に効きます。",
-        resultLabel: "成果",
-        result: "[skill N 個 · N リポジトリで毎日利用]",
         tools: ["claudeCode", "codex"] as Tool[],
-        draft: false,
       },
       {
         title: "マネージャーエージェントによる Issue → PR ループ",
         body: "マネージャーのエージェントが Issue をエンジニアのエージェントに渡し、専用の worktree で作業させます。レビュアーは変更に応じて選び、小さな変更なら1つ、リスクのある変更なら複数。指摘があれば修正に戻り、問題のないものだけが Pull Request になって、自分がマージします。",
-        resultLabel: "マージ前に止めた例",
-        result: "[レビューで止めたバグの例]",
         tools: ["github", "gitWorktree", "tmux"] as Tool[],
-        draft: false,
       },
       {
         title: "RESORN — 条件で探せるリゾートバイト求人",
         body: "全国の住み込みリゾートバイトを、エリアや職種、寮費無料・食事付きといった条件で探せる求人検索サイトです。Go のクローラーが求人を集め、本文に埋もれた条件を取り出します。計画から公開まで、Claude がマネージャー、Codex が実装とレビューを担当しました。",
         site: { label: "resorn.net", href: "https://resorn.net/" },
         tools: ["go", "nextjs", "postgresql", "claudeCode", "codex"] as Tool[],
-        draft: false,
       },
       {
         title: "X と Instagram の SNS 分析プロダクト",
@@ -375,7 +357,6 @@ const ja: typeof en = {
           "mysql",
           "googleCloud",
         ] as Tool[],
-        draft: false,
       },
     ] as CaseCard[],
   },

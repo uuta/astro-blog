@@ -34,7 +34,6 @@ const shots = { en: { light: enLight, dark: enDark }, ja: { light: jaLight, dark
 						<a class="accent-link" href="https://speakgain.com" target="_blank" rel="noopener noreferrer">
 							speakgain.com<Icon name="external" size={14} /><span class="sr-only">{` (${newTab})`}</span>
 						</a>
-						<a class="accent-link" href="#">{t.caseStudy}<Icon name="arrow-right" /></a>
 					</div>
 				</div>
 				<div class="shot-wrap">
@@ -45,24 +44,17 @@ const shots = { en: { light: enLight, dark: enDark }, ja: { light: jaLight, dark
 
 			{
 				t.cards.map((card) => (
-					<article class:list={['card', 'case', { draft: card.draft }]}>
+					<article class="card case">
 						<h3>{card.title}</h3>
 						<p class="body">{card.body}</p>
-						{card.result && (
-							<div class="result">
-								<span class="meta-label">{card.resultLabel}</span>
-								<span class="value mono">{card.result}</span>
-							</div>
-						)}
 						<ToolIcons tools={card.tools} />
-						<div class="links case-link">
-							{card.site && (
+						{card.site && (
+							<div class="links case-link">
 								<a class="accent-link" href={card.site.href} target="_blank" rel="noopener noreferrer">
 									{card.site.label}<Icon name="external" size={14} /><span class="sr-only">{` (${newTab})`}</span>
 								</a>
-							)}
-							<a class="accent-link" href="#">{t.caseStudy}<Icon name="arrow-right" /></a>
-						</div>
+							</div>
+						)}
 					</article>
 				))
 			}
@@ -82,9 +74,6 @@ const shots = { en: { light: enLight, dark: enDark }, ja: { light: jaLight, dark
 		border: 1px solid var(--rule);
 		border-radius: 6px;
 		padding: 32px;
-	}
-	.card.draft {
-		border: 1px dashed var(--dashed);
 	}
 	.feature {
 		flex: 1 1 100%;
@@ -136,17 +125,6 @@ const shots = { en: { light: enLight, dark: enDark }, ja: { light: jaLight, dark
 	}
 	.feature .body {
 		max-width: 38rem;
-	}
-	.result {
-		display: flex;
-		flex-direction: column;
-		gap: 4px;
-		padding: 14px 0;
-		border-top: 1px solid var(--rule);
-		border-bottom: 1px solid var(--rule);
-	}
-	.value {
-		font-size: 15px;
 	}
 	.links {
 		display: flex;
