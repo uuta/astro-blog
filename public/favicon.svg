@@ -1,13 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-	<!-- A Noh mask reduced to its silhouette and eye holes, on a dark tile so it reads on light and dark tabs. -->
-	<defs>
-		<radialGradient id="m" cx="50%" cy="38%" r="62%">
-			<stop stop-color="#F6EFE2" />
-			<stop offset=".75" stop-color="#E6D8C0" />
-			<stop offset="1" stop-color="#C9B597" />
-		</radialGradient>
-	</defs>
-	<rect width="32" height="32" rx="7" fill="#0B0D10" />
-	<path d="M16 3.2c6.4 0 10 4.7 10 11.1 0 7.6-4.4 14.3-10 14.3S6 21.9 6 14.3C6 7.9 9.6 3.2 16 3.2Z" fill="url(#m)" />
-	<path d="M8.9 14.9c1.6-1.6 3.9-1.8 5.6-.4-1.7 1.2-3.9 1.4-5.6.4Zm14.2 0c-1.6-1.6-3.9-1.8-5.6-.4 1.7 1.2 3.9 1.4 5.6.4Z" fill="#0B0D10" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+	<!-- A Noh mask: flat ivory silhouette and two eye holes. Drawn on a 16-unit grid so that at 16px the
+	     eyes land on whole pixels (3x1 each, row 7) instead of blurring into grey. -->
+	<rect width="16" height="16" rx="3.5" fill="#0B0D10" />
+	<path d="M8 1c3.4 0 5.5 2.6 5.5 6.1 0 4.3-2.4 7.9-5.5 7.9S2.5 11.4 2.5 7.1C2.5 3.6 4.6 1 8 1Z" fill="#EFE6D6" />
+	<path d="M4 7.5 5 7h1.6L7 7.5 6.6 8H5Z M12 7.5 11 7H9.4L9 7.5 9.4 8H11Z" fill="#0B0D10" />
 </svg>
