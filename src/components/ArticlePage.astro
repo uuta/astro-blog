@@ -61,15 +61,6 @@ const next = await nextPost(post);
 				)
 			}
 
-			{
-				post.data.agentDrafted && (
-					<div class="how">
-						<p class="meta-label">{t.howTitle}</p>
-						<p class="how-body">{t.howBody}</p>
-					</div>
-				)
-			}
-
 			<div class="prose">
 				<Content />
 			</div>
@@ -154,19 +145,6 @@ const next = await nextPost(post);
 	.translated a {
 		color: var(--accent);
 		text-underline-offset: 3px;
-	}
-	.how {
-		margin-top: 32px;
-		border: 1px solid var(--rule);
-		border-radius: 6px;
-		padding: 20px 24px;
-		background: var(--soft);
-	}
-	.how-body {
-		margin: 8px 0 0;
-		font-size: 15px;
-		line-height: 1.6;
-		color: var(--body);
 	}
 
 	/* Markdown body */
@@ -300,9 +278,7 @@ const next = await nextPost(post);
 		font-size: 20px;
 		line-height: 1.6;
 	}
-	.prose > :global(p.placeholder) {
-		color: var(--muted);
-	}
+	/* Reusable blocks for articles, written as plain HTML in the Markdown (see README). */
 	.prose :global(.pipeline) {
 		margin-top: 24px;
 		display: flex;

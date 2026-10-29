@@ -57,7 +57,6 @@ section: writing        # writing (default) or journal
 key: some-article       # optional; the same key on an EN and a JA file links the translations
 translated: true        # optional; on the translated side of a pair, shows a note linking the original
 tags: [Agentic workflow] # optional; only used by search
-agentDrafted: true      # optional; shows the "How this was written" note
 ---
 ```
 
@@ -73,6 +72,11 @@ agentDrafted: true      # optional; shows the "How this was written" note
 - Put an article's images in `src/assets/writing/<slug>/` and link them relatively
   (`../../../assets/writing/<slug>/photo.jpg`); they get a responsive `srcset` at build.
 - Reading time is estimated from the text. Code blocks are highlighted in both themes.
+- Plain HTML works inside the Markdown for layouts it can't express. Two styled blocks are
+  ready in `ArticlePage.astro`: `<div class="pipeline">` with `<div class="step">` cards
+  (`step--agent`, `step--gate`; `<p class="step-who">` and `<p class="step-what">` inside),
+  and `<dl class="permissions">`. Markdown isn't parsed inside HTML, and a blank line ends
+  the block.
 
 Without a translation, the EN/JA toggle on an article goes to the other language's list,
 and the article's own "read in the other language" link is hidden.
