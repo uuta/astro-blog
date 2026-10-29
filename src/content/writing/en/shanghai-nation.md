@@ -3,7 +3,7 @@ title: "I hereby declare the Nation of Shanghai"
 date: 2026-01-29T14:36:06.130Z
 lang: en
 section: journal
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: shanghai-nation
 translated: true
 tags:

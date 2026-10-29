@@ -3,7 +3,7 @@ title: "Istanbul: the most beautiful shithole of a city"
 date: 2023-01-18T10:11:06.130Z
 lang: en
 section: journal
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: istanbul
 translated: true
 tags:

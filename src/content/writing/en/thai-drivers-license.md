@@ -3,7 +3,7 @@ title: "[True Scary Stories] At a Thai driving school..."
 date: 2024-05-18T23:11:06.130Z
 lang: en
 section: journal
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: thai-drivers-license
 translated: true
 tags:

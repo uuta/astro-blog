@@ -3,7 +3,7 @@ title: "Engineering doesn't make people happy"
 date: 2023-12-08T02:11:06.130Z
 lang: en
 section: journal
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: engineering-doesnt-make-happy
 translated: true
 tags:

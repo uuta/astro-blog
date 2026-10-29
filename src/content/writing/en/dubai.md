@@ -3,7 +3,7 @@ title: "Way-too-hot Dubai and the workers on the losing side"
 date: 2025-05-20T23:11:06.130Z
 lang: en
 section: journal
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: dubai
 translated: true
 tags:

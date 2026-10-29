@@ -3,7 +3,7 @@ title: "2043: the artificial womb"
 date: 2022-02-02T10:11:06.130Z
 lang: en
 section: journal
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: artificial-uterus
 translated: true
 tags:

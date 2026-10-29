@@ -3,7 +3,7 @@ title: "Digesting a failed English interview with matcha pudding"
 date: 2021-02-22T10:11:06.130Z
 lang: en
 section: journal
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: failed-job-interview
 translated: true
 tags:

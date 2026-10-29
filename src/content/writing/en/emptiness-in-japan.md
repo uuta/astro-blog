@@ -3,7 +3,7 @@ title: "Natural Selection Japan"
 date: 2025-06-15T23:11:06.130Z
 lang: en
 section: journal
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: emptiness-in-japan
 translated: true
 tags:

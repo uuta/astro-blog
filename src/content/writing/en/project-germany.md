@@ -3,7 +3,7 @@ title: "Ukrainians gave me a role model for courage and strength"
 date: 2024-12-16T23:11:06.130Z
 lang: en
 section: journal
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: project-germany
 translated: true
 tags:

@@ -3,7 +3,7 @@ title: "An MVP you can build in 5 hours with Claude Code"
 date: 2025-06-01T01:11:06.130Z
 lang: en
 section: writing
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: claude-code
 translated: true
 tags:

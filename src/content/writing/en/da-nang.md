@@ -3,7 +3,7 @@ title: "Beaten up by Da Nang, and fitting in again"
 date: 2026-05-05T14:36:06.130Z
 lang: en
 section: journal
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: da-nang
 translated: true
 tags:

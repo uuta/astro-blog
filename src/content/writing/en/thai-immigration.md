@@ -3,7 +3,7 @@ title: "Japan and Thailand: my visa trouble between two cultures"
 date: 2023-12-29T00:11:06.130Z
 lang: en
 section: journal
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: thai-immigration
 translated: true
 tags:

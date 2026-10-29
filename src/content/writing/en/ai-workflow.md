@@ -3,7 +3,7 @@ title: "I built an AI agent workflow. And Fable 5"
 date: 2026-07-15T17:11:06.130Z
 lang: en
 section: writing
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: ai-workflow
 translated: true
 tags:

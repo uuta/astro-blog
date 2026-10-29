@@ -3,7 +3,7 @@ title: "Japanese stereotypes"
 date: 2023-10-24T10:11:06.130Z
 lang: en
 section: journal
-aiDisclosure: ai-generated
+aiDisclosure: ai-assisted
 key: japanese-stereo-type
 translated: true
 tags:
