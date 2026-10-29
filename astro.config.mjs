@@ -24,6 +24,8 @@ const redirectToSlash = (req, res, next) => {
 export default defineConfig({
 	site,
 	trailingSlash: 'always',
+	// The dev toolbar only shows under `astro dev`; it's off to keep the page as visitors see it.
+	devToolbar: { enabled: false },
 	i18n: {
 		locales: ['en', 'ja'],
 		defaultLocale: 'en',
