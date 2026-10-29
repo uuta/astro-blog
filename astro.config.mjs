@@ -29,6 +29,26 @@ export default defineConfig({
 		shikiConfig: { themes: { light: 'github-light', dark: 'github-dark' } },
 	},
 	vite: {
+		plugins: [
+			{
+				// With trailingSlash: 'always', `astro dev` answers /en with a 404 (a warning about
+				// links missing the slash), while the hosts redirect it to /en/. Redirect in dev too.
+				// Astro puts its check at the front of the stack, so this goes in front of it.
+				name: 'dev-trailing-slash',
+				apply: 'serve',
+				configureServer: (server) => () => {
+					server.middlewares.stack.unshift({
+						route: '',
+						handle: (req, res, next) => {
+							const [path, query] = (req.url ?? '/').split(/\?(.*)/s);
+							if (path.endsWith('/') || /\.\w+$/.test(path) || /^\/(@|_|node_modules\/|src\/)/.test(path)) return next();
+							res.writeHead(308, { Location: `${path}/${query ? `?${query}` : ''}` });
+							res.end();
+						},
+					});
+				},
+			},
+		],
 		build: {
 			// Keep font files as separate, cacheable files instead of base64 in the CSS.
 			assetsInlineLimit: (file) => (/\.woff2?$/.test(file) ? false : undefined),
