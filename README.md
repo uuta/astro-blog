@@ -1,7 +1,7 @@
 # uuta
 
 Personal site of uuta, in English and Japanese. Static [Astro](https://astro.build) build,
-deployed by Netlify (`netlify.toml`): every push to `main` goes live, every pull request
+deployed by Netlify (`netlify.toml`) at https://uutaa.cc: every push to `main` goes live, every pull request
 gets a deploy preview, and `.github/workflows/scheduled-build.yml` rebuilds daily so new
 Zenn articles appear. The approved design mock lives in `design/mock/` and is the reference
 for layout, copy and colors.
@@ -112,8 +112,6 @@ about pages to the matching new ones.
 ## Before going live
 
 - The privacy policy says the site uses PostHog, but no PostHog snippet is installed yet.
-- With a custom domain, change `site` in `astro.config.mjs`; the sitemap, canonical and
-  hreflang links are built from it.
 
 ## Logo and favicon
 

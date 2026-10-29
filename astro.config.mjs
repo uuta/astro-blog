@@ -4,9 +4,9 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
 
-// Netlify's address for the site until it gets its own domain; the sitemap, canonical and
+// The site's domain (a custom domain on the Netlify project); the sitemap, canonical and
 // hreflang links are built from it.
-const site = 'https://profound-marigold-a32ac1.netlify.app';
+const site = 'https://uutaa.cc';
 
 /**
  * Dev only: sends a URL without a trailing slash to the slashed one, keeping the query.
