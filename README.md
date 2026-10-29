@@ -86,6 +86,13 @@ and the article's own "read in the other language" link is hidden.
 The articles of the old blog (`~/astro-blog`) were imported once: drafts were left out, and
 eight Gyazo images that Gyazo no longer serves were dropped.
 
+### When an article breaks in dev after a schema change
+
+A dev server that keeps running while `src/content.config.ts` changes can save articles
+to its cache with the old schema, so a new field comes back `undefined` even after a
+restart. Stop the dev server, then run `rm -rf .astro && npm run dev`. `.astro/` is
+generated and safe to delete.
+
 ## Routes
 
 Every page lives under `/en/` or `/ja/`. `/` has no content of its own: a script in its
