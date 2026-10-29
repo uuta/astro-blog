@@ -3,6 +3,7 @@ title: "日本とタイ、異文化の中のビザトラブル体験記"
 date: 2023-12-29T00:11:06.130Z
 lang: ja
 section: journal
+key: thai-immigration
 tags:
   - "daily"
   - "Thailand"

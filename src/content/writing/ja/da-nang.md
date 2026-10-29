@@ -3,6 +3,7 @@ title: "Da Nangで殴られ、また馴染む"
 date: 2026-05-05T14:36:06.130Z
 lang: ja
 section: journal
+key: da-nang
 tags:
   - "danang"
 ---

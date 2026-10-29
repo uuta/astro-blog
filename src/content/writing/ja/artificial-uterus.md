@@ -3,6 +3,7 @@ title: "2043年、人工子宮"
 date: 2022-02-02T10:11:06.130Z
 lang: ja
 section: journal
+key: artificial-uterus
 tags:
   - "Imagination"
 ---

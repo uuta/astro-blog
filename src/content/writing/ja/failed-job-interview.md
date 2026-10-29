@@ -3,6 +3,7 @@ title: "抹茶プリンで消化する、失敗した英語面談"
 date: 2021-02-22T10:11:06.130Z
 lang: ja
 section: journal
+key: failed-job-interview
 tags:
   - "Imagination"
 ---

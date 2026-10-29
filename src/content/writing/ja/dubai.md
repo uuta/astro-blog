@@ -3,6 +3,7 @@ title: "暑すぎるDubaiと負け組労働者"
 date: 2025-05-20T23:11:06.130Z
 lang: ja
 section: journal
+key: dubai
 tags:
   - "Travel"
   - "Dubai"

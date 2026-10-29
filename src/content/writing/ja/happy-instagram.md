@@ -3,6 +3,7 @@ title: "Instagramが壊したもの、AIが奪ったもの"
 date: 2025-11-21T23:11:06.130Z
 lang: ja
 section: journal
+key: happy-instagram
 tags:
   - "instagram"
   - "algorism"

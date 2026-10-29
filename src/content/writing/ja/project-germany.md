@@ -3,6 +3,7 @@ title: "ウクライナ人がくれた勇気と強さのロールモデル"
 date: 2024-12-16T23:11:06.130Z
 lang: ja
 section: journal
+key: project-germany
 tags:
   - "Travel"
   - "Thai"
