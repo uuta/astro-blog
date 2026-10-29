@@ -1,0 +1,34 @@
+# Old blog (AstroPaper on this Netlify site) article URLs, moved to the new sections.
+# Specific rules come first: Netlify uses the first rule that matches.
+/posts/ai-workflow  /ja/posts/ai-workflow/  301
+/posts/artificial-uterus  /ja/journal/artificial-uterus/  301
+/posts/claude-code  /ja/posts/claude-code/  301
+/posts/da-nang  /ja/journal/da-nang/  301
+/posts/dubai  /ja/journal/dubai/  301
+/posts/emptiness-in-japan  /ja/journal/emptiness-in-japan/  301
+/posts/engineering-doesnt-make-happy  /ja/journal/engineering-doesnt-make-happy/  301
+/posts/failed-job-interview  /ja/journal/failed-job-interview/  301
+/posts/gorilla  /ja/journal/gorilla/  301
+/posts/happy-instagram  /ja/journal/happy-instagram/  301
+/posts/istanbul  /ja/journal/istanbul/  301
+/posts/japanese-stereo-type  /ja/journal/japanese-stereo-type/  301
+/posts/mcp-in-user-scope  /en/posts/mcp-in-user-scope/  301
+/posts/new-blog  /ja/posts/new-blog/  301
+/posts/project-germany  /ja/journal/project-germany/  301
+/posts/shanghai-nation  /ja/journal/shanghai-nation/  301
+/posts/speakgain-kpt  /ja/posts/speakgain-kpt/  301
+/posts/thai-drivers-license  /ja/journal/thai-drivers-license/  301
+/posts/thai-immigration  /ja/journal/thai-immigration/  301
+
+# The old blog's other pages: lists, pagination, tags and search go to the posts list.
+/posts  /ja/posts/  301
+/posts/*  /ja/posts/  301
+/tags  /ja/posts/  301
+/tags/*  /ja/posts/  301
+/search  /ja/posts/  301
+/rss.xml  /ja/posts/  301
+/about  /ja/  301
+
+# Unknown Japanese paths get the Japanese 404 page; Netlify serves /404.html for the rest.
+# Rules don't apply where a file exists, so real /ja/ pages are untouched.
+/ja/*  /ja/404.html  404

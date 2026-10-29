@@ -1,7 +1,7 @@
 # build output
 dist/
-.output/
-.netlify/
+# generated types
+.astro/
 
 # dependencies
 node_modules/
@@ -20,17 +20,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# ignore .astro directory
-.astro
+# jetbrains setting folder
+.idea/
 
-# ignore Jampack cache files
-.jampack/
-
-# yarn
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/sdks
-!.yarn/versions
-.pnp.*
+# wrangler local state
+.wrangler/

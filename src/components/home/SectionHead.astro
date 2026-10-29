@@ -1,0 +1,34 @@
+---
+interface Props {
+	title: string;
+	/** The Writing list sits closer to its heading. */
+	tight?: boolean;
+}
+
+const { title, tight = false } = Astro.props;
+---
+
+<h2 class:list={['section-head', { tight }]}>{title}</h2>
+
+<style>
+	.section-head {
+		margin: 0 auto 56px;
+		max-width: 24em;
+		text-align: center;
+		text-wrap: balance;
+		font-size: 34px;
+		line-height: 1.25;
+		letter-spacing: -0.01em;
+		font-weight: 600;
+	}
+	.tight {
+		margin-bottom: 40px;
+	}
+	.section-head:lang(ja) {
+		font-size: 30px;
+		line-height: 1.5;
+		letter-spacing: normal;
+		/* Break Japanese lines between phrases, not inside a word. */
+		word-break: auto-phrase;
+	}
+</style>

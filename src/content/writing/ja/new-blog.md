@@ -1,0 +1,62 @@
+---
+title: "AstroPaperでブログをリニューアル - v0.0.1"
+date: 2023-11-01T00:11:06.130Z
+lang: ja
+section: writing
+aiDisclosure: none
+tags:
+  - "dev"
+---
+[Astro](https://astro.build/)を使って、ブログをリニューアルしました。長年、WordPressを使っていたが、重い管理画面を開くのが非常に億劫になっていた点、WordPress自体が時代遅れの産物になっていた点を鑑み、以前からリニューアルを検討していました。
+
+## リニューアルでやったこと
+
+### 「AstroPaper」というテンプレートを使って、時間を短縮
+
+[AstroPaper | Astro](https://astro.build/themes/details/astro-paper/)を使って、ブログを構築しました。
+
+本当に強いエンジニアは、フルスクラッチで実装できるものです。
+
+しかし、Astroを触るのは初めてだったし、スマホ用のデザインの最適化まで考えると結構面倒くさいんですよね。
+
+この点、AstroPaperでは、デザインがすでにそこそこイケているので、少しの修正ですぐに公開できる点が良いと思いました。また、コンポーネントで部分的にReactが使われていたり、Typescriptが既存で入っていたり、Astro上でやりたかったことがAstroPaperで比較的実現されていることが導入の決め手になりました。
+
+### Netlifyにデプロイ
+
+Netlifyを人生で初めて使用しました。GitHubのブランチが更新されたタイミングでNetlifyに自動的にデプロイしてくれるこの感覚…！インフラ側はジジイ過ぎてよく分かってなかったのですが、めちゃくちゃ気持ちいい。
+
+### ロゴの刷新
+
+
+
+ChatGPT4のDALL-E 3を使ってロゴを作成してもらいました。シンプルなものでお願いしたのですが、取り扱いのしづらい複雑なロゴが返ってきました。微妙なニュアンスを汲み取ってロゴに反映する部分のチューニングは甘いのかもしれません。MidJourneyやStable-diffusionを利用したロゴの作成は試していないので、そちらを利用した方が精度の高いものが出るかもしれません。また、画像の出力をsvgで指定しても返ってこないので、若干面倒くさいですね。この点、Adobeで[PNGをSVGに変換するツール](https://www.adobe.com/jp/express/feature/image/convert/png-to-svg)が出ていたので、svgに変換し背景色をコードから消してロゴとしました。めちゃくちゃ楽。俺は誰かの遺産で生きている。
+
+### CloudinaryでOGP画像の作成
+
+OGP画像は[Cloudinary](https://cloudinary.com/)を使って、いい感じに画像が自動生成される形にしています。例えば、以下のような画像をCloudinary側にアップロードしておいて、
+
+![ogp](../../../assets/writing/new-blog/Untitled_ueewgw.png)
+
+htmlのogpのタグに下記のような値を設定してテキストやフォントサイズ等を調整してあげると、
+
+```md
+https://res.cloudinary.com/djnikeo2b/image/upload/c_fit,l_text:Sawarabi%20Gothic_40:uuta's experiment,co*rgb:fff,w_900,y*-100/v1698555456/Untitled_ueewgw.png-to-svg
+```
+
+下記のような画像をOGP画像として使うことができます。
+
+
+
+以前から利用しているサービスですがめちゃくちゃ便利ですね。もうこれなしでは生きていけない🥲
+
+### NeoVimからGyazoに画像をアップロードできるように、gyazo.vimをインストール
+
+記事内で使用する画像の管理には、gyazo.vim + NeoVimを使う形にしました。画像の管理はなかなか頭の痛い問題で、ブログ内のassets等のディレクトリ配下に配置して記事内でインポートして使うというのは結構めんどくさいんですよね。まず配置が面倒臭いし、どの画像が使いたかった画像なのかよくわからない。さらに、普段はテキストエディタでNeoVimを使っているので、エディタ内で全てを完結させたい。そこで選んだのが、[skanehira/gyazo.vim: Vim plugin for Gyazo](https://github.com/skanehira/gyazo.vim)です。クリップボードに貼り付けられた画像をgyazoにアップロードしてURLを返してくれるvimプラグインで、keymapに登録すれば簡単に利用できました。いい感じ。
+
+### astro用にformatterを導入
+
+astro用のformatterを導入しました。コードフォーマッターのprettierがastroの拡張子に対応しており、比較的簡単に導入することができました。普段、NeoVimの開発では、[none-ls.nvim](https://github.com/nvimtools/none-ls.nvim)を使用しており、astroの拡張子をfiletypesに追加することでastroの開発環境が完成してしまいました。
+
+- [uuta/nvim-configuration](https://github.com/uuta/nvim-configuration/blob/13fd17aa4964b28a0f096e5df33054db6548cafa/lua/plugins/null-ls.lua#L20)
+
+今後もやっていくぜ 👳🏼‍♂️

@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import { privacy } from '../i18n/privacy';
+import { localeUrl, otherLang, type Lang } from '../i18n/ui';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = privacy[lang];
+---
+
+<Base
+	lang={lang}
+	title={t.meta.title}
+	description={t.meta.description}
+	counterpart={{ href: localeUrl(otherLang(lang), 'privacy/'), translated: true }}
+>
+	<main class="wrap page">
+		<div class="policy">
+			<h1 class="page-title">{t.title}</h1>
+			<p class="updated mono">{t.updated}</p>
+			<p class="intro">{t.intro}</p>
+			{
+				t.sections.map((section) => (
+					<>
+						<h2>{section.title}</h2>
+						<p class="body">{section.body}</p>
+					</>
+				))
+			}
+			<h2>{t.operator.title}</h2>
+			<p class="body">
+				{t.operator.before}<a href="#contact">{t.operator.link}</a>{t.operator.after}
+			</p>
+		</div>
+	</main>
+</Base>
+
+<style>
+	.page {
+		padding-top: 80px;
+		padding-bottom: 96px;
+	}
+	.policy {
+		max-width: 44rem;
+	}
+	.updated {
+		margin: 16px 0 0;
+		font-size: 14px;
+		color: var(--muted);
+	}
+	.intro {
+		margin: 32px 0 0;
+		font-size: 19px;
+		line-height: 1.7;
+	}
+	h2 {
+		margin: 48px 0 0;
+		font-size: 20px;
+		line-height: 1.4;
+		font-weight: 600;
+	}
+	.body {
+		margin: 12px 0 0;
+		font-size: 17px;
+		line-height: 1.7;
+		color: var(--body);
+	}
+	.intro:lang(ja),
+	.body:lang(ja) {
+		line-height: 1.9;
+	}
+</style>

@@ -1,0 +1,100 @@
+---
+import SectionHead from './SectionHead.astro';
+import { home } from '../../i18n/home';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+	lang: Lang;
+}
+
+const t = home[Astro.props.lang].focus;
+
+// Card icons, drawn in one 24 × 24 stroke style.
+const icons: Record<string, string> = {
+	analysis: '<path d="M4 4v16h16"></path><path d="M8 16v-3M12 16V9M16 16v-5"></path>',
+	workflow:
+		'<circle cx="5" cy="6" r="2.5"></circle><circle cx="19" cy="6" r="2.5"></circle><circle cx="12" cy="18" r="2.5"></circle><path d="M7.5 6h9M6.3 8.3l4.4 7.4M17.7 8.3l-4.4 7.4"></path>',
+	distribution:
+		'<circle cx="12" cy="12" r="2"></circle><path d="M16.24 7.76a6 6 0 0 1 0 8.48M7.76 16.24a6 6 0 0 1 0-8.48M19.07 4.93a10 10 0 0 1 0 14.14M4.93 19.07a10 10 0 0 1 0-14.14"></path>',
+	security: '<path d="M12 3l7 3v5c0 4.5-3 8.2-7 10-4-1.8-7-5.5-7-10V6l7-3z"></path><path d="M9 12l2 2 4-4"></path>',
+};
+---
+
+<section id="focus" class="section">
+	<div class="wrap section-inner">
+		<SectionHead title={t.title} />
+		<div class="cards">
+			{
+				t.cards.map((card) => (
+					<div class="card">
+						<svg aria-hidden="true" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" set:html={icons[card.icon]} />
+						<h3>{card.title}</h3>
+						<p>{card.body}</p>
+						<ul>
+							{card.items.map((item) => (
+								<li><span class="mono" aria-hidden="true">→</span>{item}</li>
+							))}
+						</ul>
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.cards {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 24px;
+	}
+	.card {
+		flex: 1 1 420px;
+		min-width: 0;
+		border: 1px solid var(--rule);
+		border-radius: 6px;
+		padding: 32px;
+	}
+	svg {
+		stroke: var(--accent);
+	}
+	h3 {
+		margin: 20px 0 0;
+		font-size: 24px;
+		line-height: 1.3;
+		font-weight: 600;
+	}
+	h3:lang(ja) {
+		font-size: 22px;
+		line-height: 1.4;
+	}
+	p {
+		margin: 12px 0 0;
+		font-size: 17px;
+		line-height: 1.65;
+		color: var(--body);
+	}
+	p:lang(ja) {
+		font-size: 16px;
+		line-height: 1.85;
+	}
+	ul {
+		list-style: none;
+		margin: 24px 0 0;
+		padding: 0;
+	}
+	li {
+		display: flex;
+		gap: 12px;
+		padding: 13px 0;
+		border-top: 1px solid var(--rule);
+		font-size: 16px;
+	}
+	li:lang(ja) {
+		font-size: 15px;
+		line-height: 1.6;
+	}
+	li .mono {
+		color: var(--accent);
+	}
+</style>

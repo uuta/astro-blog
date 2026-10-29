@@ -1,0 +1,81 @@
+---
+import SectionHead from './SectionHead.astro';
+import { home } from '../../i18n/home';
+import type { Lang } from '../../i18n/ui';
+import Icon from '../Icon.astro';
+import ZennMark from '../ZennMark.astro';
+import { posts } from '../../i18n/posts';
+import { formatDate, getList, postsUrl } from '../../lib/writing';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = home[lang].writing;
+// The latest four from the Writing list, Zenn articles included.
+const rows = (await getList(lang, 'writing')).slice(0, 4);
+---
+
+<section id="writing" class="section">
+	<div class="wrap section-inner">
+		<SectionHead title={t.title} tight />
+		<ul>
+			{
+				rows.map((row) => (
+					<li>
+						<a href={row.href}>
+							<span class="date mono">{formatDate(row.date)}</span>
+							<span class="title">
+								{row.title}
+								{row.external === 'zenn' && <ZennMark label={posts[lang].onZenn} />}
+							</span>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+		<a class="accent-link all" href={postsUrl(lang)}>{t.all}<Icon name="arrow-right" /></a>
+	</div>
+</section>
+
+<style>
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		border-bottom: 1px solid var(--rule);
+	}
+	li {
+		border-top: 1px solid var(--rule);
+	}
+	li a {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 8px 32px;
+		padding: 24px 0;
+		text-decoration: none;
+	}
+	.date {
+		width: 120px;
+		font-size: 14px;
+		color: var(--muted);
+	}
+	.title {
+		flex: 1 1 420px;
+		font-size: 22px;
+		font-weight: 500;
+		line-height: 1.35;
+	}
+	.all {
+		display: flex;
+		width: fit-content;
+		margin-top: 24px;
+		margin-left: auto;
+	}
+	.title:lang(ja) {
+		font-size: 20px;
+		line-height: 1.6;
+	}
+</style>

@@ -1,45 +1,106 @@
 ---
-import Hr from "./Hr.astro";
-import Socials from "./Socials.astro";
+import ContactList from './ContactList.astro';
+import { localeUrl, ui, type Lang } from '../i18n/ui';
+import { getPosts, sectionUrl } from '../lib/writing';
 
-const currentYear = new Date().getFullYear();
-
-export interface Props {
-  noMarginTop?: boolean;
+interface Props {
+	lang: Lang;
 }
 
-const { noMarginTop = false } = Astro.props;
+const { lang } = Astro.props;
+const t = ui[lang];
+// Only in a language that has Journal entries.
+const hasJournal = (await getPosts(lang, 'journal')).length > 0;
 ---
 
-<footer class={`${noMarginTop ? "" : "mt-auto"}`}>
-  <Hr noPadding />
-  <div class="footer-wrapper">
-    <Socials centered />
-    <div class="copyright-wrapper">
-      <span>Copyright &#169; {currentYear}</span>
-      <span class="separator">&nbsp;|&nbsp;</span>
-      <span>All rights reserved.</span>
-    </div>
-  </div>
+<footer class="site-footer">
+	<div class="wrap">
+		<div class="footer-top">
+			<div>
+				<a class="logo mono" href={localeUrl(lang)}>uuta<span class="logo-mark">_</span></a>
+			</div>
+			{/* Every "Contact" and "Get in touch" link on the site points here. */}
+			<div id="contact" class="reach" role="group" aria-labelledby="contact-label">
+				<p id="contact-label" class="meta-label">{t.contact}</p>
+				<ContactList lang={lang} />
+			</div>
+		</div>
+		<div class="footer-bottom">
+			<span class="mono">© 2026 uuta</span>
+			<nav class="footer-nav" aria-label={t.footerNav}>
+				{hasJournal && <a href={sectionUrl(lang, 'journal')}>{t.journal}</a>}
+				<a href={localeUrl(lang, 'privacy/')}>{t.privacy}</a>
+			</nav>
+		</div>
+	</div>
 </footer>
 
 <style>
-  footer {
-    @apply w-full;
-  }
-  .footer-wrapper {
-    @apply flex flex-col items-center justify-between py-6 sm:flex-row-reverse sm:py-4;
-  }
-  .link-button {
-    @apply my-1 p-2 hover:rotate-6;
-  }
-  .link-button svg {
-    @apply scale-125;
-  }
-  .copyright-wrapper {
-    @apply my-2 flex flex-col items-center whitespace-nowrap sm:flex-row;
-  }
-  .separator {
-    @apply hidden sm:inline;
-  }
+	.site-footer {
+		border-top: 1px solid var(--rule);
+	}
+	.footer-top {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 32px 48px;
+		padding: 56px 0 40px;
+	}
+	.logo,
+	.logo:hover {
+		font-size: 24px;
+		font-weight: 500;
+		text-decoration: none;
+		color: var(--ink);
+	}
+	.logo-mark {
+		color: var(--accent);
+	}
+	.reach {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		scroll-margin-bottom: 24px;
+	}
+	/* Arriving from a Contact link: a short ring around the icons shows where to look. */
+	.reach:target :global(.contact-icons a) {
+		animation: contact-ping 1.2s ease-out 2;
+	}
+	@keyframes contact-ping {
+		from {
+			box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 55%, transparent);
+		}
+		to {
+			box-shadow: 0 0 0 12px transparent;
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.reach:target :global(.contact-icons a) {
+			animation: none;
+			border-color: var(--accent);
+		}
+	}
+	.footer-bottom {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px 32px;
+		padding: 12px 0 28px;
+		border-top: 1px solid var(--rule);
+		font-size: 14px;
+		color: var(--muted);
+	}
+	.footer-nav {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 24px;
+	}
+	.footer-nav a,
+	.footer-nav a:hover {
+		display: inline-block;
+		padding: 12px 0;
+		color: var(--muted);
+	}
 </style>

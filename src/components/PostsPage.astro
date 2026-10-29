@@ -1,0 +1,214 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from './Icon.astro';
+import { home } from '../i18n/home';
+import { posts } from '../i18n/posts';
+import { otherLang, type Lang } from '../i18n/ui';
+import ZennMark from './ZennMark.astro';
+import { formatDate, getList, sectionUrl, type Section } from '../lib/writing';
+
+interface Props {
+	lang: Lang;
+	section: Section;
+}
+
+const { lang, section } = Astro.props;
+const t = posts[lang];
+const page =
+	section === 'writing'
+		? { ...t.writing, title: home[lang].writing.title, description: home[lang].writing.title }
+		: t.journal;
+const list = await getList(lang, section);
+---
+
+<Base
+	lang={lang}
+	title={page.metaTitle}
+	description={page.description}
+	counterpart={{ href: sectionUrl(otherLang(lang), section), translated: true }}
+	current={section}
+>
+	<main class="wrap page">
+		{/* The list speaks for itself; the heading stays for screen readers and the outline. */}
+		<h1 class="sr-only">{page.title}</h1>
+		{
+			list.length === 0 ? (
+				<p class="empty">{t.empty}</p>
+			) : (
+				<>
+					{/* Filters in the browser; shown only once the script runs. */}
+					<form class="search" role="search" data-search data-one={t.countOne} data-many={t.countMany} hidden>
+						<label class="sr-only" for="post-search">{t.searchLabel}</label>
+						<div class="field">
+							<Icon name="search" size={18} />
+							<input id="post-search" type="search" name="q" placeholder={t.searchPlaceholder} autocomplete="off" />
+						</div>
+						<p class="count mono" aria-live="polite" data-count></p>
+					</form>
+					<ul data-posts>
+						{list.map((item) => (
+							<li data-text={item.searchText}>
+								<a href={item.href}>
+									<span class="date mono">{formatDate(item.date)}</span>
+									<span class="text">
+										<span class="title">
+											{item.title}
+											{item.external === 'zenn' && <ZennMark label={t.onZenn} />}
+										</span>
+										{item.description && <span class="desc">{item.description}</span>}
+									</span>
+								</a>
+							</li>
+						))}
+					</ul>
+					<p class="empty" data-no-match hidden>{t.noMatch}</p>
+				</>
+			)
+		}
+	</main>
+</Base>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>('[data-search]');
+	const input = form?.querySelector('input');
+	const count = form?.querySelector<HTMLElement>('[data-count]');
+	const noMatch = document.querySelector<HTMLElement>('[data-no-match]');
+	const rows = [...document.querySelectorAll<HTMLLIElement>('[data-posts] > li')];
+
+	if (form && input && count && noMatch) {
+		const normalize = (text: string) => text.normalize('NFKC').toLowerCase();
+		const update = () => {
+			// Every word must appear somewhere in the post.
+			const terms = normalize(input.value).split(/\s+/).filter(Boolean);
+			let shown = 0;
+			for (const row of rows) {
+				row.hidden = !terms.every((term) => row.dataset.text?.includes(term));
+				if (!row.hidden) shown++;
+			}
+			noMatch.hidden = shown > 0;
+			count.textContent =
+				terms.length === 0 ? '' : shown === 1 ? form.dataset.one! : form.dataset.many!.replace('{n}', String(shown));
+			// Keep the keyword in the address so a search can be shared or reloaded.
+			const url = new URL(location.href);
+			if (terms.length > 0) url.searchParams.set('q', input.value.trim());
+			else url.searchParams.delete('q');
+			history.replaceState(null, '', url);
+		};
+		input.value = new URLSearchParams(location.search).get('q') ?? '';
+		input.addEventListener('input', update);
+		form.addEventListener('submit', (event) => event.preventDefault());
+		form.hidden = false;
+		update();
+	}
+</script>
+
+<style>
+	.page {
+		padding-top: 80px;
+		padding-bottom: 96px;
+	}
+	ul {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		border-bottom: 1px solid var(--rule);
+	}
+	li {
+		border-top: 1px solid var(--rule);
+	}
+	li a {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 8px 32px;
+		padding: 28px 0;
+		text-decoration: none;
+	}
+	.date {
+		width: 120px;
+		font-size: 14px;
+		color: var(--muted);
+	}
+	.text {
+		flex: 1 1 420px;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 8px;
+	}
+	.title {
+		font-size: 22px;
+		font-weight: 500;
+		line-height: 1.35;
+	}
+	a:hover .title {
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+	.desc {
+		font-size: 16px;
+		line-height: 1.65;
+		color: var(--body);
+	}
+	.title:lang(ja) {
+		font-size: 20px;
+		line-height: 1.6;
+	}
+	.desc:lang(ja) {
+		font-size: 15px;
+		line-height: 1.85;
+	}
+	.search {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 12px 20px;
+		margin-bottom: 32px;
+	}
+	.search[hidden] {
+		display: none;
+	}
+	.field {
+		position: relative;
+		flex: 0 1 420px;
+		min-width: 0;
+		display: flex;
+	}
+	.field :global(svg) {
+		position: absolute;
+		left: 16px;
+		top: 50%;
+		transform: translateY(-50%);
+		color: var(--muted);
+		pointer-events: none;
+	}
+	input {
+		width: 100%;
+		min-height: 48px;
+		padding: 0 16px 0 44px;
+		border: 1px solid var(--line);
+		border-radius: 6px;
+		background: var(--card);
+		color: var(--ink);
+		font: inherit;
+		font-size: 16px;
+	}
+	input::placeholder {
+		color: var(--muted);
+		opacity: 1;
+	}
+	input:focus-visible {
+		outline: 2px solid var(--accent);
+		outline-offset: 2px;
+	}
+	.count {
+		margin: 0;
+		font-size: 14px;
+		color: var(--muted);
+	}
+	.empty {
+		margin: 32px 0 0;
+		font-size: 17px;
+		color: var(--body);
+	}
+</style>

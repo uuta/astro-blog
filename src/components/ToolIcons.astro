@@ -1,0 +1,40 @@
+---
+import { toolColor, tools, type Tool, type ToolEntry } from '../lib/tools';
+
+interface Props {
+	tools: Tool[];
+}
+
+const list: ToolEntry[] = Astro.props.tools.map((key) => tools[key]);
+---
+
+{
+	list.length > 0 && (
+		<ul class="tools">
+			{list.map((tool) => (
+				<li style={`color: ${toolColor(tool)}`}>
+					{/* The title is both the accessible name and the hover tooltip. */}
+					<svg role="img" viewBox="0 0 24 24" width="22" height="22">
+						<title>{tool.name}</title>
+						<path d={tool.icon.path} fill="currentColor" fill-rule={tool.evenodd ? 'evenodd' : undefined} />
+					</svg>
+				</li>
+			))}
+		</ul>
+	)
+}
+
+<style>
+	.tools {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 12px 18px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	svg {
+		display: block;
+	}
+</style>

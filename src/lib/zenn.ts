@@ -1,61 +1,42 @@
-import { apiClient, type ApiResult } from "@lib/apiClient";
-
-type RequestParam = {
-  username?: string;
-  order?: "latest" | "daily" | "weekly" | "monthly" | "all_time";
-  page?: number;
-};
-
-type User = {
-  id: number;
-  username: string;
-  name: string;
-  avatar_small_url: string;
-};
-
-type Publication = {
-  id: number;
-  name: string;
-  avatar_small_url: string;
-  display_name: string;
-  beta_stats: boolean;
-  avatar_registered: boolean;
-};
-
-export type Article = {
-  id: number;
-  post_type: "Article";
-  title: string;
-  slug: string;
-  comments_count: number;
-  liked_count: number;
-  bookmarked_count: number;
-  body_letters_count: number;
-  article_type: "tech" | "idea";
-  emoji: string;
-  is_suspending_private: boolean;
-  published_at: string;
-  body_updated_at: string;
-  source_repo_updated_at: string | null;
-  pinned: boolean;
-  path: string;
-  principal_type: "User" | "Publication";
-  user: User;
-  publication: Publication | null;
-};
-
-type ResponseParam = {
-  articles: Article[];
-  next_page: number | null;
-};
-
-const ENDPOINT = "https://zenn.dev/api/articles";
-
 /**
- * Fetch articles from Zenn API.
+ * Articles published on Zenn, fetched once per build. The Japanese Writing list shows
+ * them next to the site's own articles and links out to zenn.dev, so a rebuild is what
+ * picks up a new one.
  */
-export const getZennArticles = async (
-  searchParams: RequestParam
-): Promise<ApiResult<ResponseParam>> => {
-  return apiClient.get<ResponseParam>(ENDPOINT, { searchParams });
+const USERNAME = 'yutti';
+
+export interface ZennArticle {
+	title: string;
+	url: string;
+	date: Date;
+}
+
+interface ApiResponse {
+	articles: { title: string; path: string; published_at: string }[];
+	next_page: number | null;
+}
+
+let articles: Promise<ZennArticle[]> | undefined;
+
+/** Every page asks for the list; the API is called once per build. */
+export const getZennArticles = (): Promise<ZennArticle[]> => (articles ??= fetchAll());
+
+const fetchAll = async (): Promise<ZennArticle[]> => {
+	const all: ZennArticle[] = [];
+	try {
+		for (let page: number | null = 1; page !== null; ) {
+			const res = await fetch(`https://zenn.dev/api/articles?username=${USERNAME}&order=latest&page=${page}`);
+			if (!res.ok) throw new Error(`HTTP ${res.status}`);
+			const data = (await res.json()) as ApiResponse;
+			all.push(
+				...data.articles.map((a) => ({ title: a.title, url: `https://zenn.dev${a.path}`, date: new Date(a.published_at) })),
+			);
+			page = data.next_page;
+		}
+	} catch (error) {
+		// A Zenn outage shouldn't block a deploy; the next build picks the articles up again.
+		console.warn(`[zenn] Building without Zenn articles: ${error}`);
+		return [];
+	}
+	return all;
 };

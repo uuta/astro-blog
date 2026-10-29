@@ -1,154 +1,122 @@
-# AstroPaper 📄
+# uuta
 
-![AstroPaper](public/astropaper-og.jpg)
-![Typescript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
-![GitHub](https://img.shields.io/github/license/satnaing/astro-paper?color=%232F3741&style=for-the-badge)
-[![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-%23FE5196?logo=conventionalcommits&logoColor=white&style=for-the-badge)](https://conventionalcommits.org)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=for-the-badge)](http://commitizen.github.io/cz-cli/)
+Personal site of uuta, in English and Japanese. Static [Astro](https://astro.build) build,
+deployed by Netlify (`netlify.toml`) at https://uutaa.cc: every push to `main` goes live, every pull request
+gets a deploy preview, and `.github/workflows/scheduled-build.yml` rebuilds daily so new
+Zenn articles appear. The approved design mock lives in `design/mock/` and is the reference
+for layout, copy and colors.
 
-AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro blog theme. This theme is designed and crafted based on [my personal blog](https://satnaing.dev/blog).
+## Commands
 
-This theme follows best practices and provides accessibility out of the box. Light and dark mode are supported by default. Moreover, additional color schemes can also be configured.
+Requires Node 22.23.4 or later (Astro's minimum). `.nvmrc` pins 22.23.4, so run `nvm use` first.
 
-This theme is self-documented \_ which means articles/posts in this theme can also be considered as documentations. Read [the blog posts](https://astro-paper.pages.dev/posts/) or check [the README Documentation Section](#-documentation) for more info.
+| Command | What it does |
+| --- | --- |
+| `npm install` | Install dependencies |
+| `npm run dev` | Dev server at http://localhost:4321 |
+| `npm run build` | Build the static site into `dist/` |
+| `npm run preview` | Serve `dist/` locally |
+| `npm run check` | Type-check with `astro check` |
+| `npm run check:links` | Check every internal link, asset and `#anchor` in `dist/`, and each page's EN/JA toggle (run after a build) |
 
-## 🔥 Features
+Text contrast: `scripts/contrast.js` is a function to evaluate in a browser tab on the
+preview server (for example with the chrome-devtools MCP `evaluate_script` tool). It loads
+every route in the sitemap, the 404 pages and `/` in both themes and lists text below WCAG AA.
 
-- [x] type-safe markdown
-- [x] super fast performance
-- [x] accessible (Keyboard/VoiceOver)
-- [x] responsive (mobile ~ desktops)
-- [x] SEO-friendly
-- [x] light & dark mode
-- [x] fuzzy search
-- [x] draft posts & pagination
-- [x] sitemap & rss feed
-- [x] followed best practices
-- [x] highly customizable
-- [x] dynamic OG image generation for blog posts [#15](https://github.com/satnaing/astro-paper/pull/15) ([Blog Post](https://astro-paper.pages.dev/posts/dynamic-og-image-generation-in-astropaper-blog-posts/))
+Redirects and 404 pages only work on Netlify; check them on a pull request's deploy preview.
 
-_Note: I've tested screen-reader accessibility of AstroPaper using **VoiceOver** on Mac and **TalkBack** on Android. I couldn't test all other screen-readers out there. However, accessibility enhancements in AstroPaper should be working fine on others as well._
+## Layout
 
-## ✅ Lighthouse Score
-
-<p align="center">
-  <a href="https://pagespeed.web.dev/report?url=https%3A%2F%2Fastro-paper.pages.dev%2F&form_factor=desktop">
-    <img width="710" alt="AstroPaper Lighthouse Score" src="AstroPaper-lighthouse-score.svg">
-  <a>
-</p>
-
-## 🚀 Project Structure
-
-Inside of AstroPaper, you'll see the following folders and files:
-
-```bash
-/
-├── public/
-│   ├── assets/
-│   │   └── logo.svg
-│   │   └── logo.png
-│   └── favicon.svg
-│   └── astropaper-og.jpg
-│   └── robots.txt
-│   └── toggle-theme.js
-├── src/
-│   ├── assets/
-│   │   └── socialIcons.ts
-│   ├── components/
-│   ├── content/
-│   │   |  blog/
-│   │   |    └── some-blog-posts.md
-│   │   └── config.ts
-│   ├── layouts/
-│   └── pages/
-│   └── styles/
-│   └── utils/
-│   └── config.ts
-│   └── types.ts
-└── package.json
+```
+src/
+  layouts/Base.astro        <html>, head, theme script, shared header and footer
+  components/               Header, Footer, ThemeToggle, page components
+  components/home/          Home page sections
+  i18n/                     Copy per page, per language (ui.ts holds shared labels)
+  content/writing/<lang>/   Articles (Markdown), Writing and Journal
+  assets/writing/<slug>/    Article images
+  lib/                      Article lists, Zenn fetch, tool icons
+  pages/                    Routes: English under /en/, Japanese under /ja/, plus / and 404
+  styles/global.css         Color tokens (light and dark) and shared styles
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Writing
 
-Any static assets, like images, can be placed in the `public/` directory.
+Add a Markdown file at `src/content/writing/<lang>/<slug>.md`. Lists never show articles
+in the other language.
 
-All blog posts are stored in `src/content/blog` directory.
-
-## 📖 Documentation
-
-Documentation can be read in two formats\_ _markdown_ & _blog post_.
-
-- Configuration - [markdown](src/content/blog/how-to-configure-astropaper-theme.md) | [blog post](https://astro-paper.pages.dev/posts/how-to-configure-astropaper-theme/)
-- Add Posts - [markdown](src/content/blog/adding-new-post.md) | [blog post](https://astro-paper.pages.dev/posts/adding-new-posts-in-astropaper-theme/)
-- Customize Color Schemes - [markdown](src/content/blog/customizing-astropaper-theme-color-schemes.md) | [blog post](https://astro-paper.pages.dev/posts/customizing-astropaper-theme-color-schemes/)
-- Predefined Color Schemes - [markdown](src/content/blog/predefined-color-schemes.md) | [blog post](https://astro-paper.pages.dev/posts/predefined-color-schemes/)
-
-> For AstroPaper v1, check out [this branch](https://github.com/satnaing/astro-paper/tree/astro-paper-v1) and this [live URL](https://astro-paper-v1.astro-paper.pages.dev/)
-
-## 💻 Tech Stack
-
-**Main Framework** - [Astro](https://astro.build/)  
-**Type Checking** - [TypeScript](https://www.typescriptlang.org/)  
-**Component Framework** - [ReactJS](https://reactjs.org/)  
-**Styling** - [TailwindCSS](https://tailwindcss.com/)  
-**UI/UX** - [Figma](https://figma.com)  
-**Fuzzy Search** - [FuseJS](https://fusejs.io/)  
-**Icons** - [Boxicons](https://boxicons.com/) | [Tablers](https://tabler-icons.io/)  
-**Code Formatting** - [Prettier](https://prettier.io/)  
-**Deployment** - [Cloudflare Pages](https://pages.cloudflare.com/)  
-**Illustration in About Page** - [https://freesvgillustration.com](https://freesvgillustration.com/)  
-**Linting** - [ESLint](https://eslint.org)
-
-## 👨🏻‍💻 Running Locally
-
-The easiest way to run this project locally is to run the following command in your desired directory.
-
-```bash
-# npm 6.x
-npm create astro@latest --template satnaing/astro-paper
-
-# npm 7+, extra double-dash is needed:
-npm create astro@latest -- --template satnaing/astro-paper
-
-# yarn
-yarn create astro --template satnaing/astro-paper
-```
-
-## Google Site Verification (optional)
-
-You can easily add your [Google Site Verification HTML tag](https://support.google.com/webmasters/answer/9008080#meta_tag_verification&zippy=%2Chtml-tag) in AstroPaper using environment variable. This step is optional. If you don't add the following env variable, the google-site-verification tag won't appear in the html `<head>` section.
-
-```bash
-# in your environment variable file (.env)
-PUBLIC_GOOGLE_SITE_VERIFICATION=your-google-site-verification-value
-```
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                | Action                                                                                                                           |
-| :--------------------- | :------------------------------------------------------------------------------------------------------------------------------- |
-| `npm install`          | Installs dependencies                                                                                                            |
-| `npm run dev`          | Starts local dev server at `localhost:4321`                                                                                      |
-| `npm run build`        | Build your production site to `./dist/`                                                                                          |
-| `npm run preview`      | Preview your build locally, before deploying                                                                                     |
-| `npm run format:check` | Check code format with Prettier                                                                                                  |
-| `npm run format`       | Format codes with Prettier                                                                                                       |
-| `npm run sync`         | Generates TypeScript types for all Astro modules. [Learn more](https://docs.astro.build/en/reference/cli-reference/#astro-sync). |
-| `npm run cz`           | Commit code changes with commitizen                                                                                              |
-| `npm run lint`         | Lint with ESLint                                                                                                                 |
-
-> Warning! Windows PowerShell users may need to install the [concurrently package](https://www.npmjs.com/package/concurrently) if they want to [run diagnostics](https://docs.astro.build/en/reference/cli-reference/#astro-check) during development (`astro check --watch & astro dev`). For more info, see [this issue](https://github.com/satnaing/astro-paper/issues/113).
-
-## ✨ Feedback & Suggestions
-
-If you have any suggestions/feedback, you can contact me via [my email](mailto:contact@satnaing.dev). Alternatively, feel free to open an issue if you find bugs or want to request new features.
-
-## 📜 License
-
-Licensed under the MIT License, Copyright © 2023
-
+```yaml
 ---
+title: "…"
+description: "…"        # optional; without it, the opening of the article is used
+date: 2026-11-01        # or a placeholder such as "[DATE]"
+lang: en                # en or ja
+section: writing        # writing (default) or journal
+aiDisclosure: none      # required: none, ai-assisted, ai-generated or autonomous (W3C proposal);
+                        # shown as a label next to the date and as ai-disclosure on <article>
+key: some-article       # optional; the same key on an EN and a JA file links the translations
+translated: true        # optional; on the translated side of a pair, shows a note linking the original
+tags: [Agentic workflow] # optional; only used by search
+---
+```
 
-Made with 🤍 by [Sat Naing](https://satnaing.dev) 👨🏻‍💻 and [contributors](https://github.com/satnaing/astro-paper/graphs/contributors).
+- **Writing** (`section: writing`) is the professional list: `/<lang>/posts/<slug>/`, listed
+  on `/<lang>/posts/`. The header links here, and the home page shows its latest four.
+- **Journal** (`section: journal`) keeps personal essays and travel apart:
+  `/<lang>/journal/<slug>/`, listed on `/<lang>/journal/` and linked only from the footer
+  (and only in a language that has entries).
+- **Zenn**: `src/lib/zenn.ts` fetches the articles of `yutti` from the Zenn API at build time
+  and adds them to the Japanese Writing list, linking out to zenn.dev. If the API fails, the
+  build goes on without them. New Zenn articles appear only after a rebuild, so schedule one
+  (the old blog ran a daily GitHub Action that called a Netlify build hook).
+- Put an article's images in `src/assets/writing/<slug>/` and link them relatively
+  (`../../../assets/writing/<slug>/photo.jpg`); they get a responsive `srcset` at build.
+- Reading time is estimated from the text. Code blocks are highlighted in both themes.
+- Plain HTML works inside the Markdown for layouts it can't express. Two styled blocks are
+  ready in `ArticlePage.astro`: `<div class="pipeline">` with `<div class="step">` cards
+  (`step--agent`, `step--gate`; `<p class="step-who">` and `<p class="step-what">` inside),
+  and `<dl class="permissions">`. Markdown isn't parsed inside HTML, and a blank line ends
+  the block.
+
+Without a translation, the EN/JA toggle on an article goes to the other language's list,
+and the article's own "read in the other language" link is hidden.
+
+The articles of the old blog (`~/astro-blog`) were imported once: drafts were left out, and
+eight Gyazo images that Gyazo no longer serves were dropped.
+
+### When an article breaks in dev after a schema change
+
+A dev server that keeps running while `src/content.config.ts` changes can save articles
+to its cache with the old schema, so a new field comes back `undefined` even after a
+restart. Stop the dev server, then run `rm -rf .astro && npm run dev`. `.astro/` is
+generated and safe to delete.
+
+## Routes
+
+Every page lives under `/en/` or `/ja/`. `/` has no content of its own: a script in its
+`<head>` sends the visitor to the language they last picked with the EN/JA toggle
+(saved in `localStorage`), otherwise to `/ja/` when the browser's first language is
+Japanese and to `/en/` for anything else, keeping `?query` and `#hash`. Without
+JavaScript a meta refresh goes to `/en/`, and the page shows links to both homes.
+
+Unknown paths get a 404 page in the site's design: `/ja/...` gets the Japanese one
+(`dist/ja/404.html`), everything else the English one (`dist/404.html`). Netlify serves
+`404.html` itself, and `public/_redirects` sends unknown `/ja/` paths to `ja/404.html`.
+Astro writes `src/pages/ja/404.astro` to `ja/404/index.html`, so a small hook in
+`astro.config.mjs` moves it to `ja/404.html` after each build.
+
+The old blog that used to live on this Netlify site had its articles at `/posts/<slug>/`.
+`public/_redirects` sends each one to its new page (301), and the old list, tag, search and
+about pages to the matching new ones.
+
+## Before going live
+
+- The privacy policy says the site uses PostHog, but no PostHog snippet is installed yet.
+
+## Logo and favicon
+
+- `public/favicon.svg` is drawn on a 16-unit grid so its eye holes land on whole pixels at
+  16px; `favicon-32.png` and `apple-touch-icon.png` are rendered from it with sharp.
+- `brand/logo.svg` is the same mask with smooth eyes for large sizes, exported as
+  `logo-512/1024/2048.png`. `brand/logo-mark.svg` (and `logo-mark-2048.png`) is the mask
+  alone, with the eyes cut out, for any background.

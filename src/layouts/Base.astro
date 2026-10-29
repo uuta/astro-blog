@@ -1,0 +1,72 @@
+---
+import '../styles/global.css';
+// Loaded only on Japanese pages, without blocking first paint: the CSS is large
+// because it splits IBM Plex Sans JP into many unicode-range subsets.
+import fontsJaUrl from '../styles/fonts-ja.css?url';
+import ThemeScript from '../components/ThemeScript.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { otherLang, type Lang } from '../i18n/ui';
+import type { Section } from '../lib/writing';
+
+interface Props {
+	lang: Lang;
+	title: string;
+	description: string;
+	/**
+	 * This page in the other language. With `translated: false` the href is only
+	 * where the language toggle falls back to, so no hreflang link is emitted.
+	 */
+	counterpart: { href: string; translated: boolean };
+	/** Where the toggle for this page's own language points; defaults to this page. */
+	selfHref?: string;
+	current?: Section;
+	noindex?: boolean;
+	/** The page that picks a language for visitors, listed as hreflang x-default. */
+	xDefault?: string;
+}
+
+const { lang, title, description, counterpart, selfHref, current, noindex = false, xDefault } = Astro.props;
+const absolute = (path: string) => new URL(path, Astro.site).href;
+// Load as print-only, then switch to all once fetched, so it never blocks rendering.
+const nonBlocking = { media: 'print', onload: "this.media='all'" };
+---
+
+<!doctype html>
+<html lang={lang}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+		<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<ThemeScript />
+		{
+			lang === 'ja' && (
+				<>
+					<link rel="stylesheet" href={fontsJaUrl} {...nonBlocking} />
+					<noscript>
+						<link rel="stylesheet" href={fontsJaUrl} />
+					</noscript>
+				</>
+			)
+		}
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		{noindex && <meta name="robots" content="noindex" />}
+		{
+			counterpart.translated && (
+				<>
+					<link rel="alternate" hreflang={lang} href={absolute(Astro.url.pathname)} />
+					<link rel="alternate" hreflang={otherLang(lang)} href={absolute(counterpart.href)} />
+					{xDefault && <link rel="alternate" hreflang="x-default" href={absolute(xDefault)} />}
+				</>
+			)
+		}
+	</head>
+	<body>
+		<Header lang={lang} selfHref={selfHref} counterpartHref={counterpart.href} current={current} />
+		<slot />
+		<Footer lang={lang} />
+	</body>
+</html>

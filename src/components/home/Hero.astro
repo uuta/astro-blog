@@ -1,0 +1,74 @@
+---
+import HeroArt from './HeroArt.astro';
+import Icon from '../Icon.astro';
+import { home } from '../../i18n/home';
+import type { Lang } from '../../i18n/ui';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = home[lang].hero;
+---
+
+<section class="hero wrap">
+	<div class="hero-row">
+		<div class="hero-text">
+			<h1>{t.title}</h1>
+			<p class="lead">{t.lead}</p>
+			<div class="btn-row">
+				<a class="btn btn--primary" href="#contact">{t.primary}<Icon name="arrow-right" /></a>
+				<a class="btn btn--secondary" href="#writing">{t.secondary}</a>
+			</div>
+		</div>
+		<HeroArt lang={lang} />
+	</div>
+</section>
+
+<style>
+	.hero {
+		padding-top: 88px;
+		padding-bottom: 80px;
+	}
+	.hero-row {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 48px;
+	}
+	.hero-text {
+		flex: 1 1 420px;
+		min-width: 0;
+	}
+	h1 {
+		margin: 0;
+		font-size: clamp(2.25rem, 4.4vw, 3.5rem);
+		line-height: 1.08;
+		letter-spacing: -0.025em;
+		font-weight: 600;
+		max-width: 15ch;
+	}
+	h1:lang(ja) {
+		font-size: clamp(2rem, 3.6vw, 2.75rem);
+		line-height: 1.35;
+		letter-spacing: -0.01em;
+		max-width: 13em;
+		/* Break Japanese lines between phrases, not inside a word. */
+		word-break: auto-phrase;
+	}
+	.lead {
+		margin: 28px 0 0;
+		font-size: 20px;
+		line-height: 1.6;
+		color: var(--body);
+		max-width: 40rem;
+	}
+	.lead:lang(ja) {
+		font-size: 19px;
+		line-height: 1.9;
+	}
+	.btn-row {
+		margin-top: 40px;
+	}
+</style>

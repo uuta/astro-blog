@@ -1,0 +1,150 @@
+---
+import { Image } from 'astro:assets';
+import SectionHead from './SectionHead.astro';
+import Icon from '../Icon.astro';
+import ToolIcons from '../ToolIcons.astro';
+import { home } from '../../i18n/home';
+import { ui, type Lang } from '../../i18n/ui';
+import enLight from '../../assets/speakgain/speakgain-home-en.png';
+import enDark from '../../assets/speakgain/speakgain-home-en-dark.png';
+import jaLight from '../../assets/speakgain/speakgain-home-ja.png';
+import jaDark from '../../assets/speakgain/speakgain-home-ja-dark.png';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = home[lang].work;
+// Product sites open in a new tab; rel keeps them from reaching back via window.opener.
+const newTab = ui[lang].newTab;
+const shots = { en: { light: enLight, dark: enDark }, ja: { light: jaLight, dark: jaDark } }[lang];
+---
+
+<section id="work" class="section section--soft">
+	<div class="wrap section-inner">
+		<SectionHead title={t.title} />
+		<div class="grid">
+			<article class="card feature">
+				<div class="feature-body">
+					<h3>{t.feature.title}</h3>
+					<p class="body">{t.feature.body}</p>
+					<ToolIcons tools={t.feature.tools} />
+					<div class="links">
+						<a class="accent-link" href="https://speakgain.com" target="_blank" rel="noopener noreferrer">
+							speakgain.com<Icon name="external" size={14} /><span class="sr-only">{` (${newTab})`}</span>
+						</a>
+					</div>
+				</div>
+				<div class="shot-wrap">
+					<Image class="shot only-light" src={shots.light} alt={t.feature.shotAlt} widths={[240, 360]} sizes="240px" />
+					<Image class="shot only-dark" src={shots.dark} alt={t.feature.shotAlt} widths={[240, 360]} sizes="240px" />
+				</div>
+			</article>
+
+			{
+				t.cards.map((card) => (
+					<article class="card case">
+						<h3>{card.title}</h3>
+						<p class="body">{card.body}</p>
+						<ToolIcons tools={card.tools} />
+						{card.site && (
+							<div class="links case-link">
+								<a class="accent-link" href={card.site.href} target="_blank" rel="noopener noreferrer">
+									{card.site.label}<Icon name="external" size={14} /><span class="sr-only">{` (${newTab})`}</span>
+								</a>
+							</div>
+						)}
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>
+
+<style>
+	.grid {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 24px;
+	}
+	.card {
+		min-width: 0;
+		background: var(--card);
+		border: 1px solid var(--rule);
+		border-radius: 6px;
+		padding: 32px;
+	}
+	.feature {
+		flex: 1 1 100%;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 32px 48px;
+	}
+	.feature-body {
+		flex: 999 1 420px;
+		min-width: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	.case {
+		flex: 1 1 460px;
+		display: flex;
+		flex-direction: column;
+		gap: 16px;
+	}
+	h3 {
+		margin: 0;
+		font-size: 24px;
+		line-height: 1.3;
+		font-weight: 600;
+	}
+	h3:lang(ja) {
+		font-size: 22px;
+		line-height: 1.45;
+	}
+	.feature h3 {
+		font-size: 28px;
+		line-height: 1.25;
+	}
+	.feature h3:lang(ja) {
+		font-size: 26px;
+		line-height: 1.4;
+	}
+	.body {
+		margin: 0;
+		font-size: 16px;
+		line-height: 1.65;
+		color: var(--body);
+	}
+	.body:lang(ja) {
+		font-size: 15px;
+		line-height: 1.85;
+	}
+	.feature .body {
+		max-width: 38rem;
+	}
+	.links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 4px 28px;
+	}
+	.case-link {
+		margin-top: auto;
+	}
+	.shot-wrap {
+		flex: 1 1 240px;
+		display: flex;
+		justify-content: center;
+	}
+	.shot {
+		width: 240px;
+		height: auto;
+		/* Both screenshots are 360 × 780. */
+		aspect-ratio: 360 / 780;
+		border: 1px solid var(--line);
+		border-radius: 28px;
+	}
+</style>

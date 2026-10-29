@@ -1,7 +1,22 @@
-- Add an external API definition as necessary into pages/api
-- Use `type` instead of `interface`
-- Do not use `export default` instead use `export`
-- Do not use `useEffect()` as far as possible
-- Do not use the `unknown` type as far as possible. .e.g, `png as unknown as BodyInit`. Be explicit.
-- Do not use `git add` or `git commit` because diffs should be checked before staging commits.
-- If a workflow is defined in `.github/workflows`, `workflow_dispatch` also should be defined.
+## Development
+
+When starting the dev server, use background mode:
+
+```
+astro dev --background
+```
+
+Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+
+## Documentation
+
+Full documentation: https://docs.astro.build
+
+Consult these guides before working on related tasks:
+
+- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
+- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
+- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
+- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)
+- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
+- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)

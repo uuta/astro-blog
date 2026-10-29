@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Privacy policy</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Sans+JP:wght@400;500&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#FFFFFF}
+a{color:var(--ink)}a:hover{color:var(--accent)}
+.site{--bg:#FFFFFF;--card:#FFFFFF;--soft:#F5F6F8;--ink:#111418;--body:#374151;--muted:#4B5563;--rule:#E3E5E8;--line:#C9CDD3;--field-line:#8A919B;--dashed:#A7ADB5;--svg-2:#E9EBEF;--svg-3:#EEF0F3;--inverse:#111418;--on-inverse:#FFFFFF;--inverse-2:#2A2F36;--strip:#111418;--on-strip:#FFFFFF;--ok:#15803D;--danger:#B4441C;--accent:var(--accent-base);--on-accent:#FFFFFF;color-scheme:light}
+@media (prefers-color-scheme: dark){body{background:#0E1013}.site:not([data-theme="light"]){--bg:#0E1013;--card:#15181D;--soft:#171A1F;--ink:#E8EAED;--body:#C3C8CF;--muted:#9AA1AB;--rule:#262A31;--line:#3E434B;--field-line:#6B727C;--dashed:#5A616B;--svg-2:#20242A;--svg-3:#1A1D22;--inverse:#E8EAED;--on-inverse:#0E1013;--inverse-2:#C3C8CF;--strip:#1C2027;--on-strip:#E8EAED;--ok:#4ADE80;--danger:#F0875A;--accent:color-mix(in srgb, var(--accent-base) 55%, #FFFFFF);--on-accent:#0E1013;color-scheme:dark}}
+.site[data-theme="dark"]{--bg:#0E1013;--card:#15181D;--soft:#171A1F;--ink:#E8EAED;--body:#C3C8CF;--muted:#9AA1AB;--rule:#262A31;--line:#3E434B;--field-line:#6B727C;--dashed:#5A616B;--svg-2:#20242A;--svg-3:#1A1D22;--inverse:#E8EAED;--on-inverse:#0E1013;--inverse-2:#C3C8CF;--strip:#1C2027;--on-strip:#E8EAED;--ok:#4ADE80;--danger:#F0875A;--accent:color-mix(in srgb, var(--accent-base) 55%, #FFFFFF);--on-accent:#0E1013;color-scheme:dark}
+</style>
+</helmet>
+<div class="site" data-theme="{{theme}}" style="--accent-base: {{accent}}; font-family: 'IBM Plex Sans', 'IBM Plex Sans JP', system-ui, sans-serif; color: var(--ink); background: var(--bg); min-height: 100vh">
+
+<header style="border-bottom: 1px solid var(--rule)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 24px">
+<a href="Main.dc.html" style="font-family: 'IBM Plex Mono', monospace; font-weight: 500; font-size: 18px; text-decoration: none; color: var(--ink); padding: 10px 0">uuta<span style="color: var(--accent)">_</span></a>
+<nav aria-label="Main" style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px 24px; font-size: 15px">
+<a href="Main.dc.html#work" style="text-decoration: none; padding: 12px 0">Work</a>
+<a href="Main.dc.html#writing" style="text-decoration: none; padding: 12px 0">Writing</a>
+<a href="Main.dc.html#services" style="text-decoration: none; padding: 12px 0">Work with me</a>
+<a href="Profile.dc.html" style="text-decoration: none; padding: 12px 0">Profile</a>
+<a href="Main.dc.html#contact" style="text-decoration: none; padding: 11px 16px; border: 1px solid var(--ink); border-radius: 4px">Contact</a>
+<div style="display: flex; font-family: 'IBM Plex Mono', monospace; font-size: 13px; border: 1px solid var(--line); border-radius: 4px; overflow: hidden">
+<a href="Privacy.dc.html" aria-current="page" style="padding: 12px 12px; background: var(--inverse); color: var(--on-inverse); text-decoration: none">EN</a>
+<a href="PrivacyJa.dc.html" style="padding: 12px 12px; text-decoration: none">JA</a>
+</div>
+<sc-if value="{{isDark}}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{toggleTheme}}" aria-label="Switch to light mode" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: var(--ink); cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"></path></svg></button></sc-if>
+<sc-if value="{{isLight}}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{toggleTheme}}" aria-label="Switch to dark mode" style="display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 1px solid var(--line); border-radius: 4px; background: transparent; color: var(--ink); cursor: pointer"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5z"></path></svg></button></sc-if>
+</nav>
+</div>
+</header>
+
+<main style="max-width: 1120px; margin: 0 auto; padding: 80px 24px 96px">
+<div style="max-width: 44rem">
+<h1 style="margin: 0; font-size: clamp(2.25rem, 5vw, 3.5rem); line-height: 1.15; letter-spacing: -0.02em; font-weight: 600">Privacy policy</h1>
+<p style="margin: 16px 0 0; font-family: 'IBM Plex Mono', monospace; font-size: 14px; color: var(--muted)">Last updated: [DATE]</p>
+<p style="margin: 32px 0 0; font-size: 19px; line-height: 1.7">This site has no contact form, no accounts and no comments. It never asks you for personal information.</p>
+<h2 style="margin: 48px 0 0; font-size: 20px; line-height: 1.4; font-weight: 600">Hosting</h2>
+<p style="margin: 12px 0 0; font-size: 17px; line-height: 1.7; color: var(--body)">The site is static and served by [HOSTING PROVIDER]. Like any web host, it may keep standard access logs, such as IP address, browser and the pages requested, to keep the site running and secure.</p>
+<h2 style="margin: 48px 0 0; font-size: 20px; line-height: 1.4; font-weight: 600">Analytics and cookies</h2>
+<p style="margin: 12px 0 0; font-size: 17px; line-height: 1.7; color: var(--body)">[NONE, or the name of the analytics tool and what it records.]</p>
+<h2 style="margin: 48px 0 0; font-size: 20px; line-height: 1.4; font-weight: 600">If you contact me</h2>
+<p style="margin: 12px 0 0; font-size: 17px; line-height: 1.7; color: var(--body)">You reach me through X, LinkedIn or GitHub. I use what you send only to reply. Those services' own privacy policies cover the messages themselves.</p>
+<h2 style="margin: 48px 0 0; font-size: 20px; line-height: 1.4; font-weight: 600">Sharing</h2>
+<p style="margin: 12px 0 0; font-size: 17px; line-height: 1.7; color: var(--body)">I don't sell or share anything you send me, unless the law requires me to.</p>
+<h2 style="margin: 48px 0 0; font-size: 20px; line-height: 1.4; font-weight: 600">Deleting what you sent</h2>
+<p style="margin: 12px 0 0; font-size: 17px; line-height: 1.7; color: var(--body)">Ask me through the same service and I'll delete our conversation on my side within [N] days.</p>
+<h2 style="margin: 48px 0 0; font-size: 20px; line-height: 1.4; font-weight: 600">Changes</h2>
+<p style="margin: 12px 0 0; font-size: 17px; line-height: 1.7; color: var(--body)">If this policy changes, I update the date at the top of this page.</p>
+<h2 style="margin: 48px 0 0; font-size: 20px; line-height: 1.4; font-weight: 600">Who runs this site</h2>
+<p style="margin: 12px 0 0; font-size: 17px; line-height: 1.7; color: var(--body)">[FULL NAME]. Reach me through the links on the <a href="Main.dc.html#contact">home page</a>.</p>
+</div>
+</main>
+
+<footer style="border-top: 1px solid var(--rule)">
+<div style="max-width: 1120px; margin: 0 auto; padding: 32px 24px 40px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 32px; font-size: 14px; color: var(--muted)">
+<span style="font-family: 'IBM Plex Mono', monospace">© 2026 uuta</span>
+<nav aria-label="Footer" style="display: flex; flex-wrap: wrap; gap: 0 24px"><a href="Profile.dc.html" style="padding: 12px 0; color: var(--muted)">Profile</a><a href="Privacy.dc.html" style="padding: 12px 0; color: var(--muted)">Privacy policy</a></nav>
+</div>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2747D9","options":["#2747D9","#0F766E","#B4441C","#111418"]},"theme":{"editor":"enum","default":"system","options":["system","light","dark"]},"$preview":{"width":1280,"height":1490}}'>
+class Component extends DCLogic {
+  themeChoice() {
+    const t = (this.state || {}).theme || this.props.theme;
+    return t === 'light' || t === 'dark' ? t : '';
+  }
+  isDark() {
+    const t = this.themeChoice();
+    if (t) return t === 'dark';
+    return typeof window !== 'undefined' && !!window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  renderVals() {
+    const accent = this.props.accent ?? '#2747D9';
+    return {
+      accent,
+      theme: this.themeChoice(), isDark: this.isDark(), isLight: !this.isDark(),
+      toggleTheme: () => this.setState({ theme: this.isDark() ? 'light' : 'dark' })
+    };
+  }
+}
+</script>
+</body>
+</html>

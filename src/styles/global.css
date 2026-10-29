@@ -1,0 +1,268 @@
+@import '@fontsource/ibm-plex-sans/400.css';
+@import '@fontsource/ibm-plex-sans/500.css';
+@import '@fontsource/ibm-plex-sans/600.css';
+@import '@fontsource/ibm-plex-mono/400.css';
+@import '@fontsource/ibm-plex-mono/500.css';
+
+/* Tokens: copied from the approved mock (design/mock/*.dc.html). */
+:root {
+	--accent-base: #2747d9;
+	--bg: #ffffff;
+	--card: #ffffff;
+	--soft: #f5f6f8;
+	--ink: #111418;
+	--body: #374151;
+	--muted: #4b5563;
+	--rule: #e3e5e8;
+	--line: #c9cdd3;
+	--field-line: #8a919b;
+	--dashed: #a7adb5;
+	--svg-2: #e9ebef;
+	--svg-3: #eef0f3;
+	--inverse: #111418;
+	--on-inverse: #ffffff;
+	--inverse-2: #2a2f36;
+	--strip: #111418;
+	--on-strip: #ffffff;
+	--ok: #15803d;
+	--danger: #b4441c;
+	--accent: var(--accent-base);
+	--on-accent: #ffffff;
+	color-scheme: light;
+
+	--font-sans: 'IBM Plex Sans', 'IBM Plex Sans JP', system-ui, sans-serif;
+	--font-sans-ja: 'IBM Plex Sans JP', system-ui, sans-serif;
+	--font-mono: 'IBM Plex Mono', monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) {
+		--bg: #0e1013;
+		--card: #15181d;
+		--soft: #171a1f;
+		--ink: #e8eaed;
+		--body: #c3c8cf;
+		--muted: #9aa1ab;
+		--rule: #262a31;
+		--line: #3e434b;
+		--field-line: #6b727c;
+		--dashed: #5a616b;
+		--svg-2: #20242a;
+		--svg-3: #1a1d22;
+		--inverse: #e8eaed;
+		--on-inverse: #0e1013;
+		--inverse-2: #c3c8cf;
+		--strip: #1c2027;
+		--on-strip: #e8eaed;
+		--ok: #4ade80;
+		--danger: #f0875a;
+		--accent: color-mix(in srgb, var(--accent-base) 55%, #ffffff);
+		--on-accent: #0e1013;
+		color-scheme: dark;
+	}
+}
+
+:root[data-theme='dark'] {
+	--bg: #0e1013;
+	--card: #15181d;
+	--soft: #171a1f;
+	--ink: #e8eaed;
+	--body: #c3c8cf;
+	--muted: #9aa1ab;
+	--rule: #262a31;
+	--line: #3e434b;
+	--field-line: #6b727c;
+	--dashed: #5a616b;
+	--svg-2: #20242a;
+	--svg-3: #1a1d22;
+	--inverse: #e8eaed;
+	--on-inverse: #0e1013;
+	--inverse-2: #c3c8cf;
+	--strip: #1c2027;
+	--on-strip: #e8eaed;
+	--ok: #4ade80;
+	--danger: #f0875a;
+	--accent: color-mix(in srgb, var(--accent-base) 55%, #ffffff);
+	--on-accent: #0e1013;
+	color-scheme: dark;
+}
+
+/* Theme-dependent visuals switch here, never from load-time JavaScript.
+   Each rule only hides, so elements keep their own display value. */
+@media (prefers-color-scheme: light) {
+	:root:not([data-theme='dark']) .only-dark {
+		display: none !important;
+	}
+}
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) .only-light {
+		display: none !important;
+	}
+}
+:root[data-theme='light'] .only-dark,
+:root[data-theme='dark'] .only-light {
+	display: none !important;
+}
+
+/* Base */
+body {
+	margin: 0;
+	min-height: 100vh;
+	background: var(--bg);
+	color: var(--ink);
+	font-family: var(--font-sans);
+}
+:root:lang(ja) body {
+	font-family: var(--font-sans-ja);
+}
+a {
+	color: var(--ink);
+}
+a:hover {
+	color: var(--accent);
+}
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+	border: 0;
+}
+.mono {
+	font-family: var(--font-mono);
+}
+.wrap {
+	max-width: 1120px;
+	margin: 0 auto;
+	padding-left: 24px;
+	padding-right: 24px;
+}
+
+/* Shared primitives */
+.section {
+	border-top: 1px solid var(--rule);
+}
+.section--soft {
+	background: var(--soft);
+}
+.section-inner {
+	padding-top: 88px;
+	padding-bottom: 88px;
+}
+
+.kicker {
+	margin: 0;
+	font-family: var(--font-mono);
+	font-size: 13px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--accent);
+}
+.meta-label {
+	margin: 0;
+	font-family: var(--font-mono);
+	font-size: 12px;
+	letter-spacing: 0.08em;
+	text-transform: uppercase;
+	color: var(--muted);
+}
+.kicker:lang(ja),
+.meta-label:lang(ja) {
+	text-transform: none;
+}
+
+.page-title {
+	margin: 0;
+	font-size: clamp(2.25rem, 5vw, 3.5rem);
+	line-height: 1.15;
+	letter-spacing: -0.02em;
+	font-weight: 600;
+}
+
+.btn-row {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+.btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	min-height: 48px;
+	padding: 0 22px;
+	text-decoration: none;
+	border-radius: 4px;
+	font-weight: 500;
+	font-size: 16px;
+}
+.btn--primary,
+.btn--primary:hover {
+	background: var(--accent);
+	color: var(--on-accent);
+}
+.btn--secondary {
+	border: 1px solid var(--line);
+}
+/* The strip button stays light in both themes, as in the mock. */
+.btn--on-strip,
+.btn--on-strip:hover {
+	background: #ffffff;
+	color: #111418;
+}
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+.tag {
+	font-family: var(--font-mono);
+	font-size: 12px;
+	padding: 4px 10px;
+	border: 1px solid var(--rule);
+	border-radius: 999px;
+	color: var(--body);
+}
+
+.accent-link,
+.accent-link:hover {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	min-height: 44px;
+	font-weight: 500;
+	text-decoration: none;
+	color: var(--accent);
+}
+
+.strip {
+	background: var(--strip);
+	color: var(--on-strip);
+	border-radius: 6px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+}
+.strip p {
+	margin: 0;
+	font-weight: 500;
+}
+
+/* Code blocks: Shiki writes the light colors inline and the dark ones as --shiki-dark. */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']) .astro-code,
+	:root:not([data-theme='light']) .astro-code span {
+		color: var(--shiki-dark) !important;
+		background-color: var(--shiki-dark-bg) !important;
+	}
+}
+:root[data-theme='dark'] .astro-code,
+:root[data-theme='dark'] .astro-code span {
+	color: var(--shiki-dark) !important;
+	background-color: var(--shiki-dark-bg) !important;
+}
