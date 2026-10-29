@@ -109,10 +109,6 @@ The old blog that used to live on this Netlify site had its articles at `/posts/
 `public/_redirects` sends each one to its new page (301), and the old list, tag, search and
 about pages to the matching new ones.
 
-## Before going live
-
-- The privacy policy says the site uses PostHog, but no PostHog snippet is installed yet.
-
 ## Logo and favicon
 
 - `public/favicon.svg` is drawn on a 16-unit grid so its eye holes land on whole pixels at
@@ -120,3 +116,10 @@ about pages to the matching new ones.
 - `brand/logo.svg` is the same mask with smooth eyes for large sizes, exported as
   `logo-512/1024/2048.png`. `brand/logo-mark.svg` (and `logo-mark-2048.png`) is the mask
   alone, with the eyes cut out, for any background.
+
+## Analytics
+
+`src/components/PostHog.astro` loads PostHog (US cloud, project "uuta-site") on every page
+except `/`. It only runs on `uutaa.cc`, so dev, deploy previews and the netlify.app address
+send nothing, and it records page views only: no click autocapture, no session recording.
+Keep the privacy policy (`src/i18n/privacy.ts`) in step with any change here.
