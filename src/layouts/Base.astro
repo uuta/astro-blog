@@ -4,6 +4,7 @@ import '../styles/global.css';
 // because it splits IBM Plex Sans JP into many unicode-range subsets.
 import fontsJaUrl from '../styles/fonts-ja.css?url';
 import ThemeScript from '../components/ThemeScript.astro';
+import PostHog from '../components/PostHog.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { otherLang, type Lang } from '../i18n/ui';
@@ -41,6 +42,7 @@ const nonBlocking = { media: 'print', onload: "this.media='all'" };
 		<link rel="icon" href="/favicon-32.png" sizes="32x32" type="image/png" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<ThemeScript />
+		<PostHog />
 		{
 			lang === 'ja' && (
 				<>
