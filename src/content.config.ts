@@ -17,6 +17,10 @@ const writing = defineCollection({
 		section: z.enum(['writing', 'journal']).default('writing'),
 		// Shared by an article and its translation.
 		key: z.string().optional(),
+		// How much of the text AI wrote, in the values of the W3C AI Content Disclosure proposal:
+		// none (written by a person), ai-assisted, ai-generated, autonomous. Required, because a
+		// missing value would mean "unknown".
+		aiDisclosure: z.enum(['none', 'ai-assisted', 'ai-generated', 'autonomous']),
 		// Marks this file as the translation, not the original, of the article that shares its key.
 		translated: z.boolean().default(false),
 		tags: z.array(z.string()).default([]),

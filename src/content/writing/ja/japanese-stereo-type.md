@@ -3,6 +3,7 @@ title: "日本人のステレオタイプ"
 date: 2023-10-24T10:11:06.130Z
 lang: ja
 section: journal
+aiDisclosure: none
 key: japanese-stereo-type
 tags:
   - "Imagination"

@@ -3,6 +3,7 @@ title: "AstroPaperでブログをリニューアル - v0.0.1"
 date: 2023-11-01T00:11:06.130Z
 lang: ja
 section: writing
+aiDisclosure: none
 tags:
   - "dev"
 ---

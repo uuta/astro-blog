@@ -3,6 +3,7 @@ title: "ゴリラと一緒！シェア生活の意外な一面"
 date: 2023-06-24T10:11:06.130Z
 lang: ja
 section: journal
+aiDisclosure: none
 key: gorilla
 tags:
   - "Imagination"

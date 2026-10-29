@@ -3,6 +3,7 @@ title: "エンジニアリングは人を幸せにしない"
 date: 2023-12-08T02:11:06.130Z
 lang: ja
 section: journal
+aiDisclosure: none
 key: engineering-doesnt-make-happy
 tags:
   - "daily"

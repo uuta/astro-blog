@@ -3,6 +3,7 @@ title: "What Instagram broke, and what AI took"
 date: 2025-11-21T23:11:06.130Z
 lang: en
 section: journal
+aiDisclosure: ai-generated
 key: happy-instagram
 translated: true
 tags:

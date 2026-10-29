@@ -3,6 +3,7 @@ title: "ここに上海国を宣言する"
 date: 2026-01-29T14:36:06.130Z
 lang: ja
 section: journal
+aiDisclosure: none
 key: shanghai-nation
 tags:
   - "shanghai"

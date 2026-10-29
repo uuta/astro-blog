@@ -3,6 +3,7 @@ title: "自然淘汰Japan"
 date: 2025-06-15T23:11:06.130Z
 lang: ja
 section: journal
+aiDisclosure: none
 key: emptiness-in-japan
 tags:
   - "Japan"

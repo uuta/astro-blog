@@ -3,6 +3,7 @@ title: "Two months after releasing SpeakGain, my English-learning app: a retrosp
 date: 2026-10-14T05:40:48.000Z
 lang: en
 section: writing
+aiDisclosure: ai-generated
 key: speakgain-kpt
 translated: true
 tags:

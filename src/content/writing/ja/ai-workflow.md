@@ -3,6 +3,7 @@ title: "AI agentのworkflowを構築してみた。そしてFable 5"
 date: 2026-07-15T17:11:06.130Z
 lang: ja
 section: writing
+aiDisclosure: none
 key: ai-workflow
 tags:
   - "AI"

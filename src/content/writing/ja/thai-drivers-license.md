@@ -3,6 +3,7 @@ title: "【本当にあった怖い話】タイの教習所で..."
 date: 2024-05-18T23:11:06.130Z
 lang: ja
 section: journal
+aiDisclosure: none
 key: thai-drivers-license
 tags:
   - "Travel"

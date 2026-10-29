@@ -3,6 +3,7 @@ title: "Install MCP servers with User Scope"
 date: 2025-07-21T23:11:06.130Z
 lang: en
 section: writing
+aiDisclosure: none
 tags:
   - "Tech"
   - "AI"

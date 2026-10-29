@@ -3,6 +3,7 @@ title: "最高に綺麗でクソみたいな街『イスタンブール』"
 date: 2023-01-18T10:11:06.130Z
 lang: ja
 section: journal
+aiDisclosure: none
 key: istanbul
 tags:
   - "Travel"

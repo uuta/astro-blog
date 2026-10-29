@@ -3,6 +3,7 @@ title: "Living with gorillas! The unexpected side of shared housing"
 date: 2023-06-24T10:11:06.130Z
 lang: en
 section: journal
+aiDisclosure: ai-generated
 key: gorilla
 translated: true
 tags:

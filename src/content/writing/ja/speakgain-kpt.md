@@ -3,6 +3,7 @@ title: "英語学習アプリ「SpeakGain」をリリースして2ヶ月の反�
 date: 2026-10-14T05:40:48.000Z
 lang: ja
 section: writing
+aiDisclosure: none
 key: speakgain-kpt
 tags:
   - "SpeakGain"
