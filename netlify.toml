@@ -14,3 +14,28 @@
   for = "/_astro/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+
+# PostHog through this site's own domain (uutaa.cc/noh/...), so ad blockers that block
+# posthog.com don't drop page views. Proxying needs the custom domain: netlify.app alters
+# Content-Encoding. The two asset rules must come before the catch-all; `host` makes
+# PostHog route the request, and `force` proxies even if a file exists at the path.
+[[redirects]]
+  from = "/noh/static/*"
+  to = "https://us-assets.i.posthog.com/static/:splat"
+  host = "us-assets.i.posthog.com"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/noh/array/*"
+  to = "https://us-assets.i.posthog.com/array/:splat"
+  host = "us-assets.i.posthog.com"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/noh/*"
+  to = "https://us.i.posthog.com/:splat"
+  host = "us.i.posthog.com"
+  status = 200
+  force = true

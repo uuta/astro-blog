@@ -122,4 +122,6 @@ about pages to the matching new ones.
 `src/components/PostHog.astro` loads PostHog (US cloud, project "uuta-site") on every page
 except `/`. It only runs on `uutaa.cc`, so dev, deploy previews and the netlify.app address
 send nothing, and it records page views only: no click autocapture, no session recording.
+Its requests go through `uutaa.cc/noh/`, proxied to PostHog by rules in `netlify.toml`, so
+blockers that block posthog.com don't drop them.
 Keep the privacy policy (`src/i18n/privacy.ts`) in step with any change here.
