@@ -8,6 +8,18 @@ import { satteri } from '@astrojs/markdown-satteri';
 // the sitemap and hreflang links are built from it.
 const site = 'https://example.com';
 
+/**
+ * Dev only: sends a URL without a trailing slash to the slashed one, keeping the query.
+ * Files (with an extension) and Vite's own paths pass through.
+ * @type {import('vite').Connect.NextHandleFunction}
+ */
+const redirectToSlash = (req, res, next) => {
+	const [path, query] = (req.url ?? '/').split(/\?(.*)/s);
+	if (path.endsWith('/') || /\.\w+$/.test(path) || /^\/(@|_|node_modules\/|src\/)/.test(path)) return next();
+	res.writeHead(308, { Location: `${path}/${query ? `?${query}` : ''}` });
+	res.end();
+};
+
 // https://astro.build/config
 export default defineConfig({
 	site,
@@ -39,12 +51,7 @@ export default defineConfig({
 				configureServer: (server) => () => {
 					server.middlewares.stack.unshift({
 						route: '',
-						handle: (req, res, next) => {
-							const [path, query] = (req.url ?? '/').split(/\?(.*)/s);
-							if (path.endsWith('/') || /\.\w+$/.test(path) || /^\/(@|_|node_modules\/|src\/)/.test(path)) return next();
-							res.writeHead(308, { Location: `${path}/${query ? `?${query}` : ''}` });
-							res.end();
-						},
+						handle: redirectToSlash,
 					});
 				},
 			},
