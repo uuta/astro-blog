@@ -11,8 +11,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "check": "astro check",
-    "check:links": "node scripts/check-links.mjs",
-    "deploy": "npm run build && wrangler deploy"
+    "check:links": "node scripts/check-links.mjs"
   },
   "dependencies": {
     "@astrojs/markdown-satteri": "^0.4.5",
@@ -25,7 +24,6 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.12",
     "simple-icons": "^16.36.0",
-    "typescript": "^6.0.3",
-    "wrangler": "^4.153.0"
+    "typescript": "^6.0.3"
   }
 }

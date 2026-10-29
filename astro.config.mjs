@@ -4,9 +4,9 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
 
-// [SITE URL]: the production domain is not decided yet. Replace before deploy;
-// the sitemap and hreflang links are built from it.
-const site = 'https://example.com';
+// Netlify's address for the site until it gets its own domain; the sitemap, canonical and
+// hreflang links are built from it.
+const site = 'https://profound-marigold-a32ac1.netlify.app';
 
 /**
  * Dev only: sends a URL without a trailing slash to the slashed one, keeping the query.
@@ -73,8 +73,8 @@ export default defineConfig({
 			},
 		}),
 		{
-			// Astro writes src/pages/ja/404.astro to ja/404/index.html, but Cloudflare's
-			// 404-page handling looks for the nearest 404.html, so move it to ja/404.html.
+			// Astro writes src/pages/ja/404.astro to ja/404/index.html; public/_redirects sends
+			// unknown /ja/ paths to ja/404.html, so move it there.
 			name: 'ja-404',
 			hooks: {
 				'astro:build:done': async ({ dir }) => {

@@ -1,0 +1,16 @@
+# Netlify builds the static site on every push to main, and once a day from
+# .github/workflows/scheduled-build.yml so new Zenn articles show up.
+# Redirects and the Japanese 404 page are in public/_redirects.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  # Astro 7 needs Node 22.23.4 or later; .nvmrc pins the same version.
+  NODE_VERSION = "22.23.4"
+
+# Build assets have content hashes in their names, so browsers can keep them for good.
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
