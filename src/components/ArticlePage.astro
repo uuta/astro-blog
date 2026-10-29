@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import Base from '../layouts/Base.astro';
 import Icon from './Icon.astro';
+import AiDisclosureLabel from './AiDisclosureLabel.astro';
 import { article } from '../i18n/article';
 import { otherLang } from '../i18n/ui';
 import {
@@ -41,7 +42,8 @@ const next = await nextPost(post);
 	current={section}
 >
 	<main>
-		<article class="wrap article">
+		{/* ai-disclosure follows the W3C AI Content Disclosure proposal, for machines; the label shows it. */}
+		<article class="wrap article" ai-disclosure={post.data.aiDisclosure}>
 			<a class="back mono" href={sectionUrl(lang, section)}>
 				<Icon name="arrow-left" size={14} />{section === 'writing' ? t.allWriting : t.allJournal}
 			</a>
@@ -49,6 +51,7 @@ const next = await nextPost(post);
 			<div class="meta mono">
 				<span>{formatDate(post.data.date)}</span>
 				<span>{t.readingTime.replace('{n}', String(readingMinutes(post)))}</span>
+				<AiDisclosureLabel lang={lang} level={post.data.aiDisclosure} />
 				{translation && (
 					<a class="other" href={otherHref} hreflang={otherLang(lang)} lang={otherLang(lang)}>{t.readInOther}</a>
 				)}
